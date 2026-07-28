@@ -1,7 +1,7 @@
 // ==========================================================
 // PSC QR Scanner
 // app.js
-// Version 3.0
+// Version 3.1
 // ==========================================================
 
 const API_URL =
@@ -23,10 +23,8 @@ async function startScanner() {
         const devices = await Html5Qrcode.getCameras();
 
         if (!devices || devices.length === 0) {
-
             result.innerHTML = "No camera found.";
             return;
-
         }
 
         let cameraId = devices[0].id;
@@ -56,8 +54,7 @@ async function startScanner() {
 
         result.innerHTML = "Ready to scan...";
 
-    }
-    catch (err) {
+    } catch (err) {
 
         console.error(err);
 
@@ -81,11 +78,8 @@ async function onScanSuccess(decodedText) {
         "</strong><br><br>Sending to server...";
 
     try {
-
         await html5QrCode.stop();
-
-    }
-    catch (e) {
+    } catch (e) {
         console.log(e);
     }
 
@@ -96,7 +90,7 @@ async function onScanSuccess(decodedText) {
             method: "POST",
 
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "text/plain;charset=utf-8"
             },
 
             body: JSON.stringify({
@@ -112,8 +106,7 @@ async function onScanSuccess(decodedText) {
             JSON.stringify(data, null, 2) +
             "</pre>";
 
-    }
-    catch (err) {
+    } catch (err) {
 
         console.error(err);
 
@@ -126,9 +119,7 @@ async function onScanSuccess(decodedText) {
 }
 
 function onScanFailure(error) {
-
     // ignore
-
 }
 
 window.addEventListener("load", startScanner);
