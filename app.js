@@ -1,12 +1,16 @@
 // ==========================================================
 // PSC QR Scanner
 // app.js
-// Version 2.0
+// Version 3.0
 // ==========================================================
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbx6PT4GApnNfAEOGjWJin3INbMcV6a_owkCPC1FEmBl_A3LT2TRSGAqY8Nuk7NInYzC/exec";
 
 const result = document.getElementById("result");
 
 let html5QrCode = null;
+let isProcessing = false;
 
 async function startScanner() {
 
@@ -25,7 +29,6 @@ async function startScanner() {
 
         }
 
-        // Cari kamera belakang
         let cameraId = devices[0].id;
 
         const backCamera = devices.find(device =>
@@ -68,8 +71,14 @@ async function startScanner() {
 
 async function onScanSuccess(decodedText) {
 
+    if (isProcessing) return;
+
+    isProcessing = true;
+
     result.innerHTML =
-        "<strong>" + decodedText + "</strong>";
+        "QR Detected<br><br><strong>" +
+        decodedText +
+        "</strong><br><br>Sending to server...";
 
     try {
 
@@ -80,11 +89,45 @@ async function onScanSuccess(decodedText) {
         console.log(e);
     }
 
+    try {
+
+        const response = await fetch(API_URL, {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                membershipId: decodedText
+            })
+
+        });
+
+        const data = await response.json();
+
+        result.innerHTML =
+            "<pre>" +
+            JSON.stringify(data, null, 2) +
+            "</pre>";
+
+    }
+    catch (err) {
+
+        console.error(err);
+
+        result.innerHTML =
+            "Connection Failed<br><br>" +
+            err.message;
+
+    }
+
 }
 
 function onScanFailure(error) {
 
-    // sengaja dikosongkan
+    // ignore
 
 }
 
