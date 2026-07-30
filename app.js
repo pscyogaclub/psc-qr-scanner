@@ -191,15 +191,13 @@ async function checkAttendance(qrValue){
 
     catch(error){
 
-        console.error(error);
+    console.error(error);
 
-        alert("Gagal menghubungi server.");
+    alert(error.message);
 
-        processing = false;
+    processing = false;
 
-        await startScanner();
-
-    }
+    await startScanner();
 
 }
 
