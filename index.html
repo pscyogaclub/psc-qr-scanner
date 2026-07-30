@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PSC QR Scanner</title>
+    <title>PSC Attendance Scanner</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -13,19 +14,71 @@
 
 <body>
 
-    <div class="container">
+    <div class="app">
 
-        <h1>PSC QR Scanner</h1>
+        <div class="scanner-card">
 
-        <p class="subtitle">
-            Present • Stretch • Connect
-        </p>
+            <!-- ===================== -->
+            <!-- HEADER -->
+            <!-- ===================== -->
 
-        <div id="reader"></div>
+            <div class="header">
 
-        <div id="result">
+                <div class="psc-logo">
 
-            Waiting for QR Code...
+                    <div class="logo-circle">
+                        PSC
+                    </div>
+
+                </div>
+
+                <h1>QR Attendance</h1>
+
+                <p>
+                    Present • Stretch • Connect
+                </p>
+
+            </div>
+
+            <!-- ===================== -->
+            <!-- CAMERA -->
+            <!-- ===================== -->
+
+            <div id="scannerSection">
+
+                <div class="scanner-wrapper">
+
+                    <div id="reader"></div>
+
+                </div>
+
+            </div>
+
+            <!-- ===================== -->
+            <!-- STATUS -->
+            <!-- ===================== -->
+
+            <div id="statusBar">
+
+                <span class="status-dot"></span>
+
+                <span id="statusText">
+
+                    Initializing Camera...
+
+                </span>
+
+            </div>
+
+            <!-- ===================== -->
+            <!-- RESULT -->
+            <!-- ===================== -->
+
+            <div id="result">
+
+                Waiting for QR Code...
+
+            </div>
 
         </div>
 
@@ -36,4 +89,5 @@
     <script src="app.js"></script>
 
 </body>
+
 </html>
