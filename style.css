@@ -1,38 +1,7 @@
-```css
-/* ==========================================================
-   PSC YOGA CLUB ADMIN SCANNER
-   style.css
-   Part 1 / 100 Baris (1–100)
-========================================================== */
-
-:root{
-
-    --bg:#0B302B;
-    --bg-dark:#082621;
-    --panel:#F5F2EB;
-    --surface:#FFFFFF;
-
-    --primary:#0F3D36;
-    --secondary:#174C43;
-
-    --gold:#C29A56;
-    --gold-light:#D8B874;
-
-    --text:#26312F;
-    --muted:#7A7F7C;
-
-    --success:#2E7D32;
-    --danger:#C0392B;
-
-    --radius:24px;
-    --radius-sm:14px;
-
-    --shadow:
-        0 18px 50px rgba(0,0,0,.18);
-
-    --transition:.28s ease;
-
-}
+/* =====================================================
+   PSC QR Scanner
+   BUILD-002
+===================================================== */
 
 *{
     margin:0;
@@ -40,54 +9,41 @@
     box-sizing:border-box;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+
+    --primary:#C6A96B;
+    --primary-dark:#B08E47;
+
+    --dark:#2B2B2B;
+    --text:#444;
+    --light:#F7F8FA;
+    --white:#FFFFFF;
+
+    --success:#28A745;
+    --danger:#DC3545;
+    --warning:#F5A623;
+
+    --shadow:
+        0 18px 45px rgba(0,0,0,.12);
+
 }
 
 body{
 
     font-family:
-        "Inter",
         "Segoe UI",
+        Arial,
         sans-serif;
 
-    background:var(--bg);
+    background:
 
-    color:var(--text);
-
-    min-height:100vh;
-
-    overflow-x:hidden;
-
-}
-
-button{
-
-    font-family:inherit;
-    border:none;
-    cursor:pointer;
-
-}
-
-img{
-
-    display:block;
-    max-width:100%;
-
-}
-
-a{
-
-    text-decoration:none;
-    color:inherit;
-
-}
-
-.app{
+        linear-gradient(
+            180deg,
+            #f9f9f9,
+            #eceff3
+        );
 
     min-height:100vh;
-
-    position:relative;
 
     display:flex;
 
@@ -95,198 +51,125 @@ a{
 
     align-items:center;
 
-    padding:28px 18px;
+    padding:20px;
+
+    color:var(--dark);
 
 }
 
-.bg-overlay{
+.app{
 
-    position:fixed;
-
-    inset:0;
-
-    background:
-        radial-gradient(circle at top,
-        rgba(194,154,86,.16),
-        transparent 55%);
-
-    pointer-events:none;
+    width:100%;
+    max-width:440px;
 
 }
-```
-.bg-glow{
 
-    position:fixed;
+.scanner-card{
 
-    width:420px;
-    height:420px;
+    background:var(--white);
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    animation:fadeUp .45s ease;
+
+}
+
+/* ===================================
+   HEADER
+=================================== */
+
+.header{
+
+    text-align:center;
+
+    padding:
+
+        36px
+        28px
+        22px;
+
+}
+
+.logo-circle{
+
+    width:82px;
+
+    height:82px;
+
+    margin:auto;
 
     border-radius:50%;
 
     background:
-        radial-gradient(circle,
-        rgba(216,184,116,.18),
-        transparent 72%);
 
-    top:-140px;
-    right:-140px;
-
-    filter:blur(30px);
-
-    pointer-events:none;
-
-}
-
-.scanner-app{
-
-    width:100%;
-
-    max-width:430px;
-
-    position:relative;
-
-    z-index:2;
-
-}
-
-.hero{
+        linear-gradient(
+            135deg,
+            var(--primary),
+            #E8D2A3
+        );
 
     display:flex;
 
-    flex-direction:column;
-
     align-items:center;
 
-    gap:18px;
+    justify-content:center;
 
-    margin-bottom:26px;
-
-}
-
-.admin-button{
-
-    align-self:flex-end;
-
-    background:rgba(255,255,255,.08);
-
-    color:#fff;
-
-    border:1px solid rgba(255,255,255,.14);
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    font-size:.82rem;
-
-    font-weight:600;
-
-    transition:var(--transition);
-
-}
-
-.admin-button:hover{
-
-    background:rgba(255,255,255,.14);
-
-}
-
-.psc-logo{
-
-    width:72px;
-
-    height:72px;
-
-    object-fit:contain;
-
-}
-
-.brand{
-
-    text-align:center;
-
-}
-
-```css
-.brand h1{
-
-    color:#FFFFFF;
-
-    font-size:1.45rem;
+    color:white;
 
     font-weight:700;
 
-    letter-spacing:.3px;
+    font-size:26px;
 
-    margin-bottom:6px;
+    letter-spacing:2px;
 
-}
+    box-shadow:
 
-.brand p{
-
-    color:rgba(255,255,255,.72);
-
-    font-size:.9rem;
-
-    letter-spacing:.25px;
+        0 12px 30px rgba(198,169,107,.35);
 
 }
 
-.page-title{
+.header h1{
 
-    text-align:center;
+    margin-top:18px;
 
-    margin-bottom:26px;
-
-}
-
-.page-title h2{
-
-    color:#FFFFFF;
-
-    font-size:1.8rem;
+    font-size:28px;
 
     font-weight:700;
 
-    margin-bottom:8px;
+}
+
+.header p{
+
+    margin-top:8px;
+
+    color:#777;
+
+    font-size:15px;
 
 }
 
-.page-title p{
+/* ===================================
+   SCANNER
+=================================== */
 
-    color:rgba(255,255,255,.72);
+.scanner-wrapper{
 
-    font-size:.92rem;
+    margin:0 24px;
 
-}
-
-.scanner-panel{
-
-    background:var(--panel);
-
-    border-radius:var(--radius);
-
-    padding:24px;
-
-    box-shadow:var(--shadow);
-
-    margin-bottom:22px;
-
-}
-
-.scanner-frame{
-
-    position:relative;
-
-    aspect-ratio:1/1;
-
-    border-radius:22px;
+    border-radius:18px;
 
     overflow:hidden;
 
-    background:#000;
+    border:
 
-    border:2px solid rgba(194,154,86,.28);
+        2px solid
+        rgba(198,169,107,.25);
+
+    background:#fafafa;
 
 }
 
@@ -294,317 +177,261 @@ a{
 
     width:100%;
 
-    height:100%;
-
 }
 
 #reader video{
 
-    width:100% !important;
-
-    height:100% !important;
-
-    object-fit:cover;
-
-}
-```
-```css
-.scanner-guide{
-
-    text-align:center;
-
-    margin-top:18px;
-
-    color:var(--muted);
-
-    font-size:.9rem;
-
-    line-height:1.5;
+    border-radius:14px;
 
 }
 
-.corner{
+/* ===================================
+   STATUS BAR
+=================================== */
 
-    position:absolute;
+#statusBar{
 
-    width:34px;
+    margin:
 
-    height:34px;
+        22px
+        24px
+        0;
 
-    border-color:var(--gold-light);
+    background:#F4F6F8;
 
-    border-style:solid;
+    border-radius:12px;
 
-    z-index:5;
+    padding:14px;
 
-    pointer-events:none;
+    display:flex;
 
-}
+    align-items:center;
 
-.top-left{
+    justify-content:center;
 
-    top:14px;
-    left:14px;
+    gap:10px;
 
-    border-width:4px 0 0 4px;
-
-    border-top-left-radius:10px;
-
-}
-
-.top-right{
-
-    top:14px;
-    right:14px;
-
-    border-width:4px 4px 0 0;
-
-    border-top-right-radius:10px;
+    font-size:14px;
 
 }
 
-.bottom-left{
+.status-dot{
 
-    left:14px;
-    bottom:14px;
+    width:10px;
 
-    border-width:0 0 4px 4px;
+    height:10px;
 
-    border-bottom-left-radius:10px;
+    border-radius:50%;
 
-}
+    background:var(--warning);
 
-.bottom-right{
-
-    right:14px;
-    bottom:14px;
-
-    border-width:0 4px 4px 0;
-
-    border-bottom-right-radius:10px;
+    animation:pulse 1.5s infinite;
 
 }
 
-.result-panel{
+/* ===================================
+   RESULT
+=================================== */
 
-    display:none;
-
-    background:var(--panel);
-
-    border-radius:var(--radius);
+#result{
 
     padding:24px;
 
-    box-shadow:var(--shadow);
+}
 
-    animation:fadeUp .35s ease;
+/* ===================================
+   RESULT CARD
+=================================== */
+
+.result-card{
+
+    text-align:center;
+
+    animation:fadeUp .35s;
+
+}
+
+.icon{
+
+    font-size:60px;
+
+    margin-bottom:10px;
+
+}
+
+.result-card h2{
+
+    margin-bottom:8px;
+
+    font-size:26px;
+
+}
+
+.result-card .subtitle{
+
+    color:#666;
 
     margin-bottom:22px;
 
 }
-```
-```css
-.result-panel.show{
 
-    display:block;
+/* ===================================
+   INFO
+=================================== */
+
+.info{
+
+    margin-top:10px;
+
+    border-top:
+
+        1px solid #eee;
+
+    border-bottom:
+
+        1px solid #eee;
 
 }
 
-.result-header{
+.row{
 
     display:flex;
 
-    flex-direction:column;
+    justify-content:space-between;
 
     align-items:center;
 
-    justify-content:center;
+    padding:16px 0;
 
-    margin-bottom:24px;
+    border-bottom:1px solid #f0f0f0;
 
 }
 
-.success-icon{
+.row:last-child{
 
-    width:72px;
+    border-bottom:none;
 
-    height:72px;
+}
 
-    border-radius:50%;
+.row span{
 
-    background:rgba(46,125,50,.12);
+    color:#666;
+
+}
+
+.row strong{
+
+    color:var(--dark);
+
+}
+
+.session{
+
+    color:var(--primary-dark);
+
+    font-size:24px;
+
+}
+
+/* ===================================
+   BADGE
+=================================== */
+
+.badge{
+
+    background:#EAF8EF;
 
     color:var(--success);
 
-    display:flex;
+    padding:
 
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:34px;
-
-    margin-bottom:14px;
-
-}
-
-.result-label{
-
-    text-align:center;
-
-}
-
-.result-label h3{
-
-    font-size:1.35rem;
-
-    color:var(--primary);
-
-    margin-bottom:6px;
-
-}
-
-.result-label p{
-
-    color:var(--muted);
-
-    font-size:.92rem;
-
-}
-
-.member-info{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:14px;
-
-    margin-bottom:24px;
-
-}
-
-.info-box{
-
-    background:#FFFFFF;
-
-    border-radius:16px;
-
-    padding:16px;
-
-    border:1px solid rgba(0,0,0,.06);
-
-}
-```
-```css
-.info-box label{
-
-    display:block;
-
-    font-size:.74rem;
-
-    color:var(--muted);
-
-    margin-bottom:8px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.8px;
-
-}
-
-.info-box span{
-
-    display:block;
-
-    font-size:1rem;
-
-    font-weight:700;
-
-    color:var(--text);
-
-    word-break:break-word;
-
-}
-
-#statusBadge{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    min-width:92px;
-
-    padding:8px 14px;
+        6px
+        14px;
 
     border-radius:999px;
 
-    font-size:.82rem;
+    font-size:13px;
 
     font-weight:700;
 
-    background:rgba(46,125,50,.12);
-
-    color:var(--success);
-
 }
 
-.primary-button{
+/* ===================================
+   BUTTON
+=================================== */
+
+button{
 
     width:100%;
 
-    height:56px;
+    margin-top:28px;
 
-    border-radius:18px;
+    padding:16px;
 
-    background:var(--gold);
+    border:none;
 
-    color:#FFFFFF;
+    border-radius:14px;
 
-    font-size:1rem;
+    background:
 
-    font-weight:700;
+        linear-gradient(
+            135deg,
+            var(--primary),
+            var(--primary-dark)
+        );
 
-    transition:var(--transition);
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
 
 }
 
-.primary-button:hover{
-
-    background:var(--gold-light);
+button:hover{
 
     transform:translateY(-2px);
 
+    box-shadow:
+
+        0 10px 25px
+        rgba(198,169,107,.35);
+
 }
 
-.primary-button:active{
+button:active{
 
     transform:scale(.98);
 
 }
 
-.footer{
+/* ===================================
+   ERROR
+=================================== */
 
-    text-align:center;
+.error .icon{
 
-    color:rgba(255,255,255,.58);
-
-    font-size:.8rem;
-
-    padding-bottom:6px;
+    color:var(--danger);
 
 }
-```
-```css id="6cx7jq"
+
+/* ===================================
+   ANIMATION
+=================================== */
+
 @keyframes fadeUp{
 
     from{
 
         opacity:0;
 
-        transform:translateY(18px);
+        transform:
+
+            translateY(15px);
 
     }
 
@@ -612,428 +439,73 @@ a{
 
         opacity:1;
 
-        transform:translateY(0);
+        transform:
+
+            translateY(0);
 
     }
 
 }
 
-@media (max-width:420px){
+@keyframes pulse{
 
-    .app{
-
-        padding:20px 14px;
-
-    }
-
-    .scanner-panel{
-
-        padding:18px;
-
-    }
-
-    .result-panel{
-
-        padding:18px;
-
-    }
-
-    .member-info{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .page-title h2{
-
-        font-size:1.55rem;
-
-    }
-
-    .brand h1{
-
-        font-size:1.3rem;
-
-    }
-
-    .psc-logo{
-
-        width:64px;
-
-        height:64px;
-
-    }
-
-    .success-icon{
-
-        width:64px;
-
-        height:64px;
-
-        font-size:30px;
-
-    }
-
-}
-
-html,
-body{
-
-    -webkit-tap-highlight-color:transparent;
-
-}
-
-button:focus,
-button:focus-visible{
-
-    outline:none;
-
-}
-
-#reader{
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-}
-```
-```css id="u6m8e2"
-/* ---------- Html5 QRCode Cleanup ---------- */
-
-#reader__scan_region{
-
-    border:none !important;
-
-    background:#000 !important;
-
-}
-
-#reader__dashboard{
-
-    display:none !important;
-
-}
-
-#reader__dashboard_section{
-
-    display:none !important;
-
-}
-
-#reader img{
-
-    display:none !important;
-
-}
-
-#reader video{
-
-    border-radius:18px;
-
-}
-
-#reader{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-}
-
-#reader > div{
-
-    width:100% !important;
-
-}
-
-#reader__scan_region img{
-
-    display:none !important;
-
-}
-
-#reader__scan_region video{
-
-    width:100% !important;
-
-    height:100% !important;
-
-    object-fit:cover;
-
-}
-
-.scanner-panel:hover{
-
-    transform:translateY(-2px);
-
-    transition:var(--transition);
-
-}
-
-.result-panel{
-
-    transition:var(--transition);
-
-}
-
-.info-box{
-
-    transition:var(--transition);
-
-}
-
-.info-box:hover{
-
-    border-color:rgba(194,154,86,.45);
-
-    transform:translateY(-2px);
-
-}
-
-.primary-button:hover{
-
-    box-shadow:
-
-        0 12px 28px rgba(194,154,86,.28);
-
-}
-
-.primary-button:disabled{
-
-    opacity:.6;
-
-    cursor:not-allowed;
-
-    transform:none;
-
-}
-
-.hidden{
-
-    display:none !important;
-
-}
-```
-```css id="9jtw81"
-/* ---------- Utility ---------- */
-
-.text-success{
-
-    color:var(--success);
-
-}
-
-.text-danger{
-
-    color:var(--danger);
-
-}
-
-.text-muted{
-
-    color:var(--muted);
-
-}
-
-.bg-success{
-
-    background:rgba(46,125,50,.12);
-
-}
-
-.bg-danger{
-
-    background:rgba(192,57,43,.12);
-
-}
-
-.shadow{
-
-    box-shadow:var(--shadow);
-
-}
-
-.rounded{
-
-    border-radius:var(--radius);
-
-}
-
-/* ---------- Loading State ---------- */
-
-.scanner-loading{
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    height:100%;
-
-    color:#FFFFFF;
-
-    gap:16px;
-
-}
-
-.loading-spinner{
-
-    width:42px;
-
-    height:42px;
-
-    border:4px solid rgba(255,255,255,.18);
-
-    border-top-color:var(--gold-light);
-
-    border-radius:50%;
-
-    animation:spin 1s linear infinite;
-
-}
-
-@keyframes spin{
-
-    from{
-
-        transform:rotate(0deg);
-
-    }
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
-
-}
-
-/* ---------- Error State ---------- */
-
-.error-message{
-
-    background:rgba(192,57,43,.10);
-
-    color:var(--danger);
-
-    border:1px solid rgba(192,57,43,.18);
-
-    border-radius:16px;
-
-    padding:14px 16px;
-
-    font-size:.9rem;
-
-    text-align:center;
-
-}
-```
-/* ---------- Animation Helpers ---------- */
-
-.fade-in{
-
-    animation:fadeUp .35s ease;
-
-}
-
-.scale-in{
-
-    animation:scaleIn .25s ease;
-
-}
-
-@keyframes scaleIn{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.94);
-
-    }
-
-    to{
-
-        opacity:1;
+    0%{
 
         transform:scale(1);
 
-    }
-
-}
-
-/* ---------- Status Variants ---------- */
-
-.status-active{
-
-    background:rgba(46,125,50,.12);
-
-    color:var(--success);
-
-}
-
-.status-expired{
-
-    background:rgba(192,57,43,.12);
-
-    color:var(--danger);
-
-}
-
-.status-warning{
-
-    background:rgba(194,154,86,.14);
-
-    color:#8A642A;
-
-}
-
-/* ---------- Small Devices ---------- */
-
-@media (max-width:360px){
-
-    .scanner-app{
-
-        max-width:100%;
+        opacity:.7;
 
     }
 
-    .scanner-panel{
+    50%{
 
-        padding:16px;
+        transform:scale(1.4);
 
-    }
-
-    .result-panel{
-
-        padding:16px;
+        opacity:1;
 
     }
 
-    .primary-button{
+    100%{
 
-        height:52px;
+        transform:scale(1);
 
-        font-size:.95rem;
-
-    }
-
-    .corner{
-
-        width:28px;
-
-        height:28px;
+        opacity:.7;
 
     }
 
 }
 
-/* ===========================
-   END OF FILE
-=========================== */
+/* ===================================
+   MOBILE
+=================================== */
+
+@media(max-width:480px){
+
+    .scanner-card{
+
+        border-radius:18px;
+
+    }
+
+    .header{
+
+        padding:28px 20px 20px;
+
+    }
+
+    .logo-circle{
+
+        width:70px;
+        height:70px;
+
+        font-size:22px;
+
+    }
+
+    .header h1{
+
+        font-size:24px;
+
+    }
+
+}
