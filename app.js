@@ -1,90 +1,259 @@
 // ==========================================================
-// PSC QR Scanner
-// BUILD-002 FINAL
+// PSC QR Attendance Scanner
+// BUILD-003 Emerald Edition
 // ==========================================================
 
 const API_URL =
-    "https://script.google.com/macros/s/AKfycbwwUYp9mlKw4eYUBj8-0W4loFq0Vr_uieJA7GT99Az61Ohq30BDZiQ3VmYZgA9EU985/exec";
+"https://script.google.com/macros/s/AKfycbwwUYp9mlKw4eYUBj8-0W4loFq0Vr_uieJA7GT99Az61Ohq30BDZiQ3VmYZgA9EU985/exec";
 
-const result = document.getElementById("result");
-const reader = document.getElementById("reader");
-const scannerSection = document.getElementById("scannerSection");
-const statusText = document.getElementById("statusText");
-const statusDot = document.querySelector(".status-dot");
+const reader=document.getElementById("reader");
+const result=document.getElementById("result");
+const scannerSection=document.getElementById("scannerSection");
+const statusText=document.getElementById("statusText");
+const statusDot=document.querySelector(".status-dot");
 
-let html5QrCode = null;
-let isProcessing = false;
+let html5QrCode=null;
+let isProcessing=false;
 
 // ==========================================================
-// STATUS
-// ==========================================================
 
-function setStatus(text, color = "#F5A623") {
+function setStatus(text,color){
 
-    statusText.textContent = text;
-    statusDot.style.background = color;
+    statusText.textContent=text;
+
+    statusDot.style.background=color;
 
 }
 
 // ==========================================================
-// START SCANNER
+
+function showLoading(message){
+
+    result.innerHTML=`
+
+    <div class="result-card">
+
+        <div class="icon">
+
+            ⏳
+
+        </div>
+
+        <h2>
+
+            Processing
+
+        </h2>
+
+        <p class="subtitle">
+
+            ${message}
+
+        </p>
+
+    </div>
+
+    `;
+
+}
+
 // ==========================================================
 
-async function startScanner() {
+function showError(message){
 
-    isProcessing = false;
+    setStatus(
+        "Check-in Failed",
+        "#D64B4B"
+    );
 
-    scannerSection.style.display = "block";
+    result.innerHTML=`
 
-    result.innerHTML = "";
+    <div class="result-card error">
 
-    setStatus("Initializing Camera...");
+        <div class="icon">
 
-    html5QrCode = new Html5Qrcode("reader");
+            ❌
 
-    try {
+        </div>
 
-        const devices = await Html5Qrcode.getCameras();
+        <h2>
 
-        if (!devices.length) {
+            CHECK-IN FAILED
 
-            setStatus("No Camera Found", "#DC3545");
+        </h2>
 
-            result.innerHTML = `
-                <div class="result-card error">
+        <p class="subtitle">
 
-                    <div class="icon">📷</div>
+            ${message}
 
-                    <h2>No Camera</h2>
+        </p>
 
-                    <p>
-                        Camera tidak ditemukan.
-                    </p>
+        <button onclick="restartScanner()">
 
-                </div>
-            `;
+            Scan Again
+
+        </button>
+
+    </div>
+
+    `;
+
+}
+
+// ==========================================================
+
+function showSuccess(info){
+
+    setStatus(
+        "Attendance Recorded",
+        "#2EAF61"
+    );
+
+    result.innerHTML=`
+
+    <div class="result-card">
+
+        <div class="icon">
+
+            ✅
+
+        </div>
+
+        <h2>
+
+            CHECK-IN SUCCESS
+
+        </h2>
+
+        <p class="subtitle">
+
+            Attendance successfully recorded.
+
+        </p>
+
+        <div class="info">
+
+            <div class="row">
+
+                <span>Member ID</span>
+
+                <strong>
+
+                    ${info.memberId}
+
+                </strong>
+
+            </div>
+
+            <div class="row">
+
+                <span>Membership</span>
+
+                <strong>
+
+                    ${info.membershipId}
+
+                </strong>
+
+            </div>
+
+            <div class="row">
+
+                <span>Remaining Session</span>
+
+                <strong class="session">
+
+                    ${info.remainingSessions}
+
+                </strong>
+
+            </div>
+
+            <div class="row">
+
+                <span>Status</span>
+
+                <span class="badge">
+
+                    ${info.status}
+
+                </span>
+
+            </div>
+
+        </div>
+
+        <button onclick="restartScanner()">
+
+            Scan Member Berikutnya
+
+        </button>
+
+    </div>
+
+    `;
+
+}
+
+// ==========================================================
+
+async function startScanner(){
+
+    isProcessing=false;
+
+    scannerSection.style.display="block";
+
+    result.innerHTML=`
+        <div class="placeholder">
+            Ready to Scan
+        </div>
+    `;
+
+    setStatus(
+        "Initializing Camera...",
+        "#E8B44D"
+    );
+
+    html5QrCode=new Html5Qrcode("reader");
+
+    try{
+
+        const devices=
+        await Html5Qrcode.getCameras();
+
+        if(!devices.length){
+
+            showError(
+                "Camera not found."
+            );
 
             return;
 
         }
 
-        let cameraId = devices[0].id;
+        let cameraId=devices[0].id;
 
-        const backCamera = devices.find(device => {
+        const back=
+        devices.find(device=>{
 
-            const label = device.label.toLowerCase();
+            const label=
+            device.label.toLowerCase();
 
-            return (
+            return(
+
                 label.includes("back") ||
+
                 label.includes("rear") ||
+
                 label.includes("environment")
+
             );
 
         });
 
-        if (backCamera) {
+        if(back){
 
-            cameraId = backCamera.id;
+            cameraId=back.id;
 
         }
 
@@ -93,290 +262,166 @@ async function startScanner() {
             cameraId,
 
             {
-                fps: 10,
 
-                qrbox: {
-                    width: 250,
-                    height: 250
+                fps:10,
+
+                qrbox:{
+
+                    width:260,
+
+                    height:260
+
                 }
 
             },
 
             onScanSuccess,
 
-            onScanFailure
+            ()=>{}
 
         );
 
-        setStatus("Ready to Scan", "#28A745");
+        setStatus(
 
-    } catch (err) {
+            "Ready to Scan",
+
+            "#2EAF61"
+
+        );
+
+    }
+
+    catch(err){
 
         console.error(err);
 
-        setStatus("Camera Error", "#DC3545");
-
-        result.innerHTML = `
-
-            <div class="result-card error">
-
-                <div class="icon">❌</div>
-
-                <h2>Camera Error</h2>
-
-                <p>${err.message}</p>
-
-            </div>
-
-        `;
+        showError(err.message);
 
     }
 
 }
 
 // ==========================================================
-// SCAN SUCCESS
-// ==========================================================
 
-async function onScanSuccess(decodedText) {
+async function onScanSuccess(decodedText){
 
-    if (isProcessing) return;
+    if(isProcessing) return;
 
-    isProcessing = true;
+    isProcessing=true;
 
-    setStatus("Sending Attendance...", "#0D6EFD");
+    setStatus(
 
-    try {
+        "Sending Attendance...",
+
+        "#E8B44D"
+
+    );
+
+    scannerSection.style.display="none";
+
+    showLoading(
+
+        "Sending attendance to PSC Server..."
+
+    );
+
+    try{
 
         await html5QrCode.stop();
 
-    } catch (e) {}
+    }
 
-    scannerSection.style.display = "none";
+    catch(e){}
 
-    result.innerHTML = `
+    try{
 
-        <div class="result-card">
+        const response=
 
-            <div class="icon">⏳</div>
+        await fetch(
 
-            <h2>Processing...</h2>
+            API_URL,
 
-            <p>
-                Sending attendance to server...
-            </p>
+            {
 
-        </div>
+                method:"POST",
 
-    `;
+                headers:{
 
-    try {
+                    "Content-Type":"text/plain;charset=utf-8"
 
-        const response = await fetch(API_URL, {
+                },
 
-            method: "POST",
+                body:JSON.stringify({
 
-            headers: {
+                    membershipId:decodedText
 
-                "Content-Type": "text/plain;charset=utf-8"
+                })
 
-            },
+            }
 
-            body: JSON.stringify({
+        );
 
-                membershipId: decodedText
+        const data=
 
-            })
+        await response.json();
 
-        });
+        if(data.success){
 
-        const data = await response.json();
+            showSuccess(
 
-        showResult(data);
+                data.result
 
-    } catch (err) {
+            );
+
+        }
+
+        else{
+
+            showError(
+
+                data.message ||
+
+                "Unknown Error"
+
+            );
+
+        }
+
+    }
+
+    catch(err){
 
         console.error(err);
 
-        setStatus("Connection Failed", "#DC3545");
+        showError(
 
-        result.innerHTML = `
+            err.message
 
-            <div class="result-card error">
-
-                <div class="icon">❌</div>
-
-                <h2>Connection Failed</h2>
-
-                <p>${err.message}</p>
-
-                <button onclick="startScannerAgain()">
-
-                    Try Again
-
-                </button>
-
-            </div>
-
-        `;
+        );
 
     }
 
 }
 
-function onScanFailure() {
-
-    // ignore
-
-}
-
-// ==========================================================
-// SHOW RESULT
 // ==========================================================
 
-function showResult(data) {
+async function restartScanner(){
 
-    if (!data.success) {
+    result.innerHTML="";
 
-        setStatus("Check-in Failed", "#DC3545");
+    scannerSection.style.display="block";
 
-        result.innerHTML = `
+    try{
 
-            <div class="result-card error">
-
-                <div class="icon">❌</div>
-
-                <h2>CHECK-IN GAGAL</h2>
-
-                <p>
-
-                    ${data.message || "Unknown Error"}
-
-                </p>
-
-                <button onclick="startScannerAgain()">
-
-                    Scan Lagi
-
-                </button>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-    const info = data.result;
-
-    setStatus("Attendance Recorded", "#28A745");
-
-    result.innerHTML = `
-
-        <div class="result-card">
-
-            <div class="icon">
-
-                ✅
-
-            </div>
-
-            <h2>
-
-                CHECK-IN BERHASIL
-
-            </h2>
-
-            <p class="subtitle">
-
-                Attendance berhasil dicatat.
-
-            </p>
-
-            <div class="info">
-
-                <div class="row">
-
-                    <span>Member ID</span>
-
-                    <strong>
-
-                        ${info.memberId}
-
-                    </strong>
-
-                </div>
-
-                <div class="row">
-
-                    <span>Membership</span>
-
-                    <strong>
-
-                        ${info.membershipId}
-
-                    </strong>
-
-                </div>
-
-                <div class="row">
-
-                    <span>Remaining Session</span>
-
-                    <strong class="session">
-
-                        ${info.remainingSessions}
-
-                    </strong>
-
-                </div>
-
-                <div class="row">
-
-                    <span>Status</span>
-
-                    <span class="badge">
-
-                        ${info.status}
-
-                    </span>
-
-                </div>
-
-            </div>
-
-            <button onclick="startScannerAgain()">
-
-                Scan Member Berikutnya
-
-            </button>
-
-        </div>
-
-    `;
-
-}
-
-// ==========================================================
-// RESTART
-// ==========================================================
-
-async function startScannerAgain() {
-
-    result.innerHTML = "";
-
-    scannerSection.style.display = "block";
-
-    if (html5QrCode) {
-
-        try {
+        if(html5QrCode){
 
             await html5QrCode.clear();
 
-        } catch (e) {}
+        }
 
     }
+
+    catch(e){}
 
     startScanner();
 
