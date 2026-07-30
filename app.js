@@ -101,10 +101,7 @@ async function onScanSuccess(decodedText) {
 
         const data = await response.json();
 
-        result.innerHTML =
-            "<pre>" +
-            JSON.stringify(data, null, 2) +
-            "</pre>";
+showResult(data);
 
     } catch (err) {
 
@@ -121,5 +118,91 @@ async function onScanSuccess(decodedText) {
 function onScanFailure(error) {
     // ignore
 }
+function showResult(data) {
 
+    if (!data.success) {
+
+        result.innerHTML = `
+            <div class="result-card error">
+
+                <div class="icon">❌</div>
+
+                <h2>CHECK-IN GAGAL</h2>
+
+                <p>${data.message || "Unknown Error"}</p>
+
+                <button onclick="startScannerAgain()">
+                    Scan Lagi
+                </button>
+
+            </div>
+        `;
+
+        return;
+
+    }
+
+    const info = data.result;
+
+    result.innerHTML = `
+
+        <div class="result-card">
+
+            <div class="icon success">
+                ✅
+            </div>
+
+            <h2>CHECK-IN BERHASIL</h2>
+
+            <p class="subtitle">
+                Attendance berhasil dicatat
+            </p>
+
+            <div class="info">
+
+                <div class="row">
+                    <span>Member ID</span>
+                    <strong>${info.memberId}</strong>
+                </div>
+
+                <div class="row">
+                    <span>Membership</span>
+                    <strong>${info.membershipId}</strong>
+                </div>
+
+                <div class="row">
+                    <span>Remaining Session</span>
+                    <strong class="session">
+                        ${info.remainingSessions}
+                    </strong>
+                </div>
+
+                <div class="row">
+                    <span>Status</span>
+
+                    <span class="badge">
+                        ${info.status}
+                    </span>
+                </div>
+
+            </div>
+
+            <button onclick="startScannerAgain()">
+                Scan Member Berikutnya
+            </button>
+
+        </div>
+
+    `;
+
+}
+async function startScannerAgain() {
+
+    result.innerHTML = "Initializing camera...";
+
+    isProcessing = false;
+
+    startScanner();
+
+}
 window.addEventListener("load", startScanner);
