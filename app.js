@@ -1,55 +1,30 @@
 // ==========================================================
-// PSC YOGA CLUB ADMIN SCANNER
-// app.js
-// Part 1
+// PSC QR Scanner
+// BUILD-002 FINAL
 // ==========================================================
 
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbwwUYp9mlKw4eYUBj8-0W4loFq0Vr_uieJA7GT99Az61Ohq30BDZiQ3VmYZgA9EU985/exec";
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbwwUYp9mlKw4eYUBj8-0W4loFq0Vr_uieJA7GT99Az61Ohq30BDZiQ3VmYZgA9EU985/exec";
+
+const result = document.getElementById("result");
+const reader = document.getElementById("reader");
+const scannerSection = document.getElementById("scannerSection");
+const statusText = document.getElementById("statusText");
+const statusDot = document.querySelector(".status-dot");
 
 let html5QrCode = null;
-let scannerRunning = false;
-let processing = false;
+let isProcessing = false;
 
 // ==========================================================
-// ELEMENTS
+// STATUS
 // ==========================================================
 
-const scannerSection = document.getElementById("scannerSection");
+function setStatus(text, color = "#F5A623") {
 
-const resultCard =
-document.getElementById("resultCard");
+    statusText.textContent = text;
+    statusDot.style.background = color;
 
-const scanAgainBtn =
-document.getElementById("scanAgainBtn");
-
-const memberId =
-document.getElementById("memberId");
-
-const membershipId =
-document.getElementById("membershipId");
-
-const remainingSessions =
-document.getElementById("remainingSessions");
-
-const statusBadge =
-document.getElementById("statusBadge");
-
-// ==========================================================
-// INIT
-// ==========================================================
-
-window.addEventListener("load", () => {
-
-    startScanner();
-
-});
-
-scanAgainBtn.addEventListener("click", () => {
-
-    resetScanner();
-
-});
+}
 
 // ==========================================================
 // START SCANNER
@@ -57,114 +32,159 @@ scanAgainBtn.addEventListener("click", () => {
 
 async function startScanner() {
 
-    if (scannerRunning) return;
+    isProcessing = false;
+
+    scannerSection.style.display = "block";
+
+    result.innerHTML = "";
+
+    setStatus("Initializing Camera...");
 
     html5QrCode = new Html5Qrcode("reader");
 
     try {
 
-        const cameras = await Html5Qrcode.getCameras();
+        const devices = await Html5Qrcode.getCameras();
 
-        if (!cameras || cameras.length === 0) {
-            alert("Tidak ada kamera yang terdeteksi.");
+        if (!devices.length) {
+
+            setStatus("No Camera Found", "#DC3545");
+
+            result.innerHTML = `
+                <div class="result-card error">
+
+                    <div class="icon">📷</div>
+
+                    <h2>No Camera</h2>
+
+                    <p>
+                        Camera tidak ditemukan.
+                    </p>
+
+                </div>
+            `;
+
             return;
+
         }
 
-        // pilih kamera belakang jika ada
-        let cameraId = cameras[0].id;
+        let cameraId = devices[0].id;
 
-        for (const camera of cameras) {
+        const backCamera = devices.find(device => {
 
-            const name = camera.label.toLowerCase();
+            const label = device.label.toLowerCase();
 
-            if (
-                name.includes("back") ||
-                name.includes("rear") ||
-                name.includes("belakang")
-            ) {
-                cameraId = camera.id;
-                break;
-            }
+            return (
+                label.includes("back") ||
+                label.includes("rear") ||
+                label.includes("environment")
+            );
+
+        });
+
+        if (backCamera) {
+
+            cameraId = backCamera.id;
+
         }
 
         await html5QrCode.start(
+
             cameraId,
+
             {
                 fps: 10,
+
                 qrbox: {
-                    width: 260,
-                    height: 260
+                    width: 250,
+                    height: 250
                 }
+
             },
+
             onScanSuccess,
+
             onScanFailure
+
         );
 
-        scannerRunning = true;
+        setStatus("Ready to Scan", "#28A745");
 
     } catch (err) {
 
         console.error(err);
-        alert(err.message);
+
+        setStatus("Camera Error", "#DC3545");
+
+        result.innerHTML = `
+
+            <div class="result-card error">
+
+                <div class="icon">❌</div>
+
+                <h2>Camera Error</h2>
+
+                <p>${err.message}</p>
+
+            </div>
+
+        `;
 
     }
 
 }
+
 // ==========================================================
-// QR SUCCESS
+// SCAN SUCCESS
 // ==========================================================
 
-async function onScanSuccess(decodedText){
+async function onScanSuccess(decodedText) {
 
-    if(processing) return;
+    if (isProcessing) return;
 
-    processing = true;
+    isProcessing = true;
 
-    try{
+    setStatus("Sending Attendance...", "#0D6EFD");
+
+    try {
 
         await html5QrCode.stop();
 
-        scannerRunning = false;
+    } catch (e) {}
 
-    }
+    scannerSection.style.display = "none";
 
-    catch(e){
+    result.innerHTML = `
 
-        console.log(e);
+        <div class="result-card">
 
-    }
+            <div class="icon">⏳</div>
 
-    await checkAttendance(decodedText);
+            <h2>Processing...</h2>
 
-}
+            <p>
+                Sending attendance to server...
+            </p>
 
-// ==========================================================
-// IGNORE SCAN ERROR
-// ==========================================================
+        </div>
 
-function onScanFailure(){
+    `;
 
-}
+    try {
 
-// ==========================================================
-// CHECK ATTENDANCE
-// ==========================================================
+        const response = await fetch(API_URL, {
 
-async function checkAttendance(qrValue){
+            method: "POST",
 
-    try{
+            headers: {
 
-        const response = await fetch(WEB_APP_URL,{
+                "Content-Type": "text/plain;charset=utf-8"
 
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
             },
 
-            body:JSON.stringify({
+            body: JSON.stringify({
 
-                membershipId:qrValue
+                membershipId: decodedText
 
             })
 
@@ -172,33 +192,41 @@ async function checkAttendance(qrValue){
 
         const data = await response.json();
 
-        if(!data.success){
+        showResult(data);
 
-            alert("Member tidak ditemukan.");
+    } catch (err) {
 
-            processing = false;
+        console.error(err);
 
-            await startScanner();
+        setStatus("Connection Failed", "#DC3545");
 
-            return;
+        result.innerHTML = `
 
-        }
+            <div class="result-card error">
 
-        showResult(data.result);
+                <div class="icon">❌</div>
+
+                <h2>Connection Failed</h2>
+
+                <p>${err.message}</p>
+
+                <button onclick="startScannerAgain()">
+
+                    Try Again
+
+                </button>
+
+            </div>
+
+        `;
 
     }
 
-   catch(error){
-
-    console.error(error);
-
-    alert(error.message);
-
-    processing = false;
-
-    await startScanner();
-
 }
+
+function onScanFailure() {
+
+    // ignore
 
 }
 
@@ -206,142 +234,160 @@ async function checkAttendance(qrValue){
 // SHOW RESULT
 // ==========================================================
 
-function showResult(result){
+function showResult(data) {
 
-    scannerSection.classList.add("hidden");
+    if (!data.success) {
 
-    resultCard.classList.add("show");
+        setStatus("Check-in Failed", "#DC3545");
 
-    memberId.textContent =
-        result.memberId ?? "-";
+        result.innerHTML = `
 
-    membershipId.textContent =
-        result.membershipId ?? "-";
+            <div class="result-card error">
 
-    remainingSessions.textContent =
-        result.remainingSessions ?? "-";
+                <div class="icon">❌</div>
 
-    statusBadge.textContent =
-        result.status ?? "-";
+                <h2>CHECK-IN GAGAL</h2>
 
-    statusBadge.className = "";
+                <p>
 
-    if(result.status === "ACTIVE"){
+                    ${data.message || "Unknown Error"}
 
-        statusBadge.classList.add(
-            "status-active"
-        );
+                </p>
+
+                <button onclick="startScannerAgain()">
+
+                    Scan Lagi
+
+                </button>
+
+            </div>
+
+        `;
+
+        return;
 
     }
-    else{
 
-        statusBadge.classList.add(
-            "status-expired"
-        );
+    const info = data.result;
 
-    }
+    setStatus("Attendance Recorded", "#28A745");
 
-    processing = false;
+    result.innerHTML = `
+
+        <div class="result-card">
+
+            <div class="icon">
+
+                ✅
+
+            </div>
+
+            <h2>
+
+                CHECK-IN BERHASIL
+
+            </h2>
+
+            <p class="subtitle">
+
+                Attendance berhasil dicatat.
+
+            </p>
+
+            <div class="info">
+
+                <div class="row">
+
+                    <span>Member ID</span>
+
+                    <strong>
+
+                        ${info.memberId}
+
+                    </strong>
+
+                </div>
+
+                <div class="row">
+
+                    <span>Membership</span>
+
+                    <strong>
+
+                        ${info.membershipId}
+
+                    </strong>
+
+                </div>
+
+                <div class="row">
+
+                    <span>Remaining Session</span>
+
+                    <strong class="session">
+
+                        ${info.remainingSessions}
+
+                    </strong>
+
+                </div>
+
+                <div class="row">
+
+                    <span>Status</span>
+
+                    <span class="badge">
+
+                        ${info.status}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <button onclick="startScannerAgain()">
+
+                Scan Member Berikutnya
+
+            </button>
+
+        </div>
+
+    `;
 
 }
 
 // ==========================================================
-// RESET
+// RESTART
 // ==========================================================
 
-async function resetScanner(){
+async function startScannerAgain() {
 
-    resultCard.classList.remove("show");
+    result.innerHTML = "";
 
-    scannerSection.classList.remove("hidden");
+    scannerSection.style.display = "block";
 
-    await startScanner();
+    if (html5QrCode) {
+
+        try {
+
+            await html5QrCode.clear();
+
+        } catch (e) {}
+
+    }
+
+    startScanner();
 
 }
 
 // ==========================================================
-// OPTIONAL HELPERS
-// ==========================================================
 
-function showError(message){
+window.addEventListener(
 
-    alert(message);
+    "load",
 
-}
+    startScanner
 
-function showSuccess(message){
-
-    console.log(message);
-
-}
-
-// ==========================================================
-// PAGE VISIBILITY
-// ==========================================================
-
-document.addEventListener("visibilitychange", async ()=>{
-
-    if(document.hidden){
-
-        if(scannerRunning && html5QrCode){
-
-            try{
-
-                await html5QrCode.stop();
-
-                scannerRunning = false;
-
-            }
-
-            catch(e){
-
-                console.log(e);
-
-            }
-
-        }
-
-    }
-    else{
-
-        if(
-            !scannerRunning &&
-            !processing &&
-            !resultCard.classList.contains("show")
-        ){
-
-            startScanner();
-
-        }
-
-    }
-
-});
-
-// ==========================================================
-// CLEANUP
-// ==========================================================
-
-window.addEventListener("beforeunload", async ()=>{
-
-    if(scannerRunning && html5QrCode){
-
-        try{
-
-            await html5QrCode.stop();
-
-        }
-
-        catch(e){
-
-            console.log(e);
-
-        }
-
-    }
-
-});
-
-// ==========================================================
-// END
-// ==========================================================
+);
