@@ -56,50 +56,61 @@ scanAgainBtn.addEventListener("click", () => {
 // START SCANNER
 // ==========================================================
 
-async function startScanner(){
+async function startScanner() {
 
-    if(scannerRunning) return;
+    if (scannerRunning) return;
 
     html5QrCode = new Html5Qrcode("reader");
 
-    try{
+    try {
+
+        const cameras = await Html5Qrcode.getCameras();
+
+        if (!cameras || cameras.length === 0) {
+            alert("Tidak ada kamera yang terdeteksi.");
+            return;
+        }
+
+        // pilih kamera belakang jika ada
+        let cameraId = cameras[0].id;
+
+        for (const camera of cameras) {
+
+            const name = camera.label.toLowerCase();
+
+            if (
+                name.includes("back") ||
+                name.includes("rear") ||
+                name.includes("belakang")
+            ) {
+                cameraId = camera.id;
+                break;
+            }
+        }
 
         await html5QrCode.start(
-
+            cameraId,
             {
-                facingMode:"environment"
-            },
-
-            {
-                fps:10,
-
-                qrbox:{
-                    width:260,
-                    height:260
+                fps: 10,
+                qrbox: {
+                    width: 260,
+                    height: 260
                 }
-
             },
-
             onScanSuccess,
-
             onScanFailure
-
         );
 
         scannerRunning = true;
 
-    }
+    } catch (err) {
 
-    catch(error){
-
-        console.error(error);
-
-        alert("Camera tidak dapat diakses.");
+        console.error(err);
+        alert(err.message);
 
     }
 
 }
-
 // ==========================================================
 // QR SUCCESS
 // ==========================================================
