@@ -1,4 +1,4 @@
-```javascript
+
 // ==========================================================
 // PSC YOGA CLUB ADMIN SCANNER
 // app.js
@@ -146,8 +146,7 @@ async function onScanSuccess(decodedText){
 function onScanFailure(){
 
 }
-```
-```javascript id="8pw3ks"
+
 // ==========================================================
 // CHECK ATTENDANCE
 // ==========================================================
@@ -260,7 +259,7 @@ async function resetScanner(){
     await startScanner();
 
 }
-```
+
 // ==========================================================
 // OPTIONAL HELPERS
 // ==========================================================
