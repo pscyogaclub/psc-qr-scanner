@@ -1,7 +1,37 @@
-/* =====================================================
-   PSC QR Scanner
-   BUILD-002
-===================================================== */
+/* ==========================================================
+   PSC YOGA CLUB ADMIN SCANNER
+   style.css
+   Part 1 / 100 Baris (1–100)
+========================================================== */
+
+:root{
+
+    --bg:#0B302B;
+    --bg-dark:#082621;
+    --panel:#F5F2EB;
+    --surface:#FFFFFF;
+
+    --primary:#0F3D36;
+    --secondary:#174C43;
+
+    --gold:#C29A56;
+    --gold-light:#D8B874;
+
+    --text:#26312F;
+    --muted:#7A7F7C;
+
+    --success:#2E7D32;
+    --danger:#C0392B;
+
+    --radius:24px;
+    --radius-sm:14px;
+
+    --shadow:
+        0 18px 50px rgba(0,0,0,.18);
+
+    --transition:.28s ease;
+
+}
 
 *{
     margin:0;
@@ -9,167 +39,252 @@
     box-sizing:border-box;
 }
 
-:root{
-
-    --primary:#C6A96B;
-    --primary-dark:#B08E47;
-
-    --dark:#2B2B2B;
-    --text:#444;
-    --light:#F7F8FA;
-    --white:#FFFFFF;
-
-    --success:#28A745;
-    --danger:#DC3545;
-    --warning:#F5A623;
-
-    --shadow:
-        0 18px 45px rgba(0,0,0,.12);
-
+html{
+    scroll-behavior:smooth;
 }
 
 body{
 
     font-family:
+        "Inter",
         "Segoe UI",
-        Arial,
         sans-serif;
 
-    background:
+    background:var(--bg);
 
-        linear-gradient(
-            180deg,
-            #f9f9f9,
-            #eceff3
-        );
+    color:var(--text);
 
     min-height:100vh;
 
-    display:flex;
+    overflow-x:hidden;
 
-    justify-content:center;
+}
 
-    align-items:center;
+button{
 
-    padding:20px;
+    font-family:inherit;
+    border:none;
+    cursor:pointer;
 
-    color:var(--dark);
+}
+
+img{
+
+    display:block;
+    max-width:100%;
+
+}
+
+a{
+
+    text-decoration:none;
+    color:inherit;
 
 }
 
 .app{
 
-    width:100%;
-    max-width:440px;
+    min-height:100vh;
+
+    position:relative;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:28px 18px;
 
 }
 
-.scanner-card{
+.bg-overlay{
 
-    background:var(--white);
+    position:fixed;
 
-    border-radius:24px;
+    inset:0;
 
-    overflow:hidden;
+    background:
+        radial-gradient(circle at top,
+        rgba(194,154,86,.16),
+        transparent 55%);
 
-    box-shadow:var(--shadow);
-
-    animation:fadeUp .45s ease;
-
-}
-
-/* ===================================
-   HEADER
-=================================== */
-
-.header{
-
-    text-align:center;
-
-    padding:
-
-        36px
-        28px
-        22px;
+    pointer-events:none;
 
 }
 
-.logo-circle{
+.bg-glow{
 
-    width:82px;
+    position:fixed;
 
-    height:82px;
-
-    margin:auto;
+    width:420px;
+    height:420px;
 
     border-radius:50%;
 
     background:
+        radial-gradient(circle,
+        rgba(216,184,116,.18),
+        transparent 72%);
 
-        linear-gradient(
-            135deg,
-            var(--primary),
-            #E8D2A3
-        );
+    top:-140px;
+    right:-140px;
+
+    filter:blur(30px);
+
+    pointer-events:none;
+
+}
+
+.scanner-app{
+
+    width:100%;
+
+    max-width:430px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.hero{
 
     display:flex;
 
+    flex-direction:column;
+
     align-items:center;
 
-    justify-content:center;
+    gap:18px;
 
-    color:white;
+    margin-bottom:26px;
+
+}
+
+.admin-button{
+
+    align-self:flex-end;
+
+    background:rgba(255,255,255,.08);
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.14);
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    transition:var(--transition);
+
+}
+
+.admin-button:hover{
+
+    background:rgba(255,255,255,.14);
+
+}
+
+.psc-logo{
+
+    width:72px;
+
+    height:72px;
+
+    object-fit:contain;
+
+}
+
+.brand{
+
+    text-align:center;
+
+}
+
+.brand h1{
+
+    color:#FFFFFF;
+
+    font-size:1.45rem;
 
     font-weight:700;
 
-    font-size:26px;
+    letter-spacing:.3px;
 
-    letter-spacing:2px;
-
-    box-shadow:
-
-        0 12px 30px rgba(198,169,107,.35);
+    margin-bottom:6px;
 
 }
 
-.header h1{
+.brand p{
 
-    margin-top:18px;
+    color:rgba(255,255,255,.72);
 
-    font-size:28px;
+    font-size:.9rem;
+
+    letter-spacing:.25px;
+
+}
+
+.page-title{
+
+    text-align:center;
+
+    margin-bottom:26px;
+
+}
+
+.page-title h2{
+
+    color:#FFFFFF;
+
+    font-size:1.8rem;
 
     font-weight:700;
 
-}
-
-.header p{
-
-    margin-top:8px;
-
-    color:#777;
-
-    font-size:15px;
+    margin-bottom:8px;
 
 }
 
-/* ===================================
-   SCANNER
-=================================== */
+.page-title p{
 
-.scanner-wrapper{
+    color:rgba(255,255,255,.72);
 
-    margin:0 24px;
+    font-size:.92rem;
 
-    border-radius:18px;
+}
+
+.scanner-panel{
+
+    background:var(--panel);
+
+    border-radius:var(--radius);
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+    margin-bottom:22px;
+
+}
+
+.scanner-frame{
+
+    position:relative;
+
+    aspect-ratio:1/1;
+
+    border-radius:22px;
 
     overflow:hidden;
 
-    border:
+    background:#000;
 
-        2px solid
-        rgba(198,169,107,.25);
-
-    background:#fafafa;
+    border:2px solid rgba(194,154,86,.28);
 
 }
 
@@ -177,31 +292,145 @@ body{
 
     width:100%;
 
+    height:100%;
+
 }
 
 #reader video{
 
-    border-radius:14px;
+    width:100% !important;
+
+    height:100% !important;
+
+    object-fit:cover;
 
 }
 
-/* ===================================
-   STATUS BAR
-=================================== */
+.scanner-guide{
 
-#statusBar{
+    text-align:center;
 
-    margin:
+    margin-top:18px;
 
-        22px
-        24px
-        0;
+    color:var(--muted);
 
-    background:#F4F6F8;
+    font-size:.9rem;
 
-    border-radius:12px;
+    line-height:1.5;
 
-    padding:14px;
+}
+
+.corner{
+
+    position:absolute;
+
+    width:34px;
+
+    height:34px;
+
+    border-color:var(--gold-light);
+
+    border-style:solid;
+
+    z-index:5;
+
+    pointer-events:none;
+
+}
+
+.top-left{
+
+    top:14px;
+    left:14px;
+
+    border-width:4px 0 0 4px;
+
+    border-top-left-radius:10px;
+
+}
+
+.top-right{
+
+    top:14px;
+    right:14px;
+
+    border-width:4px 4px 0 0;
+
+    border-top-right-radius:10px;
+
+}
+
+.bottom-left{
+
+    left:14px;
+    bottom:14px;
+
+    border-width:0 0 4px 4px;
+
+    border-bottom-left-radius:10px;
+
+}
+
+.bottom-right{
+
+    right:14px;
+    bottom:14px;
+
+    border-width:0 4px 4px 0;
+
+    border-bottom-right-radius:10px;
+
+}
+
+.result-panel{
+
+    display:none;
+
+    background:var(--panel);
+
+    border-radius:var(--radius);
+
+    padding:24px;
+
+    box-shadow:var(--shadow);
+
+    animation:fadeUp .35s ease;
+
+    margin-bottom:22px;
+
+}
+
+.result-panel.show{
+
+    display:block;
+
+}
+
+.result-header{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:24px;
+
+}
+
+.success-icon{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:50%;
+
+    background:rgba(46,125,50,.12);
+
+    color:var(--success);
 
     display:flex;
 
@@ -209,219 +438,159 @@ body{
 
     justify-content:center;
 
-    gap:10px;
+    font-size:34px;
 
-    font-size:14px;
-
-}
-
-.status-dot{
-
-    width:10px;
-
-    height:10px;
-
-    border-radius:50%;
-
-    background:var(--warning);
-
-    animation:pulse 1.5s infinite;
+    margin-bottom:14px;
 
 }
 
-/* ===================================
-   RESULT
-=================================== */
-
-#result{
-
-    padding:24px;
-
-}
-
-/* ===================================
-   RESULT CARD
-=================================== */
-
-.result-card{
+.result-label{
 
     text-align:center;
 
-    animation:fadeUp .35s;
+}
+
+.result-label h3{
+
+    font-size:1.35rem;
+
+    color:var(--primary);
+
+    margin-bottom:6px;
 
 }
 
-.icon{
+.result-label p{
 
-    font-size:60px;
+    color:var(--muted);
 
-    margin-bottom:10px;
-
-}
-
-.result-card h2{
-
-    margin-bottom:8px;
-
-    font-size:26px;
+    font-size:.92rem;
 
 }
 
-.result-card .subtitle{
+.member-info{
 
-    color:#666;
+    display:grid;
 
-    margin-bottom:22px;
+    grid-template-columns:1fr 1fr;
 
-}
+    gap:14px;
 
-/* ===================================
-   INFO
-=================================== */
-
-.info{
-
-    margin-top:10px;
-
-    border-top:
-
-        1px solid #eee;
-
-    border-bottom:
-
-        1px solid #eee;
+    margin-bottom:24px;
 
 }
 
-.row{
+.info-box{
 
-    display:flex;
+    background:#FFFFFF;
 
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:16px 0;
-
-    border-bottom:1px solid #f0f0f0;
-
-}
-
-.row:last-child{
-
-    border-bottom:none;
-
-}
-
-.row span{
-
-    color:#666;
-
-}
-
-.row strong{
-
-    color:var(--dark);
-
-}
-
-.session{
-
-    color:var(--primary-dark);
-
-    font-size:24px;
-
-}
-
-/* ===================================
-   BADGE
-=================================== */
-
-.badge{
-
-    background:#EAF8EF;
-
-    color:var(--success);
-
-    padding:
-
-        6px
-        14px;
-
-    border-radius:999px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-/* ===================================
-   BUTTON
-=================================== */
-
-button{
-
-    width:100%;
-
-    margin-top:28px;
+    border-radius:16px;
 
     padding:16px;
 
-    border:none;
-
-    border-radius:14px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            var(--primary),
-            var(--primary-dark)
-        );
-
-    color:white;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.25s;
+    border:1px solid rgba(0,0,0,.06);
 
 }
 
-button:hover{
+.info-box label{
+
+    display:block;
+
+    font-size:.74rem;
+
+    color:var(--muted);
+
+    margin-bottom:8px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.8px;
+
+}
+
+.info-box span{
+
+    display:block;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    color:var(--text);
+
+    word-break:break-word;
+
+}
+
+#statusBadge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:92px;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    background:rgba(46,125,50,.12);
+
+    color:var(--success);
+
+}
+
+.primary-button{
+
+    width:100%;
+
+    height:56px;
+
+    border-radius:18px;
+
+    background:var(--gold);
+
+    color:#FFFFFF;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    transition:var(--transition);
+
+}
+
+.primary-button:hover{
+
+    background:var(--gold-light);
 
     transform:translateY(-2px);
 
-    box-shadow:
-
-        0 10px 25px
-        rgba(198,169,107,.35);
-
 }
 
-button:active{
+.primary-button:active{
 
     transform:scale(.98);
 
 }
 
-/* ===================================
-   ERROR
-=================================== */
+.footer{
 
-.error .icon{
+    text-align:center;
 
-    color:var(--danger);
+    color:rgba(255,255,255,.58);
+
+    font-size:.8rem;
+
+    padding-bottom:6px;
 
 }
-
-/* ===================================
-   ANIMATION
-=================================== */
 
 @keyframes fadeUp{
 
@@ -429,9 +598,7 @@ button:active{
 
         opacity:0;
 
-        transform:
-
-            translateY(15px);
+        transform:translateY(18px);
 
     }
 
@@ -439,73 +606,426 @@ button:active{
 
         opacity:1;
 
-        transform:
-
-            translateY(0);
+        transform:translateY(0);
 
     }
 
 }
 
-@keyframes pulse{
+@media (max-width:420px){
 
-    0%{
+    .app{
 
-        transform:scale(1);
-
-        opacity:.7;
+        padding:20px 14px;
 
     }
 
-    50%{
+    .scanner-panel{
 
-        transform:scale(1.4);
+        padding:18px;
+
+    }
+
+    .result-panel{
+
+        padding:18px;
+
+    }
+
+    .member-info{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .page-title h2{
+
+        font-size:1.55rem;
+
+    }
+
+    .brand h1{
+
+        font-size:1.3rem;
+
+    }
+
+    .psc-logo{
+
+        width:64px;
+
+        height:64px;
+
+    }
+
+    .success-icon{
+
+        width:64px;
+
+        height:64px;
+
+        font-size:30px;
+
+    }
+
+}
+
+html,
+body{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+button:focus,
+button:focus-visible{
+
+    outline:none;
+
+}
+
+#reader{
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+/* ---------- Html5 QRCode Cleanup ---------- */
+
+#reader__scan_region{
+
+    border:none !important;
+
+    background:#000 !important;
+
+}
+
+#reader__dashboard{
+
+    display:none !important;
+
+}
+
+#reader__dashboard_section{
+
+    display:none !important;
+
+}
+
+#reader img{
+
+    display:none !important;
+
+}
+
+#reader video{
+
+    border-radius:18px;
+
+}
+
+#reader{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+}
+
+#reader > div{
+
+    width:100% !important;
+
+}
+
+#reader__scan_region img{
+
+    display:none !important;
+
+}
+
+#reader__scan_region video{
+
+    width:100% !important;
+
+    height:100% !important;
+
+    object-fit:cover;
+
+}
+
+.scanner-panel:hover{
+
+    transform:translateY(-2px);
+
+    transition:var(--transition);
+
+}
+
+.result-panel{
+
+    transition:var(--transition);
+
+}
+
+.info-box{
+
+    transition:var(--transition);
+
+}
+
+.info-box:hover{
+
+    border-color:rgba(194,154,86,.45);
+
+    transform:translateY(-2px);
+
+}
+
+.primary-button:hover{
+
+    box-shadow:
+
+        0 12px 28px rgba(194,154,86,.28);
+
+}
+
+.primary-button:disabled{
+
+    opacity:.6;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+}
+
+.hidden{
+
+    display:none !important;
+
+}
+
+/* ---------- Utility ---------- */
+
+.text-success{
+
+    color:var(--success);
+
+}
+
+.text-danger{
+
+    color:var(--danger);
+
+}
+
+.text-muted{
+
+    color:var(--muted);
+
+}
+
+.bg-success{
+
+    background:rgba(46,125,50,.12);
+
+}
+
+.bg-danger{
+
+    background:rgba(192,57,43,.12);
+
+}
+
+.shadow{
+
+    box-shadow:var(--shadow);
+
+}
+
+.rounded{
+
+    border-radius:var(--radius);
+
+}
+
+/* ---------- Loading State ---------- */
+
+.scanner-loading{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    height:100%;
+
+    color:#FFFFFF;
+
+    gap:16px;
+
+}
+
+.loading-spinner{
+
+    width:42px;
+
+    height:42px;
+
+    border:4px solid rgba(255,255,255,.18);
+
+    border-top-color:var(--gold-light);
+
+    border-radius:50%;
+
+    animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ---------- Error State ---------- */
+
+.error-message{
+
+    background:rgba(192,57,43,.10);
+
+    color:var(--danger);
+
+    border:1px solid rgba(192,57,43,.18);
+
+    border-radius:16px;
+
+    padding:14px 16px;
+
+    font-size:.9rem;
+
+    text-align:center;
+
+}
+```
+/* ---------- Animation Helpers ---------- */
+
+.fade-in{
+
+    animation:fadeUp .35s ease;
+
+}
+
+.scale-in{
+
+    animation:scaleIn .25s ease;
+
+}
+
+@keyframes scaleIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.94);
+
+    }
+
+    to{
 
         opacity:1;
 
-    }
-
-    100%{
-
         transform:scale(1);
 
-        opacity:.7;
+    }
+
+}
+
+/* ---------- Status Variants ---------- */
+
+.status-active{
+
+    background:rgba(46,125,50,.12);
+
+    color:var(--success);
+
+}
+
+.status-expired{
+
+    background:rgba(192,57,43,.12);
+
+    color:var(--danger);
+
+}
+
+.status-warning{
+
+    background:rgba(194,154,86,.14);
+
+    color:#8A642A;
+
+}
+
+/* ---------- Small Devices ---------- */
+
+@media (max-width:360px){
+
+    .scanner-app{
+
+        max-width:100%;
+
+    }
+
+    .scanner-panel{
+
+        padding:16px;
+
+    }
+
+    .result-panel{
+
+        padding:16px;
+
+    }
+
+    .primary-button{
+
+        height:52px;
+
+        font-size:.95rem;
+
+    }
+
+    .corner{
+
+        width:28px;
+
+        height:28px;
 
     }
 
 }
 
-/* ===================================
-   MOBILE
-=================================== */
-
-@media(max-width:480px){
-
-    .scanner-card{
-
-        border-radius:18px;
-
-    }
-
-    .header{
-
-        padding:28px 20px 20px;
-
-    }
-
-    .logo-circle{
-
-        width:70px;
-        height:70px;
-
-        font-size:22px;
-
-    }
-
-    .header h1{
-
-        font-size:24px;
-
-    }
-
-}
+/* ===========================
+   END OF FILE
+=========================== */
