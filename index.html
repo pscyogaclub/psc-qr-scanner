@@ -9,7 +9,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0">
 
-    <title>PSC Admin Scanner</title>
+    <title>PSC QR Attendance Scanner</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -17,99 +17,129 @@
 
 <body>
 
-<div class="background-glow"></div>
+    <!-- Background Decoration -->
+    <div class="background-glow"></div>
 
-<div class="app">
+    <div class="app">
 
-    <div class="scanner-card">
+        <main class="scanner-card">
 
-        <!-- ============================= -->
-        <!-- HEADER -->
-        <!-- ============================= -->
+            <!-- ================================= -->
+            <!-- HERO -->
+            <!-- ================================= -->
 
-        <header class="hero">
+            <header class="hero">
 
-            <img
-                src="psc-logo-gold.png"
-                alt="PSC Yoga Club"
-                class="logo">
+                <img
+                    src="psc-logo-gold.png"
+                    alt="PSC Yoga Club"
+                    class="logo">
 
-            <h1>
+                <div class="hero-divider"></div>
 
-                PSC YOGA CLUB
+                <h1>
 
-            </h1>
+                    QR Attendance
 
-            <p class="subtitle">
+                </h1>
 
-                QR Attendance Scanner
+                <p class="subtitle">
 
-            </p>
+                    Scan member QR Code for attendance
 
-            <p class="tagline">
+                </p>
 
-                Present • Stretch • Connect
+                <p class="tagline">
 
-            </p>
+                    Present • Stretch • Connect
 
-        </header>
+                </p>
 
-        <!-- ============================= -->
-        <!-- SCANNER -->
-        <!-- ============================= -->
+            </header>
 
-        <section
-            id="scannerSection">
+            <!-- ================================= -->
+            <!-- SCANNER -->
+            <!-- ================================= -->
 
-            <div class="scanner-frame">
+            <section
+                id="scannerSection"
+                class="scanner-section">
 
-                <div id="reader"></div>
+                <div class="scanner-frame">
 
-            </div>
+                    <div id="reader"></div>
 
-        </section>
+                </div>
 
-        <!-- ============================= -->
-        <!-- STATUS -->
-        <!-- ============================= -->
+            </section>
 
-        <section class="status-wrapper">
+            <!-- ================================= -->
+            <!-- STATUS -->
+            <!-- ================================= -->
 
-            <div id="statusBar">
+            <section class="status-section">
 
-                <span class="status-dot"></span>
+                <div id="statusBar">
 
-                <span id="statusText">
+                    <span class="status-dot"></span>
 
-                    Initializing Camera...
+                    <span id="statusText">
+
+                        Initializing Camera...
+
+                    </span>
+
+                </div>
+
+            </section>
+
+            <!-- ================================= -->
+            <!-- RESULT -->
+            <!-- ================================= -->
+
+            <section id="result">
+
+                <div class="placeholder">
+
+                    Ready to Scan
+
+                </div>
+
+            </section>
+
+            <!-- ================================= -->
+            <!-- FOOTER -->
+            <!-- ================================= -->
+
+            <footer class="footer">
+
+                <span>
+
+                    PSC Yoga Club
 
                 </span>
 
-            </div>
+                <span class="footer-divider">
 
-        </section>
+                    •
 
-        <!-- ============================= -->
-        <!-- RESULT -->
-        <!-- ============================= -->
+                </span>
 
-        <section id="result">
+                <span>
 
-            <div class="placeholder">
+                    Admin Scanner v1.0
 
-                Ready to Scan
+                </span>
 
-            </div>
+            </footer>
 
-        </section>
+        </main>
 
     </div>
 
-</div>
+    <script src="https://unpkg.com/html5-qrcode"></script>
 
-<script src="https://unpkg.com/html5-qrcode"></script>
-
-<script src="app.js"></script>
+    <script src="app.js"></script>
 
 </body>
 
