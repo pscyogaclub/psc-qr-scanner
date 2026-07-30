@@ -4,9 +4,12 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PSC Attendance Scanner</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>PSC Admin Scanner</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -14,49 +17,63 @@
 
 <body>
 
-    <div class="app">
+<div class="background-glow"></div>
 
-        <div class="scanner-card">
+<div class="app">
 
-            <!-- ===================== -->
-            <!-- HEADER -->
-            <!-- ===================== -->
+    <div class="scanner-card">
 
-            <div class="header">
+        <!-- ============================= -->
+        <!-- HEADER -->
+        <!-- ============================= -->
 
-                <div class="psc-logo">
+        <header class="hero">
 
-                    <div class="logo-circle">
-                        PSC
-                    </div>
+            <img
+                src="psc-logo-gold.png"
+                alt="PSC Yoga Club"
+                class="logo">
 
-                </div>
+            <h1>
 
-                <h1>QR Attendance</h1>
+                PSC YOGA CLUB
 
-                <p>
-                    Present • Stretch • Connect
-                </p>
+            </h1>
+
+            <p class="subtitle">
+
+                QR Attendance Scanner
+
+            </p>
+
+            <p class="tagline">
+
+                Present • Stretch • Connect
+
+            </p>
+
+        </header>
+
+        <!-- ============================= -->
+        <!-- SCANNER -->
+        <!-- ============================= -->
+
+        <section
+            id="scannerSection">
+
+            <div class="scanner-frame">
+
+                <div id="reader"></div>
 
             </div>
 
-            <!-- ===================== -->
-            <!-- CAMERA -->
-            <!-- ===================== -->
+        </section>
 
-            <div id="scannerSection">
+        <!-- ============================= -->
+        <!-- STATUS -->
+        <!-- ============================= -->
 
-                <div class="scanner-wrapper">
-
-                    <div id="reader"></div>
-
-                </div>
-
-            </div>
-
-            <!-- ===================== -->
-            <!-- STATUS -->
-            <!-- ===================== -->
+        <section class="status-wrapper">
 
             <div id="statusBar">
 
@@ -70,23 +87,29 @@
 
             </div>
 
-            <!-- ===================== -->
-            <!-- RESULT -->
-            <!-- ===================== -->
+        </section>
 
-            <div id="result">
+        <!-- ============================= -->
+        <!-- RESULT -->
+        <!-- ============================= -->
 
-                Waiting for QR Code...
+        <section id="result">
+
+            <div class="placeholder">
+
+                Ready to Scan
 
             </div>
 
-        </div>
+        </section>
 
     </div>
 
-    <script src="https://unpkg.com/html5-qrcode"></script>
+</div>
 
-    <script src="app.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script src="app.js"></script>
 
 </body>
 
