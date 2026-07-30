@@ -11,135 +11,256 @@
 
     <title>PSC QR Attendance Scanner</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
 
 </head>
 
 <body>
 
-    <!-- Background Decoration -->
-    <div class="background-glow"></div>
+<div class="background"></div>
 
-    <div class="app">
+<div class="container">
 
-        <main class="scanner-card">
+    <!-- ===================================== -->
+    <!-- HEADER -->
+    <!-- ===================================== -->
 
-            <!-- ================================= -->
-            <!-- HERO -->
-            <!-- ================================= -->
+    <header class="hero">
 
-            <header class="hero">
+        <button
+            class="admin-btn">
 
-                <img
-                    src="psc-logo-gold.png"
-                    alt="PSC Yoga Club"
-                    class="logo">
+            ⚙ ADMIN
 
-                <div class="hero-divider"></div>
+        </button>
 
-                <h1>
+        <img
+            src="psc-logo-gold.png"
+            alt="PSC Yoga Club"
+            class="logo">
 
-                    QR Attendance
+        <h3>
 
-                </h1>
+            PSC YOGA CLUB
 
-                <p class="subtitle">
+        </h3>
 
-                    Scan member QR Code for attendance
+        <p>
 
-                </p>
+            PRESENT • STRETCH • CONNECT
 
-                <p class="tagline">
+        </p>
 
-                    Present • Stretch • Connect
+    </header>
 
-                </p>
+    <!-- ===================================== -->
+    <!-- TITLE -->
+    <!-- ===================================== -->
 
-            </header>
+    <section class="title">
 
-            <!-- ================================= -->
-            <!-- SCANNER -->
-            <!-- ================================= -->
+        <h1>
 
-            <section
-                id="scannerSection"
-                class="scanner-section">
+            QR Attendance
 
-                <div class="scanner-frame">
+        </h1>
 
-                    <div id="reader"></div>
+        <p>
+
+            Scan member QR Code for attendance
+
+        </p>
+
+    </section>
+
+    <!-- ===================================== -->
+    <!-- SCANNER -->
+    <!-- ===================================== -->
+
+    <section
+        id="scannerSection"
+        class="scanner-card">
+
+        <div
+            class="scanner-frame">
+
+            <div
+                class="corner tl"></div>
+
+            <div
+                class="corner tr"></div>
+
+            <div
+                class="corner bl"></div>
+
+            <div
+                class="corner br"></div>
+
+            <div
+                id="reader">
+
+            </div>
+
+            <div
+                class="scanner-caption">
+
+                📷 Arahkan kamera ke QR Code member
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ===================================== -->
+    <!-- RESULT -->
+    <!-- ===================================== -->
+
+    <section
+        id="resultCard"
+        class="result-card">
+
+        <div
+            class="success-row">
+
+            <div
+                class="success-icon">
+
+                ✓
+
+            </div>
+
+            <div>
+
+                <div
+                    class="success-small">
+
+                    Attendance Recorded
 
                 </div>
 
-            </section>
+                <h2>
 
-            <!-- ================================= -->
-            <!-- STATUS -->
-            <!-- ================================= -->
+                    Check-in Success!
 
-            <section class="status-section">
+                </h2>
 
-                <div id="statusBar">
+            </div>
 
-                    <span class="status-dot"></span>
+        </div>
 
-                    <span id="statusText">
+        <div
+            class="divider">
 
-                        Initializing Camera...
+        </div>
 
-                    </span>
+        <div
+            class="member-grid">
 
-                </div>
+            <div
+                class="info">
 
-            </section>
+                <label>
 
-            <!-- ================================= -->
-            <!-- RESULT -->
-            <!-- ================================= -->
+                    Member ID
 
-            <section id="result">
+                </label>
 
-                <div class="placeholder">
+                <strong
+                    id="memberId">
 
-                    Ready to Scan
+                    -
 
-                </div>
+                </strong>
 
-            </section>
+            </div>
 
-            <!-- ================================= -->
-            <!-- FOOTER -->
-            <!-- ================================= -->
+            <div
+                class="info">
 
-            <footer class="footer">
+                <label>
 
-                <span>
+                    Membership ID
 
-                    PSC Yoga Club
+                </label>
+
+                <strong
+                    id="membershipId">
+
+                    -
+
+                </strong>
+
+            </div>
+
+            <div
+                class="info">
+
+                <label>
+
+                    Remaining Session
+
+                </label>
+
+                <strong
+                    id="remainingSessions">
+
+                    -
+
+                </strong>
+
+            </div>
+
+            <div
+                class="info">
+
+                <label>
+
+                    Status
+
+                </label>
+
+                <span
+                    id="statusBadge"
+                    class="badge">
+
+                    -
 
                 </span>
 
-                <span class="footer-divider">
+            </div>
 
-                    •
+        </div>
 
-                </span>
+        <button
+            id="scanAgainBtn">
 
-                <span>
+            Scan Member Berikutnya
 
-                    Admin Scanner v1.0
+        </button>
 
-                </span>
+    </section>
 
-            </footer>
+    <!-- ===================================== -->
+    <!-- FOOTER -->
+    <!-- ===================================== -->
 
-        </main>
+    <footer>
 
-    </div>
+        PSC Yoga Club
+        •
 
-    <script src="https://unpkg.com/html5-qrcode"></script>
+        Admin Scanner v1.0
 
-    <script src="app.js"></script>
+    </footer>
+
+</div>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<script src="app.js"></script>
 
 </body>
 
