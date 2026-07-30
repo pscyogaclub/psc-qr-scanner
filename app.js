@@ -1,438 +1,338 @@
+```javascript
 // ==========================================================
-// PSC QR Attendance Scanner
-// BUILD-003 Emerald Edition
+// PSC YOGA CLUB ADMIN SCANNER
+// app.js
+// Part 1
 // ==========================================================
 
-const API_URL =
+const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbwwUYp9mlKw4eYUBj8-0W4loFq0Vr_uieJA7GT99Az61Ohq30BDZiQ3VmYZgA9EU985/exec";
 
-const reader=document.getElementById("reader");
-const result=document.getElementById("result");
-const scannerSection=document.getElementById("scannerSection");
-const statusText=document.getElementById("statusText");
-const statusDot=document.querySelector(".status-dot");
-
-let html5QrCode=null;
-let isProcessing=false;
+let html5QrCode = null;
+let scannerRunning = false;
+let processing = false;
 
 // ==========================================================
-
-function setStatus(text,color){
-
-    statusText.textContent=text;
-
-    statusDot.style.background=color;
-
-}
-
+// ELEMENTS
 // ==========================================================
 
-function showLoading(message){
+const scannerSection = document.getElementById("scannerSection");
 
-    result.innerHTML=`
+const resultCard =
+document.getElementById("resultCard");
 
-    <div class="result-card">
+const scanAgainBtn =
+document.getElementById("scanAgainBtn");
 
-        <div class="icon">
+const memberId =
+document.getElementById("memberId");
 
-            ⏳
+const membershipId =
+document.getElementById("membershipId");
 
-        </div>
+const remainingSessions =
+document.getElementById("remainingSessions");
 
-        <h2>
-
-            Processing
-
-        </h2>
-
-        <p class="subtitle">
-
-            ${message}
-
-        </p>
-
-    </div>
-
-    `;
-
-}
+const statusBadge =
+document.getElementById("statusBadge");
 
 // ==========================================================
-
-function showError(message){
-
-    setStatus(
-        "Check-in Failed",
-        "#D64B4B"
-    );
-
-    result.innerHTML=`
-
-    <div class="result-card error">
-
-        <div class="icon">
-
-            ❌
-
-        </div>
-
-        <h2>
-
-            CHECK-IN FAILED
-
-        </h2>
-
-        <p class="subtitle">
-
-            ${message}
-
-        </p>
-
-        <button onclick="restartScanner()">
-
-            Scan Again
-
-        </button>
-
-    </div>
-
-    `;
-
-}
-
+// INIT
 // ==========================================================
 
-function showSuccess(info){
+window.addEventListener("load", () => {
 
-    setStatus(
-        "Attendance Recorded",
-        "#2EAF61"
-    );
+    startScanner();
 
-    result.innerHTML=`
+});
 
-    <div class="result-card">
+scanAgainBtn.addEventListener("click", () => {
 
-        <div class="icon">
+    resetScanner();
 
-            ✅
+});
 
-        </div>
-
-        <h2>
-
-            CHECK-IN SUCCESS
-
-        </h2>
-
-        <p class="subtitle">
-
-            Attendance successfully recorded.
-
-        </p>
-
-        <div class="info">
-
-            <div class="row">
-
-                <span>Member ID</span>
-
-                <strong>
-
-                    ${info.memberId}
-
-                </strong>
-
-            </div>
-
-            <div class="row">
-
-                <span>Membership</span>
-
-                <strong>
-
-                    ${info.membershipId}
-
-                </strong>
-
-            </div>
-
-            <div class="row">
-
-                <span>Remaining Session</span>
-
-                <strong class="session">
-
-                    ${info.remainingSessions}
-
-                </strong>
-
-            </div>
-
-            <div class="row">
-
-                <span>Status</span>
-
-                <span class="badge">
-
-                    ${info.status}
-
-                </span>
-
-            </div>
-
-        </div>
-
-        <button onclick="restartScanner()">
-
-            Scan Member Berikutnya
-
-        </button>
-
-    </div>
-
-    `;
-
-}
-
+// ==========================================================
+// START SCANNER
 // ==========================================================
 
 async function startScanner(){
 
-    isProcessing=false;
+    if(scannerRunning) return;
 
-    scannerSection.style.display="block";
-
-    result.innerHTML=`
-        <div class="placeholder">
-            Ready to Scan
-        </div>
-    `;
-
-    setStatus(
-        "Initializing Camera...",
-        "#E8B44D"
-    );
-
-    html5QrCode=new Html5Qrcode("reader");
+    html5QrCode = new Html5Qrcode("reader");
 
     try{
 
-        const devices=
-        await Html5Qrcode.getCameras();
-
-        if(!devices.length){
-
-            showError(
-                "Camera not found."
-            );
-
-            return;
-
-        }
-
-        let cameraId=devices[0].id;
-
-        const back=
-        devices.find(device=>{
-
-            const label=
-            device.label.toLowerCase();
-
-            return(
-
-                label.includes("back") ||
-
-                label.includes("rear") ||
-
-                label.includes("environment")
-
-            );
-
-        });
-
-        if(back){
-
-            cameraId=back.id;
-
-        }
-
         await html5QrCode.start(
 
-            cameraId,
+            {
+                facingMode:"environment"
+            },
 
             {
-
                 fps:10,
 
                 qrbox:{
-
                     width:260,
-
                     height:260
-
                 }
 
             },
 
             onScanSuccess,
 
-            ()=>{}
+            onScanFailure
 
         );
 
-        setStatus(
-
-            "Ready to Scan",
-
-            "#2EAF61"
-
-        );
+        scannerRunning = true;
 
     }
 
-    catch(err){
+    catch(error){
 
-        console.error(err);
+        console.error(error);
 
-        showError(err.message);
+        alert("Camera tidak dapat diakses.");
 
     }
 
 }
 
 // ==========================================================
+// QR SUCCESS
+// ==========================================================
 
 async function onScanSuccess(decodedText){
 
-    if(isProcessing) return;
+    if(processing) return;
 
-    isProcessing=true;
-
-    setStatus(
-
-        "Sending Attendance...",
-
-        "#E8B44D"
-
-    );
-
-    scannerSection.style.display="none";
-
-    showLoading(
-
-        "Sending attendance to PSC Server..."
-
-    );
+    processing = true;
 
     try{
 
         await html5QrCode.stop();
 
+        scannerRunning = false;
+
     }
 
-    catch(e){}
+    catch(e){
+
+        console.log(e);
+
+    }
+
+    await checkAttendance(decodedText);
+
+}
+
+// ==========================================================
+// IGNORE SCAN ERROR
+// ==========================================================
+
+function onScanFailure(){
+
+}
+```
+```javascript id="8pw3ks"
+// ==========================================================
+// CHECK ATTENDANCE
+// ==========================================================
+
+async function checkAttendance(qrValue){
 
     try{
 
-        const response=
+        const response = await fetch(WEB_APP_URL,{
 
-        await fetch(
+            method:"POST",
 
-            API_URL,
+            headers:{
+                "Content-Type":"application/json"
+            },
 
-            {
+            body:JSON.stringify({
 
-                method:"POST",
+                membershipId:qrValue
 
-                headers:{
+            })
 
-                    "Content-Type":"text/plain;charset=utf-8"
+        });
 
-                },
+        const data = await response.json();
 
-                body:JSON.stringify({
+        if(!data.success){
 
-                    membershipId:decodedText
+            alert("Member tidak ditemukan.");
 
-                })
+            processing = false;
+
+            await startScanner();
+
+            return;
+
+        }
+
+        showResult(data.result);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert("Gagal menghubungi server.");
+
+        processing = false;
+
+        await startScanner();
+
+    }
+
+}
+
+// ==========================================================
+// SHOW RESULT
+// ==========================================================
+
+function showResult(result){
+
+    scannerSection.classList.add("hidden");
+
+    resultCard.classList.add("show");
+
+    memberId.textContent =
+        result.memberId ?? "-";
+
+    membershipId.textContent =
+        result.membershipId ?? "-";
+
+    remainingSessions.textContent =
+        result.remainingSessions ?? "-";
+
+    statusBadge.textContent =
+        result.status ?? "-";
+
+    statusBadge.className = "";
+
+    if(result.status === "ACTIVE"){
+
+        statusBadge.classList.add(
+            "status-active"
+        );
+
+    }
+    else{
+
+        statusBadge.classList.add(
+            "status-expired"
+        );
+
+    }
+
+    processing = false;
+
+}
+
+// ==========================================================
+// RESET
+// ==========================================================
+
+async function resetScanner(){
+
+    resultCard.classList.remove("show");
+
+    scannerSection.classList.remove("hidden");
+
+    await startScanner();
+
+}
+```
+// ==========================================================
+// OPTIONAL HELPERS
+// ==========================================================
+
+function showError(message){
+
+    alert(message);
+
+}
+
+function showSuccess(message){
+
+    console.log(message);
+
+}
+
+// ==========================================================
+// PAGE VISIBILITY
+// ==========================================================
+
+document.addEventListener("visibilitychange", async ()=>{
+
+    if(document.hidden){
+
+        if(scannerRunning && html5QrCode){
+
+            try{
+
+                await html5QrCode.stop();
+
+                scannerRunning = false;
 
             }
 
-        );
+            catch(e){
 
-        const data=
+                console.log(e);
 
-        await response.json();
-
-        if(data.success){
-
-            showSuccess(
-
-                data.result
-
-            );
+            }
 
         }
 
-        else{
+    }
+    else{
 
-            showError(
+        if(
+            !scannerRunning &&
+            !processing &&
+            !resultCard.classList.contains("show")
+        ){
 
-                data.message ||
-
-                "Unknown Error"
-
-            );
+            startScanner();
 
         }
 
     }
 
-    catch(err){
-
-        console.error(err);
-
-        showError(
-
-            err.message
-
-        );
-
-    }
-
-}
+});
 
 // ==========================================================
+// CLEANUP
+// ==========================================================
 
-async function restartScanner(){
+window.addEventListener("beforeunload", async ()=>{
 
-    result.innerHTML="";
+    if(scannerRunning && html5QrCode){
 
-    scannerSection.style.display="block";
+        try{
 
-    try{
+            await html5QrCode.stop();
 
-        if(html5QrCode){
+        }
 
-            await html5QrCode.clear();
+        catch(e){
+
+            console.log(e);
 
         }
 
     }
 
-    catch(e){}
-
-    startScanner();
-
-}
+});
 
 // ==========================================================
-
-window.addEventListener(
-
-    "load",
-
-    startScanner
-
-);
+// END
+// ==========================================================
