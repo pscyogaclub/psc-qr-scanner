@@ -1,8 +1,12 @@
 /* ======================================================
    PSC YOGA CLUB
    QR ATTENDANCE SCANNER
-   BUILD-003 : EMERALD EDITION
+   Premium Emerald Theme
 ====================================================== */
+
+/* ===========================
+   RESET
+=========================== */
 
 *{
     margin:0;
@@ -12,211 +16,243 @@
 
 :root{
 
-    --emerald-dark:#0B4F43;
-    --emerald:#13695B;
-    --emerald-light:#1F8A70;
+    --emerald-900:#0B4F43;
+    --emerald-800:#115E50;
+    --emerald-700:#177565;
 
     --gold:#C6A96B;
-    --gold-light:#E4C987;
+    --gold-light:#E5CB95;
 
-    --card:#FCFBF7;
-    --text:#2F2F2F;
-    --text-light:#727272;
+    --surface:#FCFBF8;
+    --surface-2:#F7F4EE;
 
-    --success:#2EAF61;
-    --danger:#D64B4B;
-    --warning:#E8B44D;
+    --text:#2E2E2E;
+    --muted:#7A7A7A;
+
+    --success:#2FA565;
+    --danger:#D85A5A;
+    --warning:#E3B24F;
+
+    --shadow:
+        0 30px 70px rgba(0,0,0,.16);
 
 }
+
+/* ===========================
+   BODY
+=========================== */
 
 body{
 
     font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     min-height:100vh;
 
     display:flex;
-
     justify-content:center;
-
     align-items:center;
 
     overflow-x:hidden;
 
     background:
 
-    linear-gradient(
-        180deg,
-        var(--emerald-light),
-        var(--emerald),
-        var(--emerald-dark)
-    );
+        radial-gradient(
+            circle at top,
+            rgba(255,255,255,.10),
+            transparent 40%
+        ),
+
+        linear-gradient(
+            180deg,
+            var(--emerald-700),
+            var(--emerald-800),
+            var(--emerald-900)
+        );
 
 }
 
-/* =======================================
-   Background Glow
-======================================= */
+/* ===========================
+   BACKGROUND GLOW
+=========================== */
 
 .background-glow{
 
     position:fixed;
 
-    width:650px;
-    height:650px;
+    width:700px;
+    height:700px;
 
     border-radius:50%;
 
-    background:
-
-    radial-gradient(
-
-        rgba(228,201,135,.18),
-
-        transparent 70%
-
-    );
-
-    top:-260px;
-
     left:50%;
+    top:-320px;
 
     transform:translateX(-50%);
+
+    background:
+
+        radial-gradient(
+
+            rgba(229,203,149,.22),
+
+            transparent 70%
+
+        );
 
     pointer-events:none;
 
 }
 
-/* =======================================
+/* ===========================
    APP
-======================================= */
+=========================== */
 
 .app{
 
     width:100%;
+    max-width:480px;
 
-    max-width:470px;
-
-    padding:24px;
+    padding:28px;
 
 }
 
-/* =======================================
+/* ===========================
    CARD
-======================================= */
+=========================== */
 
 .scanner-card{
 
-    background:var(--card);
+    background:var(--surface);
 
-    border-radius:28px;
+    border-radius:32px;
 
     overflow:hidden;
 
-    box-shadow:
-
-    0 20px 55px rgba(0,0,0,.20);
+    box-shadow:var(--shadow);
 
     animation:fadeUp .6s ease;
 
-    backdrop-filter:blur(8px);
-
 }
 
-/* =======================================
+/* ===========================
    HERO
-======================================= */
+=========================== */
 
 .hero{
 
-    text-align:center;
-
     padding:
 
-    34px
-    28px
-    24px;
+        42px
+        34px
+        28px;
+
+    text-align:center;
 
 }
 
 .logo{
 
-    width:120px;
-
-    margin:auto;
+    width:118px;
 
     display:block;
 
+    margin:auto;
+
     filter:
 
-    drop-shadow(
-        0 8px 18px rgba(198,169,107,.35)
-    );
+        drop-shadow(
+            0 10px 24px rgba(198,169,107,.28)
+        );
+
+}
+
+.hero-divider{
+
+    width:60px;
+
+    height:2px;
+
+    background:var(--gold);
+
+    margin:
+
+        26px auto;
+
+    opacity:.45;
 
 }
 
 .hero h1{
 
-    margin-top:20px;
+    color:var(--emerald-900);
 
-    color:var(--emerald-dark);
+    font-size:30px;
 
-    font-size:28px;
+    font-weight:700;
 
-    letter-spacing:1px;
+    letter-spacing:.5px;
 
 }
 
 .subtitle{
 
-    margin-top:8px;
+    margin-top:12px;
 
-    color:var(--gold);
+    color:var(--muted);
 
-    font-weight:700;
+    font-size:15px;
 
-    font-size:16px;
+    line-height:1.6;
 
 }
 
 .tagline{
 
-    margin-top:8px;
+    margin-top:12px;
 
-    color:var(--text-light);
+    color:var(--gold);
 
     font-size:14px;
 
+    letter-spacing:1.5px;
+
+    text-transform:uppercase;
+
 }
 
-/* =======================================
-   Scanner
-======================================= */
+/* ===========================
+   SCANNER
+=========================== */
 
-#scannerSection{
+.scanner-section{
 
-    padding:0 24px;
+    padding:
+
+        0
+        30px
+        22px;
 
 }
 
 .scanner-frame{
 
+    background:white;
+
+    border-radius:22px;
+
+    padding:10px;
+
     border:
 
-    2px solid rgba(198,169,107,.35);
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    background:white;
+        2px solid
+        rgba(198,169,107,.28);
 
     box-shadow:
 
-    inset 0 0 0 4px rgba(198,169,107,.06);
+        inset 0 0 0 1px rgba(255,255,255,.6);
 
 }
 
@@ -224,25 +260,29 @@ body{
 
     width:100%;
 
+    overflow:hidden;
+
+    border-radius:16px;
+
 }
 
 #reader video{
 
-    border-radius:18px;
+    border-radius:16px;
 
 }
 
-/* =======================================
+/* ===========================
    STATUS
-======================================= */
+=========================== */
 
-.status-wrapper{
+.status-section{
 
     padding:
 
-    20px
-    24px
-    0;
+        0
+        30px
+        24px;
 
 }
 
@@ -256,39 +296,42 @@ body{
 
     gap:10px;
 
-    padding:14px;
+    padding:14px 20px;
+
+    background:var(--surface-2);
 
     border-radius:999px;
 
-    background:#F5F5F5;
+    color:#666;
 
     font-size:14px;
-
-    color:#555;
 
 }
 
 .status-dot{
 
     width:10px;
-
     height:10px;
 
     border-radius:50%;
 
     background:var(--warning);
 
-    animation:pulse 1.4s infinite;
+    animation:pulse 1.5s infinite;
 
 }
 
-/* =======================================
+/* ===========================
    RESULT
-======================================= */
+=========================== */
 
 #result{
 
-    padding:26px;
+    padding:
+
+        0
+        30px
+        30px;
 
     min-height:140px;
 
@@ -298,29 +341,21 @@ body{
 
     text-align:center;
 
-    color:#777;
+    color:#888;
+
+    padding:26px 0;
 
     font-size:15px;
 
 }
 
-/* =======================================
+/* ===========================
    RESULT CARD
-======================================= */
+=========================== */
 
 .result-card{
 
-    animation:fadeUp .35s;
-
-}
-
-.result-card h2{
-
-    margin-top:12px;
-
-    text-align:center;
-
-    color:var(--emerald-dark);
+    animation:fadeUp .35s ease;
 
 }
 
@@ -332,27 +367,43 @@ body{
 
 }
 
-.result-card .subtitle{
+.result-card h2{
+
+    margin-top:16px;
 
     text-align:center;
 
-    margin-top:10px;
+    color:var(--emerald-900);
 
-    margin-bottom:22px;
+}
+
+.result-card .subtitle{
+
+    margin:
+
+        12px
+        0
+        26px;
+
+    text-align:center;
 
     color:#666;
 
 }
 
-/* =======================================
+/* ===========================
    INFO
-======================================= */
+=========================== */
 
 .info{
 
-    border-top:1px solid #ECECEC;
+    border-top:
 
-    border-bottom:1px solid #ECECEC;
+        1px solid #ECECEC;
+
+    border-bottom:
+
+        1px solid #ECECEC;
 
 }
 
@@ -364,9 +415,11 @@ body{
 
     align-items:center;
 
-    padding:17px 0;
+    padding:18px 0;
 
-    border-bottom:1px solid #F2F2F2;
+    border-bottom:
+
+        1px solid #F3F3F3;
 
 }
 
@@ -390,9 +443,9 @@ body{
 
 .session{
 
-    color:var(--gold);
+    font-size:30px;
 
-    font-size:28px;
+    color:var(--gold);
 
     font-weight:700;
 
@@ -402,16 +455,16 @@ body{
 
     background:
 
-    rgba(46,175,97,.10);
+        rgba(47,165,101,.12);
 
     color:
 
-    var(--success);
+        var(--success);
 
     padding:
 
-    7px
-    16px;
+        8px
+        16px;
 
     border-radius:999px;
 
@@ -421,21 +474,23 @@ body{
 
 }
 
-/* =======================================
+/* ===========================
    BUTTON
-======================================= */
+=========================== */
 
 button{
 
     width:100%;
 
-    margin-top:28px;
+    margin-top:30px;
+
+    padding:17px;
 
     border:none;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    padding:16px;
+    cursor:pointer;
 
     font-size:16px;
 
@@ -443,39 +498,37 @@ button{
 
     color:white;
 
-    cursor:pointer;
-
-    transition:.28s;
+    transition:.25s;
 
     background:
 
-    linear-gradient(
+        linear-gradient(
 
-        135deg,
+            135deg,
 
-        var(--emerald),
+            var(--emerald-700),
 
-        var(--emerald-dark)
+            var(--emerald-900)
 
-    );
+        );
 
 }
 
 button:hover{
 
+    transform:translateY(-2px);
+
     background:
 
-    linear-gradient(
+        linear-gradient(
 
-        135deg,
+            135deg,
 
-        var(--gold),
+            var(--gold),
 
-        #B69250
+            #B79252
 
-    );
-
-    transform:translateY(-2px);
+        );
 
 }
 
@@ -485,9 +538,9 @@ button:active{
 
 }
 
-/* =======================================
+/* ===========================
    ERROR
-======================================= */
+=========================== */
 
 .error h2{
 
@@ -495,9 +548,45 @@ button:active{
 
 }
 
-/* =======================================
-   Animation
-======================================= */
+/* ===========================
+   FOOTER
+=========================== */
+
+.footer{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:
+
+        20px
+        20px
+        26px;
+
+    font-size:11px;
+
+    color:#A5A5A5;
+
+    border-top:
+
+        1px solid rgba(0,0,0,.05);
+
+}
+
+.footer-divider{
+
+    color:var(--gold);
+
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
 
 @keyframes fadeUp{
 
@@ -507,7 +596,7 @@ button:active{
 
         transform:
 
-        translateY(18px);
+            translateY(16px);
 
     }
 
@@ -517,7 +606,7 @@ button:active{
 
         transform:
 
-        translateY(0);
+            translateY(0);
 
     }
 
@@ -551,27 +640,31 @@ button:active{
 
 }
 
-/* =======================================
-   Mobile
-======================================= */
+/* ===========================
+   MOBILE
+=========================== */
 
 @media(max-width:480px){
 
     .app{
 
-        padding:16px;
+        padding:18px;
 
     }
 
     .scanner-card{
 
-        border-radius:22px;
+        border-radius:26px;
 
     }
 
     .hero{
 
-        padding:28px 22px 20px;
+        padding:
+
+            34px
+            24px
+            24px;
 
     }
 
@@ -583,7 +676,16 @@ button:active{
 
     .hero h1{
 
-        font-size:24px;
+        font-size:26px;
+
+    }
+
+    .scanner-section,
+    .status-section,
+    #result{
+
+        padding-left:22px;
+        padding-right:22px;
 
     }
 
