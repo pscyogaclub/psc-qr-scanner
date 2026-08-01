@@ -44,7 +44,7 @@ async function startScanner() {
 
     try {
 
-        const devices = await Html5Qrcode.getCameras();
+        const devices = await Html5QrCode.getCameras();
 
         if (!devices.length) {
 
@@ -101,7 +101,6 @@ async function startScanner() {
                 }
 
             },
-
             onScanSuccess,
 
             onScanFailure
@@ -229,6 +228,7 @@ function onScanFailure() {
     // ignore
 
 }
+
 
 // ==========================================================
 // SHOW RESULT
@@ -391,3 +391,4 @@ window.addEventListener(
     startScanner
 
 );
+
