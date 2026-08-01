@@ -44,7 +44,7 @@ async function startScanner() {
 
     try {
 
-        const devices = await Html5QrCode.getCameras();
+        const devices = await Html5Qrcode.getCameras();
 
         if (!devices.length) {
 
