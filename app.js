@@ -1,6 +1,7 @@
 // ==========================================================
 // PSC QR Scanner
 // BUILD-002 FINAL
+// Sprint 4A — Practice Update
 // ==========================================================
 
 const API_URL =
@@ -14,6 +15,9 @@ const statusDot = document.querySelector(".status-dot");
 
 let html5QrCode = null;
 let isProcessing = false;
+let lastAttendanceInfo = null;
+let lastWhatsAppUrl = "";
+
 
 // ==========================================================
 // STATUS
@@ -26,6 +30,7 @@ function setStatus(text, color = "#F5A623") {
 
 }
 
+
 // ==========================================================
 // START SCANNER
 // ==========================================================
@@ -33,6 +38,9 @@ function setStatus(text, color = "#F5A623") {
 async function startScanner() {
 
     isProcessing = false;
+
+    lastAttendanceInfo = null;
+    lastWhatsAppUrl = "";
 
     scannerSection.style.display = "block";
 
@@ -101,8 +109,8 @@ async function startScanner() {
                 }
 
             },
-            onScanSuccess,
 
+            onScanSuccess,
             onScanFailure
 
         );
@@ -123,7 +131,9 @@ async function startScanner() {
 
                 <h2>Camera Error</h2>
 
-                <p>${err.message}</p>
+                <p>
+                    ${err.message}
+                </p>
 
             </div>
 
@@ -132,6 +142,7 @@ async function startScanner() {
     }
 
 }
+
 
 // ==========================================================
 // SCAN SUCCESS
@@ -171,23 +182,27 @@ async function onScanSuccess(decodedText) {
 
     try {
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(
 
-            method: "POST",
+            API_URL,
 
-            headers: {
+            {
+                method: "POST",
 
-                "Content-Type": "text/plain;charset=utf-8"
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
 
-            },
+                body: JSON.stringify({
 
-            body: JSON.stringify({
+                    membershipId: decodedText
 
-                membershipId: decodedText
+                })
 
-            })
+            }
 
-        });
+        );
 
         const data = await response.json();
 
@@ -197,7 +212,10 @@ async function onScanSuccess(decodedText) {
 
         console.error(err);
 
-        setStatus("Connection Failed", "#DC3545");
+        setStatus(
+            "Connection Failed",
+            "#DC3545"
+        );
 
         result.innerHTML = `
 
@@ -207,9 +225,12 @@ async function onScanSuccess(decodedText) {
 
                 <h2>Connection Failed</h2>
 
-                <p>${err.message}</p>
+                <p>
+                    ${err.message}
+                </p>
 
-                <button onclick="startScannerAgain()">
+                <button
+                    onclick="startScannerAgain()">
 
                     Try Again
 
@@ -222,6 +243,7 @@ async function onScanSuccess(decodedText) {
     }
 
 }
+
 
 function onScanFailure() {
 
@@ -238,7 +260,10 @@ function showResult(data) {
 
     if (!data.success) {
 
-        setStatus("Check-in Failed", "#DC3545");
+        setStatus(
+            "Check-in Failed",
+            "#DC3545"
+        );
 
         result.innerHTML = `
 
@@ -250,11 +275,15 @@ function showResult(data) {
 
                 <p>
 
-                    ${data.message || "Unknown Error"}
+                    ${
+                        data.message ||
+                        "Unknown Error"
+                    }
 
                 </p>
 
-                <button onclick="startScannerAgain()">
+                <button
+                    onclick="startScannerAgain()">
 
                     Scan Lagi
 
@@ -268,9 +297,17 @@ function showResult(data) {
 
     }
 
+
     const info = data.result;
 
-    setStatus("Attendance Recorded", "#28A745");
+    lastAttendanceInfo = info;
+
+
+    setStatus(
+        "Attendance Recorded",
+        "#28A745"
+    );
+
 
     result.innerHTML = `
 
@@ -294,6 +331,7 @@ function showResult(data) {
 
             </p>
 
+
             <div class="info">
 
                 <div class="row">
@@ -308,6 +346,7 @@ function showResult(data) {
 
                 </div>
 
+
                 <div class="row">
 
                     <span>Membership</span>
@@ -320,6 +359,7 @@ function showResult(data) {
 
                 </div>
 
+
                 <div class="row">
 
                     <span>Remaining Session</span>
@@ -331,6 +371,7 @@ function showResult(data) {
                     </strong>
 
                 </div>
+
 
                 <div class="row">
 
@@ -346,11 +387,34 @@ function showResult(data) {
 
             </div>
 
-            <button onclick="startScannerAgain()">
+
+            <!-- ==================================================
+                 PRACTICE UPDATE
+                 ================================================== -->
+
+            <div id="practiceUpdateArea">
+
+                <button
+                    onclick="preparePracticeUpdate()">
+
+                    💬 Practice Update
+
+                </button>
+
+            </div>
+
+
+            <!-- ==================================================
+                 SCAN NEXT MEMBER
+                 ================================================== -->
+
+            <button
+                onclick="startScannerAgain()">
 
                 Scan Member Berikutnya
 
             </button>
+
 
         </div>
 
@@ -358,15 +422,241 @@ function showResult(data) {
 
 }
 
+
+// ==========================================================
+// PRACTICE UPDATE
+// ==========================================================
+
+async function preparePracticeUpdate() {
+
+    const area =
+        document.getElementById(
+            "practiceUpdateArea"
+        );
+
+    if (!area) return;
+
+
+    if (!lastAttendanceInfo) {
+
+        area.innerHTML = `
+
+            <div style="
+                margin-top:18px;
+                padding:14px;
+                background:#FDECEA;
+                border-radius:10px;
+                color:#C0392B;
+                text-align:center;
+                font-size:13px;
+            ">
+
+                Data attendance tidak ditemukan.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    area.innerHTML = `
+
+        <div style="
+            margin-top:18px;
+            text-align:center;
+            color:#777;
+            font-size:13px;
+        ">
+
+            Menyiapkan Practice Update...
+
+        </div>
+
+    `;
+
+
+    try {
+
+        const response = await fetch(
+
+            API_URL,
+
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type":
+                        "text/plain;charset=utf-8"
+                },
+
+                body: JSON.stringify({
+
+                    action: "practiceUpdate",
+
+                    data: {
+
+                        memberName:
+                            lastAttendanceInfo.memberName,
+
+                        whatsapp:
+                            lastAttendanceInfo.whatsapp,
+
+                        memberId:
+                            lastAttendanceInfo.memberId,
+
+                        membershipId:
+                            lastAttendanceInfo.membershipId,
+
+                        remainingSessions:
+                            lastAttendanceInfo.remainingSessions,
+
+                        classDate:
+                            new Date()
+
+                    }
+
+                })
+
+            }
+
+        );
+
+
+        const data =
+            await response.json();
+
+
+        if (
+            !data ||
+            data.success !== true ||
+            !data.result ||
+            data.result.success !== true
+        ) {
+
+            throw new Error(
+
+                data && data.message
+
+                    ? data.message
+
+                    : "Practice Update gagal disiapkan."
+
+            );
+
+        }
+
+
+        lastWhatsAppUrl =
+            data.result.whatsappUrl;
+
+
+        area.innerHTML = `
+
+            <button
+                onclick="openPracticeWhatsApp()">
+
+                💬 Buka WhatsApp
+
+            </button>
+
+            <div style="
+                margin-top:8px;
+                text-align:center;
+                color:#888;
+                font-size:12px;
+                line-height:1.5;
+            ">
+
+                Pesan sudah disiapkan.
+                <br>
+                Admin tetap melakukan SEND secara manual.
+
+            </div>
+
+        `;
+
+
+    } catch (err) {
+
+        console.error(err);
+
+
+        area.innerHTML = `
+
+            <div style="
+                margin-top:18px;
+                padding:14px;
+                background:#FDECEA;
+                border-radius:10px;
+                color:#C0392B;
+                text-align:center;
+                font-size:13px;
+            ">
+
+                Practice Update gagal disiapkan.
+
+                <br>
+
+                ${err.message}
+
+            </div>
+
+
+            <button
+                onclick="preparePracticeUpdate()">
+
+                Coba Lagi
+
+            </button>
+
+        `;
+
+    }
+
+}
+
+
+// ==========================================================
+// OPEN WHATSAPP
+// ==========================================================
+
+function openPracticeWhatsApp() {
+
+    if (!lastWhatsAppUrl) {
+
+        alert(
+            "WhatsApp URL belum tersedia."
+        );
+
+        return;
+
+    }
+
+
+    window.open(
+        lastWhatsAppUrl,
+        "_blank"
+    );
+
+}
+
+
 // ==========================================================
 // RESTART
 // ==========================================================
 
 async function startScannerAgain() {
 
+    lastAttendanceInfo = null;
+    lastWhatsAppUrl = "";
+
     result.innerHTML = "";
 
     scannerSection.style.display = "block";
+
 
     if (html5QrCode) {
 
@@ -378,10 +668,14 @@ async function startScannerAgain() {
 
     }
 
+
     startScanner();
 
 }
 
+
+// ==========================================================
+// INITIALIZE
 // ==========================================================
 
 window.addEventListener(
@@ -391,4 +685,3 @@ window.addEventListener(
     startScanner
 
 );
-
