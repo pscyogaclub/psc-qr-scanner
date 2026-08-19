@@ -1,99 +1,149 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>PSC Attendance Scanner</title>
+<title>PSC Attendance Scanner</title>
 
-    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ==========================================================
+   PSC OS — HOME Navigation
+   Navigation only. Scanner engine remains untouched.
+   ========================================================== */
+
+.header {
+  position: relative;
+}
+
+.psc-home {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 13px;
+  box-sizing: border-box;
+  border: 1px solid #d9d9d4;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #2f5d50;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s ease;
+}
+
+.psc-home:hover {
+  background: #f5f7f6;
+}
+
+.psc-home:active {
+  background: #eef2f0;
+}
+
+@media (max-width: 520px) {
+  .psc-home {
+    top: 0;
+    right: 0;
+    min-height: 32px;
+    padding: 0 11px;
+    font-size: 12px;
+  }
+}
+</style>
 
 </head>
 
 <body>
 
-    <div class="app">
+<div class="app">
 
-        <div class="scanner-card">
+<div class="scanner-card">
 
-            <!-- ===================== -->
-            <!-- HEADER -->
-            <!-- ===================== -->
+<!-- ===================== -->
+<!-- HEADER -->
+<!-- ===================== -->
 
-            <div class="header">
+<div class="header">
 
-                <a
-                    class="home-button"
-                    href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
-                    aria-label="Kembali ke PSC Admin">
-                    ⌂ HOME
-                </a>
+<a
+  class="psc-home"
+  href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
+  aria-label="Kembali ke PSC Admin">
+  ⌂ HOME
+</a>
 
-                <div class="psc-logo">
+<div class="psc-logo">
 
-                    <div class="logo-circle">
-                        PSC
-                    </div>
+<div class="logo-circle">
 
-                </div>
+PSC
 
-                <h1>QR Attendance</h1>
+</div>
 
-                <p>
-                    Present • Stretch • Connect
-                </p>
+</div>
 
-            </div>
+<h1>QR Attendance</h1>
 
-            <!-- ===================== -->
-            <!-- CAMERA -->
-            <!-- ===================== -->
+<p>
+Present • Stretch • Connect
+</p>
 
-            <div id="scannerSection">
+</div>
 
-                <div class="scanner-wrapper">
+<!-- ===================== -->
+<!-- CAMERA -->
+<!-- ===================== -->
 
-                    <div id="reader"></div>
+<div id="scannerSection">
 
-                </div>
+<div class="scanner-wrapper">
 
-            </div>
+<div id="reader"></div>
 
-            <!-- ===================== -->
-            <!-- STATUS -->
-            <!-- ===================== -->
+</div>
 
-            <div id="statusBar">
+</div>
 
-                <span class="status-dot"></span>
+<!-- ===================== -->
+<!-- STATUS -->
+<!-- ===================== -->
 
-                <span id="statusText">
+<div id="statusBar">
 
-                    Initializing Camera...
+<span class="status-dot"></span>
 
-                </span>
+<span id="statusText">
+Initializing Camera...
+</span>
 
-            </div>
+</div>
 
-            <!-- ===================== -->
-            <!-- RESULT -->
-            <!-- ===================== -->
+<!-- ===================== -->
+<!-- RESULT -->
+<!-- ===================== -->
 
-            <div id="result">
+<div id="result">
+Waiting for QR Code...
+</div>
 
-                Waiting for QR Code...
+</div>
 
-            </div>
+</div>
 
-        </div>
-
-    </div>
-
-    <script src="https://unpkg.com/html5-qrcode"></script>
-
-    <script src="app.js"></script>
+<script src="https://unpkg.com/html5-qrcode"></script>
+<script src="app.js"></script>
 
 </body>
 
