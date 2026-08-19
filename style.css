@@ -1,53 +1,21 @@
-/* ==========================================================
-   PSC QR ATTENDANCE SCANNER
-   VISUAL REFINEMENT — LOCKED DESIGN
-   ==========================================================
-
-   SAFETY:
-   - CSS / visual layer only.
-   - #reader and #result IDs are preserved.
-   - No scanner engine logic is changed.
-   - app.js remains untouched.
-   ========================================================== */
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
 :root{
   --psc-forest:#0D2B1E;
   --psc-emerald:#1A4D34;
-  --psc-moss:#5A6F3A;
   --psc-gold:#C6A96B;
   --psc-soft-gold:#E0C78A;
   --psc-cream:#F6F4ED;
-  --psc-charcoal:#111111;
-  --psc-white:#FFFFFF;
   --psc-success:#4CAF72;
-  --psc-danger:#D95C5C;
-  --psc-warning:#F2B84B;
   --psc-line:rgba(224,199,138,.28);
   --psc-shadow:0 24px 60px rgba(0,0,0,.28);
 }
 
-html,
-body{
-  min-height:100%;
-}
+html,body{min-height:100%}
 
 body{
-  font-family:
-    "Segoe UI",
-    Arial,
-    sans-serif;
-  background:
-    linear-gradient(
-      180deg,
-      var(--psc-emerald) 0%,
-      var(--psc-forest) 100%
-    );
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:linear-gradient(180deg,var(--psc-emerald) 0%,var(--psc-forest) 100%);
   min-height:100vh;
   display:flex;
   justify-content:center;
@@ -56,10 +24,7 @@ body{
   color:var(--psc-cream);
 }
 
-.app{
-  width:100%;
-  max-width:440px;
-}
+.app{width:100%;max-width:440px}
 
 .scanner-card{
   position:relative;
@@ -68,37 +33,41 @@ body{
   border-radius:24px;
   overflow:hidden;
   box-shadow:var(--psc-shadow);
-  animation:fadeUp .45s ease;
 }
-
-/* ==========================================================
-   HEADER
-   ========================================================== */
 
 .header{
   position:relative;
   text-align:center;
-  padding:34px 28px 24px;
+  padding:42px 28px 25px;
 }
 
 .psc-logo{
   display:block;
-  width:128px;
-  height:128px;
+  width:156px;
+  height:156px;
   object-fit:contain;
-  margin:4px auto 18px;
+  margin:2px auto 10px;
+}
+
+.psc-tagline{
+  color:var(--psc-soft-gold);
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.22em;
+  line-height:1.4;
+  margin:0 auto 15px;
 }
 
 .header h1{
   color:var(--psc-cream);
-  font-size:27px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:28px;
   line-height:1.15;
-  font-weight:700;
-  letter-spacing:.01em;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
 }
-
-/* HOME stays visually attached to the scanner module,
-   rather than floating outside the card. */
 
 .psc-home{
   position:absolute;
@@ -109,7 +78,7 @@ body{
   justify-content:center;
   min-height:34px;
   padding:0 11px;
-  border:1px solid var(--line, rgba(224,199,138,.28));
+  border:1px solid rgba(224,199,138,.35);
   border-radius:999px;
   background:rgba(13,43,30,.72);
   color:var(--psc-soft-gold);
@@ -120,42 +89,19 @@ body{
   -webkit-tap-highlight-color:transparent;
 }
 
-.psc-home:active{
-  background:rgba(224,199,138,.14);
-}
-
-/* ==========================================================
-   SCANNER
-   ========================================================== */
+.psc-home:active{background:rgba(224,199,138,.14)}
 
 .scanner-wrapper{
   margin:0 22px;
   border-radius:18px;
   overflow:hidden;
-  border:1px solid var(--line);
+  border:1px solid var(--psc-line);
   background:#000;
 }
 
-#reader{
-  width:100%;
-  background:#000;
-}
-
-#reader video{
-  display:block;
-  width:100%;
-  border-radius:16px;
-}
-
-/* Keep html5-qrcode's own controls usable. */
-
-#reader button{
-  font-family:inherit;
-}
-
-/* ==========================================================
-   STATUS BAR
-   ========================================================== */
+#reader{width:100%;background:#000}
+#reader video{display:block;width:100%;border-radius:16px}
+#reader button{font-family:inherit}
 
 #statusBar{
   margin:18px 22px 0;
@@ -172,243 +118,46 @@ body{
 }
 
 .status-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
+  width:9px;height:9px;border-radius:50%;
   background:var(--psc-success);
   animation:pulse 1.5s infinite;
   flex:0 0 9px;
 }
 
-/* ==========================================================
-   RESULT
-   ========================================================== */
+#result{padding:20px 22px 24px;color:var(--psc-cream);text-align:center}
+#result:empty{display:none}
 
-#result{
-  padding:20px 22px 24px;
-  color:var(--psc-cream);
-  text-align:center;
-}
+.psc-result-card{text-align:center}
+.psc-result-card h2{margin-bottom:8px;color:var(--psc-cream);font-size:24px}
+.psc-muted{color:rgba(246,244,237,.72);margin-bottom:20px}
+.psc-success-icon,.psc-error-icon{width:52px;height:52px;margin:0 auto 12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:27px;font-weight:700}
+.psc-success-icon{background:rgba(76,175,114,.16);color:#78D49A;border:1px solid rgba(120,212,154,.25)}
+.psc-error-icon{background:rgba(217,92,92,.16);color:#F18A8A;border:1px solid rgba(241,138,138,.25)}
+.psc-info{margin-top:10px;border-top:1px solid var(--psc-line);border-bottom:1px solid var(--psc-line)}
+.psc-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:13px 0;border-bottom:1px solid rgba(224,199,138,.12);text-align:left}
+.psc-row:last-child{border-bottom:none}
+.psc-row span{color:rgba(246,244,237,.68)}
+.psc-row strong{color:var(--psc-cream);text-align:right}
+.psc-practice-ready{margin-top:18px;padding:14px;border:1px solid rgba(224,199,138,.18);border-radius:14px;background:rgba(246,244,237,.06);display:flex;gap:12px;align-items:flex-start;text-align:left}
+.psc-practice-icon{width:28px;height:28px;flex:0 0 28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(76,175,114,.16);color:#78D49A;font-weight:700}
+.psc-practice-title{color:var(--psc-soft-gold);font-weight:700;margin-bottom:4px}
+.psc-practice-text{color:rgba(246,244,237,.70);font-size:12px;line-height:1.5}
 
-#result:empty{
-  display:none;
-}
+button{width:100%;margin-top:22px;padding:14px 16px;border:1px solid rgba(224,199,138,.32);border-radius:12px;background:var(--psc-gold);color:var(--psc-forest);font-family:inherit;font-size:15px;font-weight:700;cursor:pointer;transition:.2s ease}
+button:hover{background:var(--psc-soft-gold)}
+button:active{transform:scale(.98)}
 
-.psc-result-card{
-  text-align:center;
-  animation:fadeUp .35s ease;
-}
-
-.psc-result-card h2{
-  margin-bottom:8px;
-  color:var(--psc-cream);
-  font-size:24px;
-}
-
-.psc-muted{
-  color:rgba(246,244,237,.72);
-  margin-bottom:20px;
-}
-
-.psc-success-icon,
-.psc-error-icon{
-  width:52px;
-  height:52px;
-  margin:0 auto 12px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:27px;
-  font-weight:700;
-}
-
-.psc-success-icon{
-  background:rgba(76,175,114,.16);
-  color:#78D49A;
-  border:1px solid rgba(120,212,154,.25);
-}
-
-.psc-error-icon{
-  background:rgba(217,92,92,.16);
-  color:#F18A8A;
-  border:1px solid rgba(241,138,138,.25);
-}
-
-.psc-info{
-  margin-top:10px;
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-
-.psc-row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:16px;
-  padding:13px 0;
-  border-bottom:1px solid rgba(224,199,138,.12);
-  text-align:left;
-}
-
-.psc-row:last-child{
-  border-bottom:none;
-}
-
-.psc-row span{
-  color:rgba(246,244,237,.68);
-}
-
-.psc-row strong{
-  color:var(--psc-cream);
-  text-align:right;
-}
-
-.psc-practice-ready{
-  margin-top:18px;
-  padding:14px;
-  border:1px solid rgba(224,199,138,.18);
-  border-radius:14px;
-  background:rgba(246,244,237,.06);
-  display:flex;
-  gap:12px;
-  align-items:flex-start;
-  text-align:left;
-}
-
-.psc-practice-icon{
-  width:28px;
-  height:28px;
-  flex:0 0 28px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(76,175,114,.16);
-  color:#78D49A;
-  font-weight:700;
-}
-
-.psc-practice-title{
-  color:var(--psc-soft-gold);
-  font-weight:700;
-  margin-bottom:4px;
-}
-
-.psc-practice-text{
-  color:rgba(246,244,237,.70);
-  font-size:12px;
-  line-height:1.5;
-}
-
-/* ==========================================================
-   BUTTON
-   ========================================================== */
-
-button{
-  width:100%;
-  margin-top:22px;
-  padding:14px 16px;
-  border:1px solid rgba(224,199,138,.32);
-  border-radius:12px;
-  background:var(--psc-gold);
-  color:var(--psc-forest);
-  font-family:inherit;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s ease;
-}
-
-button:hover{
-  background:var(--psc-soft-gold);
-}
-
-button:active{
-  transform:scale(.98);
-}
-
-/* ==========================================================
-   ANIMATION
-   ========================================================== */
-
-@keyframes fadeUp{
-  from{
-    opacity:0;
-    transform:translateY(10px);
-  }
-
-  to{
-    opacity:1;
-    transform:translateY(0);
-  }
-}
-
-@keyframes pulse{
-  0%{
-    transform:scale(1);
-    opacity:.65;
-  }
-
-  50%{
-    transform:scale(1.35);
-    opacity:1;
-  }
-
-  100%{
-    transform:scale(1);
-    opacity:.65;
-  }
-}
-
-/* ==========================================================
-   MOBILE
-   ========================================================== */
+@keyframes pulse{0%{transform:scale(1);opacity:.65}50%{transform:scale(1.35);opacity:1}100%{transform:scale(1);opacity:.65}}
 
 @media(max-width:480px){
-
-  body{
-    padding:14px 10px;
-  }
-
-  .scanner-card{
-    border-radius:20px;
-  }
-
-  .header{
-    padding:30px 18px 20px;
-  }
-
-  .psc-logo{
-    width:112px;
-    height:112px;
-    margin-bottom:16px;
-  }
-
-  .header h1{
-    font-size:23px;
-  }
-
-  .psc-home{
-    top:12px;
-    right:12px;
-    min-height:32px;
-    padding:0 10px;
-    font-size:10px;
-  }
-
-  .scanner-wrapper{
-    margin:0 14px;
-    border-radius:16px;
-  }
-
-  #statusBar{
-    margin-left:14px;
-    margin-right:14px;
-  }
-
-  #result{
-    padding-left:14px;
-    padding-right:14px;
-  }
+  body{padding:14px 10px}
+  .scanner-card{border-radius:20px}
+  .header{padding:34px 18px 21px}
+  .psc-logo{width:142px;height:142px;margin-bottom:8px}
+  .psc-tagline{font-size:10px;letter-spacing:.18em;margin-bottom:13px}
+  .header h1{font-size:22px;letter-spacing:.10em}
+  .psc-home{top:12px;right:12px;min-height:32px;padding:0 10px;font-size:10px}
+  .scanner-wrapper{margin:0 14px;border-radius:16px}
+  #statusBar{margin-left:14px;margin-right:14px}
+  #result{padding-left:14px;padding-right:14px}
 }
