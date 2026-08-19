@@ -38,25 +38,25 @@ body{
 .header{
   position:relative;
   text-align:center;
-  padding:42px 28px 25px;
+  padding:40px 28px 28px;
 }
 
 .psc-logo{
   display:block;
-  width:156px;
-  height:156px;
+  width:190px;
+  height:190px;
   object-fit:contain;
-  margin:2px auto 10px;
+  margin:0 auto 4px;
 }
 
 .psc-tagline{
   color:var(--psc-soft-gold);
   font-family:Georgia,"Times New Roman",serif;
   font-size:12px;
-  font-weight:600;
-  letter-spacing:.22em;
+  font-weight:500;
+  letter-spacing:.20em;
   line-height:1.4;
-  margin:0 auto 15px;
+  margin:0 auto 22px;
 }
 
 .header h1{
@@ -64,8 +64,8 @@ body{
   font-family:Georgia,"Times New Roman",serif;
   font-size:28px;
   line-height:1.15;
-  font-weight:600;
-  letter-spacing:.12em;
+  font-weight:500;
+  letter-spacing:.10em;
   text-transform:uppercase;
 }
 
@@ -83,7 +83,7 @@ body{
   background:rgba(13,43,30,.72);
   color:var(--psc-soft-gold);
   font-size:11px;
-  font-weight:700;
+  font-weight:600;
   letter-spacing:.04em;
   text-decoration:none;
   -webkit-tap-highlight-color:transparent;
@@ -152,10 +152,10 @@ button:active{transform:scale(.98)}
 @media(max-width:480px){
   body{padding:14px 10px}
   .scanner-card{border-radius:20px}
-  .header{padding:34px 18px 21px}
-  .psc-logo{width:142px;height:142px;margin-bottom:8px}
-  .psc-tagline{font-size:10px;letter-spacing:.18em;margin-bottom:13px}
-  .header h1{font-size:22px;letter-spacing:.10em}
+  .header{padding:34px 18px 23px}
+  .psc-logo{width:170px;height:170px;margin-bottom:2px}
+  .psc-tagline{font-size:10px;letter-spacing:.17em;margin-bottom:18px}
+  .header h1{font-size:22px;letter-spacing:.09em;font-weight:500}
   .psc-home{top:12px;right:12px;min-height:32px;padding:0 10px;font-size:10px}
   .scanner-wrapper{margin:0 14px;border-radius:16px}
   #statusBar{margin-left:14px;margin-right:14px}
