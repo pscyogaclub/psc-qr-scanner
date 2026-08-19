@@ -1,141 +1,58 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>PSC Attendance Scanner</title>
-
-<link rel="stylesheet" href="style.css">
-
-<style>
-/* PSC OS — HOME navigation only */
-.header {
-  position: relative;
-}
-
-.psc-home {
-  position: absolute;
-  top: 0;
-  right: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 34px;
-  padding: 0 12px;
-  border: 1px solid #d9d9d4;
-  border-radius: 9px;
-  background: #ffffff;
-  color: #2f5d50;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  text-decoration: none;
-  white-space: nowrap;
-  -webkit-tap-highlight-color: transparent;
-  box-sizing: border-box;
-}
-
-.psc-home:active {
-  background: #f1f4f3;
-}
-
-@media (max-width: 520px) {
-  .psc-home {
-    top: 0;
-    right: 0;
-    min-height: 32px;
-    padding: 0 10px;
-    font-size: 12px;
-  }
-}
-</style>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSC Attendance Scanner</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+  <main class="app">
+    <section class="scanner-card">
 
-<div class="app">
+      <!-- PSC HEADER -->
+      <header class="header">
+        <a
+          class="psc-home"
+          href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
+          aria-label="Kembali ke PSC Admin">
+          ⌂ HOME
+        </a>
 
-<div class="scanner-card">
+        <img
+          class="psc-logo"
+          src="psc-logo-gold.png"
+          alt="PSC Yoga Club">
 
-<!-- ===================== -->
-<!-- HEADER -->
-<!-- ===================== -->
+        <h1>QR Attendance</h1>
+      </header>
 
-<div class="header">
+      <!-- CAMERA / SCANNER ENGINE
+           DO NOT CHANGE id="reader". app.js depends on it. -->
+      <section id="scannerSection">
+        <div class="scanner-wrapper">
+          <div id="reader"></div>
+        </div>
+      </section>
 
-<a
-  class="psc-home"
-  href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
-  aria-label="Kembali ke PSC Admin">
-  ⌂ HOME
-</a>
+      <!-- STATUS -->
+      <div id="statusBar">
+        <span class="status-dot"></span>
+        <span id="statusText">Initializing Camera...</span>
+      </div>
 
-<div class="psc-logo">
+      <!-- RESULT
+           app.js writes its check-in result here. -->
+      <div id="result">
+        Waiting for QR Code...
+      </div>
 
-<div class="logo-circle">
+    </section>
+  </main>
 
-PSC
-
-</div>
-
-</div>
-
-<h1>QR Attendance</h1>
-
-<p>
-Present • Stretch • Connect
-</p>
-
-</div>
-
-<!-- ===================== -->
-<!-- CAMERA -->
-<!-- ===================== -->
-
-<div id="scannerSection">
-
-<div class="scanner-wrapper">
-
-<div id="reader"></div>
-
-</div>
-
-</div>
-
-<!-- ===================== -->
-<!-- STATUS -->
-<!-- ===================== -->
-
-<div id="statusBar">
-
-<span class="status-dot"></span>
-
-<span id="statusText">
-Initializing Camera...
-</span>
-
-</div>
-
-<!-- ===================== -->
-<!-- RESULT -->
-<!-- ===================== -->
-
-<div id="result">
-Waiting for QR Code...
-</div>
-
-</div>
-
-</div>
-
-<script src="https://unpkg.com/html5-qrcode"></script>
-<script src="app.js"></script>
-
+  <!-- SCANNER ENGINE: UNCHANGED -->
+  <script src="https://unpkg.com/html5-qrcode"></script>
+  <script src="app.js"></script>
 </body>
-
 </html>
