@@ -4,20 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PSC Attendance Scanner</title>
-  <link rel="stylesheet" href="style.css?v=20260820-02">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=20260820-03">
 </head>
 
 <body>
   <main class="app">
     <section class="scanner-card">
 
-      <!-- PSC HEADER -->
+      <!-- PSC HEADER / VISUAL LAYER ONLY -->
       <header class="header">
         <a
           class="psc-home"
           href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
           aria-label="Kembali ke PSC Admin">
-          ⌂ HOME
+          <span class="home-icon">⌂</span> HOME
         </a>
 
         <img
@@ -25,9 +28,12 @@
           src="psc-logo-gold.png"
           alt="PSC Yoga Club">
 
+        <div class="header-rule" aria-hidden="true"></div>
         <div class="psc-tagline">PRESENT • STRETCH • CONNECT</div>
+        <div class="title-rule" aria-hidden="true"></div>
 
-        <h1>QR Attendance</h1>
+        <h1>QR ATTENDANCE</h1>
+        <div class="title-rule title-rule-bottom" aria-hidden="true"></div>
       </header>
 
       <!-- CAMERA / SCANNER ENGINE
