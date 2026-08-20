@@ -14,12 +14,12 @@
   <main class="app">
     <section class="scanner-card">
       <header class="header">
-        <!-- PSC Admin HOME: warm-up the Apps Script route before the visible navigation. -->
+        <!-- PSC Admin HOME: cache-busted navigation prevents the intermittent first-load Page Not Found glitch. -->
         <a
           class="psc-home"
           href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
           aria-label="Buka PSC Admin"
-          onclick="event.preventDefault(); pscOpenAdmin();">
+          onclick="event.preventDefault(); window.location.assign('https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin&_psc_nav=' + Date.now());">
           <span class="home-icon">⌂</span> HOME
         </a>
 
@@ -43,30 +43,6 @@
     </section>
   </main>
 
-  <script>
-    function pscOpenAdmin() {
-      const base = 'https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec';
-      const warmUrl = base + '?page=admin&_psc_warm=' + Date.now();
-      const finalUrl = base + '?page=admin&_psc_nav=' + Date.now();
-
-      // First request warms the Apps Script deployment. This reproduces the
-      // browser's successful second Enter/reload without changing the UI.
-      const frame = document.createElement('iframe');
-      frame.setAttribute('aria-hidden', 'true');
-      frame.style.position = 'fixed';
-      frame.style.width = '1px';
-      frame.style.height = '1px';
-      frame.style.opacity = '0';
-      frame.style.pointerEvents = 'none';
-      frame.style.border = '0';
-      frame.src = warmUrl;
-      document.body.appendChild(frame);
-
-      setTimeout(function () {
-        window.location.replace(finalUrl);
-      }, 900);
-    }
-  </script>
   <script src="https://unpkg.com/html5-qrcode"></script>
   <script src="app.js"></script>
 </body>
