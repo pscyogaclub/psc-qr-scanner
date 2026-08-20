@@ -1,121 +1,102 @@
-/* PSC APPROVED MOCK-UP AMBIENCE — IMPLEMENTATION LAYER.
+/* PSC APPROVED MOCK-UP AMBIENCE — IMPLEMENTATION ONLY.
    SOURCE OF TRUTH: approved PSC scanner mock-up.
    LOCKED: layout, proportions, typography, scanner size, responsive sizing and navigation.
    THIS FILE CHANGES ATMOSPHERE ONLY. */
 
 :root{
-  --psc-ambient-green:#071E15;
-  --psc-ambient-deep:#04150F;
-  --psc-ambient-warm:#A8793F;
-  --psc-ambient-olive:#5C593A;
-  --psc-ambient-gold:#C6A96B;
+  --psc-wall:#0D2B1E;
+  --psc-wall-deep:#071E15;
+  --psc-warm:#C6A96B;
+  --psc-soft-gold:#E0C78A;
 }
 
-/* The mock-up is an architectural wall: deep forest green with a warm,
-   diffuse amber pool BEHIND the card. No side spotlight, no bright halo. */
-html,body{background:#071E15!important;}
+/* ONE wall. No second panel, no side light, no white glow. */
+html,body{
+  background:
+    radial-gradient(ellipse 68% 70% at 50% 50%,
+      rgba(198,169,107,.14) 0%,
+      rgba(168,132,70,.075) 24%,
+      rgba(90,111,58,.045) 43%,
+      transparent 70%),
+    radial-gradient(ellipse 110% 100% at 50% 50%,
+      rgba(26,77,52,.30) 0%,
+      rgba(13,43,30,.16) 52%,
+      transparent 78%),
+    #071E15 !important;
+}
 
 body{
   position:relative;
   isolation:isolate;
-  background:
-    radial-gradient(ellipse 70% 82% at 50% 50%,
-      rgba(151,112,54,.25) 0%,
-      rgba(118,92,51,.16) 24%,
-      rgba(76,70,46,.08) 47%,
-      transparent 72%),
-    radial-gradient(ellipse 92% 92% at 50% 50%,
-      rgba(35,57,43,.32) 0%,
-      rgba(14,38,28,.16) 48%,
-      transparent 78%),
-    linear-gradient(112deg,#03130D 0%,#082117 31%,#102A20 50%,#082117 69%,#03130D 100%)!important;
 }
 
-/* Quiet wall texture. */
+/* Quiet wall texture only — no visible graphic panel. */
 body::after{
   content:"";
   position:fixed;
   inset:0;
-  z-index:-3;
+  z-index:0;
   pointer-events:none;
-  opacity:.22;
-  background:
-    repeating-radial-gradient(ellipse at 18% 32%,rgba(225,193,131,.045) 0 1px,transparent 1px 9px),
-    repeating-linear-gradient(102deg,rgba(255,255,255,.012) 0 1px,transparent 1px 7px);
+  opacity:.11;
+  background:repeating-linear-gradient(102deg,rgba(255,255,255,.014) 0 1px,transparent 1px 9px);
   mix-blend-mode:soft-light;
 }
 
-/* ACTUAL foliage shadow asset — a soft palm-leaf silhouette, not abstract blobs. */
+/* Recognizable palm-leaf shadow. It belongs to the wall, not the UI. */
 body::before{
   content:"";
   position:fixed;
-  z-index:-2;
-  left:-3vw;
-  top:-4vh;
-  width:58vw;
+  z-index:0;
+  left:-7vw;
+  top:-6vh;
+  width:46vw;
   height:112vh;
   pointer-events:none;
-  opacity:.52;
-  background:url("psc-foliage-shadow.svg") left top / 100% 100% no-repeat;
-  filter:blur(2px);
+  opacity:.20;
+  background:url("psc-foliage-shadow.svg") left center / 100% 100% no-repeat;
+  filter:blur(1.2px);
   mix-blend-mode:multiply;
 }
 
-/* Warm pool behind the EXISTING approved card. The light belongs to the wall,
-   so the card remains the same size and structure while its surroundings gain
-   the warm architectural feeling from the mock-up. */
-.app::before{
-  background:
-    radial-gradient(ellipse 70% 72% at 50% 50%,
-      rgba(211,164,83,.25) 0%,
-      rgba(184,139,68,.16) 24%,
-      rgba(145,112,61,.075) 45%,
-      transparent 72%)!important;
-  width:170%!important;
-  height:125%!important;
-  left:-35%!important;
-  top:-12%!important;
-  filter:blur(38px)!important;
+/* Keep the approved card above the wall ambience. */
+.app{
+  position:relative;
+  z-index:1;
 }
 
+/* Remove the old secondary ambience layer so there is only ONE background. */
+.app::before{
+  display:none !important;
+}
+
+/* Existing approved card: only material tone + very soft warm reflection. */
 .scanner-card{
-  background:
-    radial-gradient(ellipse 74% 42% at 50% 2%,
-      rgba(207,172,101,.085) 0%,
-      rgba(177,140,76,.030) 36%,
-      transparent 72%),
-    linear-gradient(145deg,
-      rgba(24,57,43,.985) 0%,
-      rgba(15,45,33,.992) 52%,
-      rgba(7,29,22,.997) 100%)!important;
-  border-color:rgba(198,169,107,.30)!important;
+  background:linear-gradient(145deg,
+    rgba(26,77,52,.985) 0%,
+    rgba(16,55,40,.992) 52%,
+    rgba(13,43,30,.997) 100%) !important;
+  border-color:rgba(198,169,107,.30) !important;
   box-shadow:
-    0 28px 80px rgba(0,0,0,.38),
-    0 10px 34px rgba(198,169,107,.055)!important;
+    0 28px 80px rgba(0,0,0,.30),
+    0 0 82px 18px rgba(198,169,107,.075) !important;
 }
 
 .scanner-card::after{
-  background:
-    radial-gradient(ellipse 58% 46% at 26% 5%,
-      rgba(232,198,128,.050),transparent 72%),
-    radial-gradient(ellipse 54% 50% at 78% 92%,
-      rgba(151,110,52,.025),transparent 72%),
-    linear-gradient(110deg,
-      rgba(255,255,255,.010),transparent 28%,transparent 72%,rgba(198,169,107,.018))!important;
+  background:linear-gradient(180deg,
+    rgba(224,199,138,.028),
+    transparent 24%,
+    transparent 76%,
+    rgba(198,169,107,.018)) !important;
 }
 
 .psc-tagline,.header h1,.psc-home{
-  text-shadow:0 1px 10px rgba(198,169,107,.06);
+  text-shadow:0 1px 10px rgba(198,169,107,.05);
 }
 
 @media(max-width:560px){
   body::before{
-    left:-18vw;
-    width:72vw;
-    opacity:.40;
+    left:-15vw;
+    width:58vw;
+    opacity:.18;
   }
-  body{background:
-    radial-gradient(ellipse 82% 68% at 50% 50%,rgba(151,112,54,.20) 0%,rgba(118,92,51,.11) 27%,rgba(82,76,49,.05) 48%,transparent 72%),
-    radial-gradient(ellipse 100% 84% at 50% 50%,rgba(42,64,49,.30) 0%,rgba(16,39,29,.15) 48%,transparent 76%),
-    linear-gradient(112deg,#03130D 0%,#092319 50%,#03130D 100%)!important;}
 }
