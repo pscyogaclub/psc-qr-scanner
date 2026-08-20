@@ -1,70 +1,126 @@
-/* PSC APPROVED VISUAL AMBIENCE v2 — ATMOSPHERE ONLY.
+/* PSC APPROVED MOCK-UP AMBIENCE — IMPLEMENTATION LAYER.
+   SOURCE OF TRUTH: approved PSC scanner mock-up.
    LOCKED: layout, proportions, typography, scanner size, responsive sizing and navigation.
-   Purpose: make the approved warm-room feeling visibly render on the real UI. */
+   THIS FILE CHANGES ATMOSPHERE ONLY. */
 
-html,body{
-  background:
-    radial-gradient(ellipse 52% 72% at 50% 48%,rgba(194,154,82,.115) 0%,rgba(194,154,82,.070) 24%,rgba(194,154,82,.028) 44%,transparent 68%),
-    radial-gradient(ellipse 34% 78% at 18% 52%,rgba(167,123,58,.095) 0%,rgba(167,123,58,.050) 30%,transparent 68%),
-    radial-gradient(ellipse 30% 72% at 82% 52%,rgba(145,108,52,.050) 0%,transparent 68%),
-    linear-gradient(112deg,#061A12 0%,#092319 36%,#10291D 50%,#092319 64%,#061A12 100%) !important;
+:root{
+  --psc-ambient-green:#071E15;
+  --psc-ambient-deep:#04150F;
+  --psc-ambient-warm:#A8793F;
+  --psc-ambient-olive:#5C593A;
+  --psc-ambient-gold:#C6A96B;
 }
 
-body{position:relative;isolation:isolate;}
+/*
+   PSC spatial mood:
+   deep architectural green + warm olive/amber reflected light.
+   The light is broad and low-contrast — FELT, not read as a bright effect.
+*/
+html,body{background:#071E15!important;}
 
-/* Keep atmosphere behind the interface instead of behind the document canvas. */
+body{
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse 42% 66% at 50% 50%,
+      rgba(157,119,59,.20) 0%,
+      rgba(128,101,57,.125) 23%,
+      rgba(82,76,49,.065) 43%,
+      transparent 69%),
+    radial-gradient(ellipse 72% 82% at 50% 50%,
+      rgba(50,70,52,.32) 0%,
+      rgba(24,48,35,.18) 46%,
+      transparent 74%),
+    radial-gradient(ellipse 48% 42% at 50% 82%,
+      rgba(126,91,42,.075) 0%,
+      transparent 70%),
+    linear-gradient(112deg,#04150F 0%,#092219 30%,#14291F 50%,#092219 70%,#04150F 100%)!important;
+}
+
+/* Quiet wall texture: keeps the mock-up from becoming a flat green screen. */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  pointer-events:none;
+  opacity:.20;
+  background:
+    repeating-radial-gradient(ellipse at 18% 32%,rgba(225,193,131,.040) 0 1px,transparent 1px 9px),
+    repeating-linear-gradient(102deg,rgba(255,255,255,.010) 0 1px,transparent 1px 7px);
+  mix-blend-mode:soft-light;
+}
+
+/* Subtle foliage shadow at the edge — a depth cue, not an illustration. */
 body::before{
   content:"";
   position:fixed;
-  z-index:0;
-  inset:0;
+  z-index:-2;
+  left:-6vw;
+  top:-8vh;
+  width:34vw;
+  height:116vh;
   pointer-events:none;
-  opacity:.22;
+  opacity:.38;
+  filter:blur(5px);
+  transform:rotate(-9deg);
   background:
-    radial-gradient(ellipse 46% 58% at 50% 48%,rgba(204,157,78,.10),transparent 72%),
-    radial-gradient(ellipse 20% 55% at 10% 35%,rgba(0,0,0,.24),transparent 72%);
-  filter:blur(28px);
+    radial-gradient(ellipse 10% 35% at 25% 12%,rgba(0,0,0,.46) 0 55%,transparent 57%),
+    radial-gradient(ellipse 12% 30% at 45% 22%,rgba(0,0,0,.42) 0 55%,transparent 57%),
+    radial-gradient(ellipse 11% 30% at 62% 34%,rgba(0,0,0,.38) 0 55%,transparent 57%),
+    radial-gradient(ellipse 10% 29% at 45% 47%,rgba(0,0,0,.34) 0 55%,transparent 57%),
+    radial-gradient(ellipse 9% 27% at 28% 61%,rgba(0,0,0,.30) 0 55%,transparent 57%),
+    linear-gradient(73deg,transparent 0 46%,rgba(0,0,0,.34) 47% 51%,transparent 52%);
 }
 
-body::after{display:none!important;}
-
-.app{position:relative;z-index:1;}
-
-/* Warm light behind the existing card — deliberately felt, never bright. */
+/* Warm pool behind the EXISTING approved card. Color/light only. */
 .app::before{
-  content:"";
-  position:absolute;
-  z-index:0;
-  width:155%;
-  height:135%;
-  left:-27.5%;
-  top:-17.5%;
-  pointer-events:none;
   background:
-    radial-gradient(ellipse 48% 58% at 50% 48%,rgba(204,157,78,.14) 0%,rgba(204,157,78,.075) 26%,rgba(160,124,65,.025) 48%,transparent 72%);
-  filter:blur(44px);
+    radial-gradient(ellipse 62% 66% at 50% 50%,
+      rgba(199,151,72,.17) 0%,
+      rgba(174,132,65,.085) 25%,
+      rgba(142,112,64,.035) 46%,
+      transparent 72%)!important;
+  filter:blur(42px)!important;
 }
 
-.scanner-card{position:relative;z-index:1;}
-
-/* Only tonal treatment — no size, spacing, position or geometry changes. */
 .scanner-card{
   background:
-    radial-gradient(ellipse 72% 38% at 50% 4%,rgba(224,191,119,.075) 0%,rgba(224,191,119,.026) 38%,transparent 72%),
-    linear-gradient(145deg,rgba(25,61,45,.985) 0%,rgba(15,46,34,.992) 52%,rgba(8,31,23,.997) 100%) !important;
-  border-color:rgba(198,169,107,.30) !important;
-  box-shadow:0 28px 80px rgba(0,0,0,.34),0 10px 34px rgba(198,169,107,.065) !important;
+    radial-gradient(ellipse 74% 42% at 50% 2%,
+      rgba(207,172,101,.085) 0%,
+      rgba(177,140,76,.030) 36%,
+      transparent 72%),
+    radial-gradient(ellipse 80% 80% at 18% 50%,
+      rgba(111,94,54,.045) 0%,
+      transparent 62%),
+    linear-gradient(145deg,
+      rgba(25,57,43,.985) 0%,
+      rgba(15,45,33,.992) 52%,
+      rgba(7,29,22,.997) 100%)!important;
+  border-color:rgba(198,169,107,.30)!important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.34),
+    0 10px 34px rgba(198,169,107,.055)!important;
 }
 
 .scanner-card::after{
   background:
-    radial-gradient(ellipse 52% 38% at 22% 4%,rgba(232,198,128,.045),transparent 72%),
-    linear-gradient(110deg,rgba(255,255,255,.010),transparent 28%,transparent 72%,rgba(198,169,107,.018)) !important;
+    radial-gradient(ellipse 58% 46% at 26% 5%,
+      rgba(232,198,128,.050),transparent 72%),
+    radial-gradient(ellipse 54% 50% at 78% 92%,
+      rgba(151,110,52,.025),transparent 72%),
+    linear-gradient(110deg,
+      rgba(255,255,255,.010),transparent 28%,transparent 72%,rgba(198,169,107,.018))!important;
 }
 
-.psc-tagline,.header h1,.psc-home{text-shadow:0 1px 10px rgba(198,169,107,.06);}
+.psc-tagline,.header h1,.psc-home{
+  text-shadow:0 1px 10px rgba(198,169,107,.06);
+}
 
 @media(max-width:560px){
-  body::before{opacity:.18;}
-  .app::before{width:175%;left:-37.5%;}
+  body::before{left:-18vw;width:55vw;opacity:.31;}
+  body{background:
+    radial-gradient(ellipse 62% 54% at 50% 50%,rgba(157,119,59,.16) 0%,rgba(128,101,57,.09) 25%,rgba(82,76,49,.045) 45%,transparent 70%),
+    radial-gradient(ellipse 92% 78% at 50% 50%,rgba(42,64,49,.28) 0%,rgba(16,39,29,.16) 48%,transparent 74%),
+    linear-gradient(112deg,#04150F 0%,#0A241A 50%,#04150F 100%)!important;}
 }
