@@ -3,20 +3,32 @@
    Palette: #0E2B22 #153D31 #C6A96B #274C3B #121A16
    Light: #DDBA77 warm gold, #E6C98A soft gold, #0B1F18 shadow green.
    Direction: warm light comes from BEHIND the card, center-ish and slightly upper.
-   Foliage: recognizable Monstera shadow, soft and natural.
+   Foliage: small, recognizable Monstera shadow, soft and natural.
 */
 :root{--psc-deep-emerald:#0E2B22;--psc-emerald-green:#153D31;--psc-champagne:#C6A96B;--psc-moss:#274C3B;--psc-charcoal:#121A16;--psc-warm-glow:#DDBA77;--psc-soft-gold:#E6C98A;--psc-shadow-green:#0B1F18;--psc-cream:#F6F4ED}
-html,body{background:radial-gradient(ellipse 48% 58% at 50% 48%,rgba(221,186,119,.78) 0%,rgba(221,186,119,.58) 9%,rgba(221,186,119,.38) 21%,rgba(198,169,107,.22) 37%,rgba(198,169,107,.09) 53%,transparent 72%),radial-gradient(ellipse 105% 115% at 50% 50%,rgba(21,61,49,.72) 0%,rgba(14,43,34,.84) 50%,rgba(7,30,21,.98) 100%),var(--psc-deep-emerald)!important}
+
+/* Single environment: deeper and less saturated green, with a clearly visible warm pool behind the card. */
+html,body{background:
+ radial-gradient(ellipse 42% 48% at 50% 43%,rgba(221,186,119,.96) 0%,rgba(221,186,119,.78) 12%,rgba(221,186,119,.52) 25%,rgba(198,169,107,.30) 40%,rgba(198,169,107,.13) 55%,transparent 70%),
+ radial-gradient(ellipse 115% 120% at 50% 52%,rgba(26,77,52,.46) 0%,rgba(14,43,34,.80) 50%,rgba(11,31,24,.96) 100%),
+ var(--psc-deep-emerald)!important}
 body{position:relative;isolation:isolate}
-/* Recognizable Monstera shadow — not a palm and not decorative foliage. */
-body::before{content:"";position:fixed;z-index:0;left:-10vw;top:-8vh;width:58vw;height:116vh;pointer-events:none;opacity:.48;background:url("psc-foliage-shadow.svg?v=20260820-04") left center/100% 100% no-repeat;filter:blur(2px);mix-blend-mode:multiply}
-/* Very subtle wall texture; never another background panel. */
-body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;background:repeating-linear-gradient(102deg,rgba(246,244,237,.018) 0 1px,transparent 1px 11px);mix-blend-mode:soft-light}
-/* The warm source sits BEHIND the card, not on the left or right. */
-.app::before{content:"";position:absolute;z-index:0;pointer-events:none;width:260%;height:190%;left:-80%;top:-44%;background:radial-gradient(ellipse 44% 36% at 50% 50%,rgba(221,186,119,.62) 0%,rgba(221,186,119,.44) 18%,rgba(198,169,107,.24) 37%,rgba(198,169,107,.10) 55%,transparent 76%);filter:blur(32px)}
+
+/* Small Monstera only: recognizable leaves, never a giant dark mass. */
+body::before{content:"";position:fixed;z-index:0;left:3vw;top:9vh;width:180px;height:180px;pointer-events:none;opacity:.34;background:url("psc-foliage-shadow.svg?v=20260820-05") center/contain no-repeat;filter:blur(1.5px);mix-blend-mode:multiply}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background:repeating-linear-gradient(102deg,rgba(246,244,237,.018) 0 1px,transparent 1px 11px);mix-blend-mode:soft-light}
+
+/* Warm source: deliberately centered behind the card, slightly upper. No side spotlight. */
+.app::before{content:"";position:absolute;z-index:0;pointer-events:none;width:220%;height:165%;left:-60%;top:-31%;background:radial-gradient(ellipse 38% 34% at 50% 45%,rgba(221,186,119,.82) 0%,rgba(221,186,119,.62) 16%,rgba(221,186,119,.42) 31%,rgba(198,169,107,.22) 48%,rgba(198,169,107,.08) 64%,transparent 79%);filter:blur(24px)}
 .app{position:relative;z-index:1}
-/* Card stays dark, premium and grounded; the wall carries the warmth. */
-.scanner-card{position:relative;z-index:1;background:radial-gradient(ellipse 72% 30% at 50% 0%,rgba(230,201,138,.055) 0%,transparent 70%),linear-gradient(145deg,rgba(14,43,34,.985) 0%,rgba(11,31,24,.992) 58%,rgba(7,25,19,.998) 100%)!important;border-color:rgba(198,169,107,.42)!important;box-shadow:0 28px 80px rgba(0,0,0,.46),0 0 110px 28px rgba(221,186,119,.30),0 0 44px 8px rgba(198,169,107,.16)!important}
-.scanner-card::after{background:linear-gradient(180deg,rgba(230,201,138,.035),transparent 24%,transparent 76%,rgba(198,169,107,.020))!important}
-.psc-tagline,.header h1,.psc-home{text-shadow:0 1px 10px rgba(230,201,138,.12)}
-@media(max-width:560px){body::before{left:-24vw;top:-5vh;width:88vw;height:112vh;opacity:.44}.app::before{width:300%;left:-100%;height:175%;top:-35%;background:radial-gradient(ellipse 46% 38% at 50% 50%,rgba(221,186,119,.56) 0%,rgba(221,186,119,.39) 20%,rgba(198,169,107,.20) 40%,rgba(198,169,107,.08) 59%,transparent 78%);filter:blur(28px)}.scanner-card{box-shadow:0 24px 65px rgba(0,0,0,.48),0 0 92px 24px rgba(221,186,119,.28),0 0 36px 7px rgba(198,169,107,.14)!important}}
+
+/* Card remains dark and premium; the surrounding wall carries the warmth. */
+.scanner-card{position:relative;z-index:1;background:radial-gradient(ellipse 72% 30% at 50% 0%,rgba(230,201,138,.07) 0%,transparent 70%),linear-gradient(145deg,rgba(14,43,34,.99) 0%,rgba(11,31,24,.995) 58%,rgba(7,25,19,1) 100%)!important;border-color:rgba(198,169,107,.44)!important;box-shadow:0 28px 80px rgba(0,0,0,.48),0 0 96px 22px rgba(221,186,119,.42),0 0 38px 7px rgba(198,169,107,.20)!important}
+.scanner-card::after{background:linear-gradient(180deg,rgba(230,201,138,.045),transparent 24%,transparent 76%,rgba(198,169,107,.025))!important}
+.psc-tagline,.header h1,.psc-home{text-shadow:0 1px 10px rgba(230,201,138,.14)}
+
+@media(max-width:560px){
+ body::before{left:8vw;top:8vh;width:120px;height:120px;opacity:.28}
+ .app::before{width:245%;left:-72.5%;height:150%;top:-24%;background:radial-gradient(ellipse 40% 33% at 50% 44%,rgba(221,186,119,.76) 0%,rgba(221,186,119,.57) 18%,rgba(221,186,119,.36) 34%,rgba(198,169,107,.18) 51%,rgba(198,169,107,.06) 67%,transparent 81%);filter:blur(21px)}
+ .scanner-card{box-shadow:0 24px 65px rgba(0,0,0,.50),0 0 82px 20px rgba(221,186,119,.38),0 0 34px 6px rgba(198,169,107,.18)!important}
+}
