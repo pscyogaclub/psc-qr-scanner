@@ -58,7 +58,7 @@ body::before{
   height:114vh;
   pointer-events:none;
   opacity:.22;
-  background:url("psc-foliage-shadow.svg") left center / 100% 100% no-repeat;
+  background:url("psc-foliage-shadow.svg?v=20260820-02") left center / 100% 100% no-repeat;
   filter:blur(1.5px);
   mix-blend-mode:multiply;
 }
