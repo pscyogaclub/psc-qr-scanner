@@ -1,14 +1,17 @@
-/* PSC APPROVED VISUAL AMBIENCE v2 — ATMOSPHERE ONLY.
+/* PSC APPROVED UI COLOR SOURCE OF TRUTH — ATMOSPHERE ONLY.
    LOCKED: layout, proportions, typography, scanner size, responsive sizing and navigation.
-   Purpose: carry the approved warm-room feeling into the real UI.
+   Palette source: PSC Yoga Club Color Palette.
+   Forest #0D2B1E | Emerald #1A4D34 | Moss #5A6F3A
+   Gold #C6A96B | Soft Gold #E0C78A
+   Neutral: Deep Charcoal #111111 | Warm Dark Grey #2B2B2B | Cream #F6F4ED
    IMPORTANT: this file must never alter geometry. */
 
 html,body{
   background:
-    radial-gradient(ellipse 34% 66% at 18% 50%,rgba(187,139,64,.22) 0%,rgba(187,139,64,.12) 22%,rgba(187,139,64,.045) 42%,transparent 70%),
-    radial-gradient(ellipse 46% 58% at 50% 46%,rgba(167,126,59,.075) 0%,rgba(167,126,59,.035) 30%,transparent 68%),
-    radial-gradient(ellipse 28% 62% at 82% 50%,rgba(96,76,43,.035) 0%,transparent 70%),
-    linear-gradient(112deg,#061A12 0%,#092219 34%,#10291D 52%,#092219 68%,#051810 100%) !important;
+    radial-gradient(ellipse 46% 72% at 50% 48%,rgba(90,111,58,.22) 0%,rgba(90,111,58,.10) 28%,transparent 66%),
+    radial-gradient(ellipse 34% 70% at 18% 52%,rgba(198,169,107,.15) 0%,rgba(198,169,107,.07) 28%,transparent 66%),
+    radial-gradient(ellipse 34% 70% at 82% 50%,rgba(26,77,52,.14) 0%,rgba(26,77,52,.05) 34%,transparent 70%),
+    linear-gradient(112deg,#0D2B1E 0%,#1A4D34 42%,#0D2B1E 68%,#061A12 100%) !important;
 }
 
 body{
@@ -16,32 +19,32 @@ body{
   isolation:isolate;
 }
 
-/* Quiet room depth: warm light enters from the left, never as a white glow. */
+/* PSC ambience: green-to-gold warmth, never a white glow. */
 body::before{
   content:"";
   position:fixed;
   z-index:0;
   inset:0;
   pointer-events:none;
-  opacity:.90;
+  opacity:.92;
   background:
-    radial-gradient(ellipse 25% 72% at 16% 50%,rgba(201,154,75,.13),transparent 72%),
-    radial-gradient(ellipse 40% 42% at 48% 50%,rgba(186,139,67,.045),transparent 72%),
-    linear-gradient(90deg,rgba(0,0,0,.10),transparent 24%,transparent 78%,rgba(0,0,0,.16));
+    radial-gradient(ellipse 26% 72% at 18% 50%,rgba(198,169,107,.18),transparent 72%),
+    radial-gradient(ellipse 42% 48% at 50% 48%,rgba(90,111,58,.10),transparent 72%),
+    linear-gradient(90deg,rgba(0,0,0,.12),transparent 24%,transparent 78%,rgba(0,0,0,.18));
   filter:blur(30px);
 }
 
-/* Very subtle organic texture — felt rather than seen. */
+/* Organic visual grain remains extremely subtle; it does not define the UI. */
 body::after{
   content:"";
   position:fixed;
   z-index:0;
   inset:-20px;
   pointer-events:none;
-  opacity:.055;
+  opacity:.035;
   background-image:
-    radial-gradient(circle at 20% 30%,rgba(255,224,155,.45) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 70% 65%,rgba(255,224,155,.28) 0 1px,transparent 1.5px);
+    radial-gradient(circle at 20% 30%,rgba(224,199,138,.42) 0 1px,transparent 1.5px),
+    radial-gradient(circle at 70% 65%,rgba(224,199,138,.24) 0 1px,transparent 1.5px);
   background-size:17px 19px,23px 27px;
   mix-blend-mode:soft-light;
 }
@@ -51,9 +54,7 @@ body::after{
   z-index:1;
 }
 
-/* The approved warm pool behind the existing card.
-   It is intentionally broader and lower-contrast than the mock-up light,
-   so the warmth is present without becoming a spotlight. */
+/* Warm pool behind the existing approved card — color only. */
 .app::before{
   content:"";
   position:absolute;
@@ -64,7 +65,7 @@ body::after{
   top:-25%;
   pointer-events:none;
   background:
-    radial-gradient(ellipse 46% 56% at 43% 50%,rgba(207,159,77,.16) 0%,rgba(207,159,77,.085) 25%,rgba(173,131,64,.035) 48%,transparent 73%);
+    radial-gradient(ellipse 46% 56% at 43% 50%,rgba(198,169,107,.16) 0%,rgba(198,169,107,.075) 25%,rgba(90,111,58,.04) 48%,transparent 73%);
   filter:blur(48px);
 }
 
@@ -72,9 +73,9 @@ body::after{
   position:relative;
   z-index:1;
   background:
-    radial-gradient(ellipse 72% 40% at 50% 4%,rgba(224,191,119,.09) 0%,rgba(224,191,119,.032) 38%,transparent 72%),
-    linear-gradient(145deg,rgba(27,61,45,.985) 0%,rgba(15,45,33,.992) 52%,rgba(7,29,22,.998) 100%) !important;
-  border-color:rgba(198,169,107,.31) !important;
+    radial-gradient(ellipse 72% 40% at 50% 4%,rgba(224,199,138,.10) 0%,rgba(224,199,138,.035) 38%,transparent 72%),
+    linear-gradient(145deg,#1A4D34 0%,#123B2A 48%,#0D2B1E 100%) !important;
+  border-color:rgba(198,169,107,.34) !important;
   box-shadow:
     0 28px 80px rgba(0,0,0,.38),
     0 10px 34px rgba(198,169,107,.075) !important;
@@ -82,12 +83,12 @@ body::after{
 
 .scanner-card::after{
   background:
-    radial-gradient(ellipse 54% 40% at 20% 3%,rgba(232,198,128,.055),transparent 72%),
-    linear-gradient(110deg,rgba(255,255,255,.008),transparent 28%,transparent 72%,rgba(198,169,107,.022)) !important;
+    radial-gradient(ellipse 54% 40% at 20% 3%,rgba(224,199,138,.06),transparent 72%),
+    linear-gradient(110deg,rgba(255,255,255,.008),transparent 28%,transparent 72%,rgba(198,169,107,.02)) !important;
 }
 
 .psc-tagline,.header h1,.psc-home{
-  text-shadow:0 1px 10px rgba(198,169,107,.08);
+  text-shadow:0 1px 10px rgba(224,199,138,.10);
 }
 
 @media(max-width:560px){
