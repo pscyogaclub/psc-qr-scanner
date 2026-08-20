@@ -5,58 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PSC Attendance Scanner</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260820-09">
   <link rel="stylesheet" href="psc-ambience.css?v=20260820-02">
 </head>
-
 <body>
   <main class="app">
     <section class="scanner-card">
-
-      <!-- PSC HEADER / VISUAL LAYER ONLY -->
       <header class="header">
-        <!-- Safe local HOME target. The previous Apps Script destination was stale and returned Page Not Found. -->
+        <!-- RESTORED: approved PSC Admin destination. -->
         <a
           class="psc-home"
-          href="./"
-          aria-label="Kembali ke PSC QR Attendance">
+          href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
+          aria-label="Buka PSC Admin">
           <span class="home-icon">⌂</span> HOME
         </a>
 
-        <img
-          class="psc-logo"
-          src="psc-logo-gold.png"
-          alt="PSC Yoga Club">
-
+        <img class="psc-logo" src="psc-logo-gold.png" alt="PSC Yoga Club">
         <div class="psc-tagline">PRESENT • STRETCH • CONNECT</div>
-
         <h1>QR ATTENDANCE</h1>
       </header>
 
-      <!-- CAMERA / SCANNER ENGINE
-           DO NOT CHANGE id="reader". app.js depends on it. -->
       <section id="scannerSection">
         <div class="scanner-wrapper">
           <div id="reader"></div>
         </div>
       </section>
 
-      <!-- STATUS -->
       <div id="statusBar">
         <span class="status-dot"></span>
         <span id="statusText">Initializing Camera...</span>
       </div>
 
-      <!-- RESULT
-           app.js writes its check-in result here. -->
       <div id="result"></div>
-
     </section>
   </main>
 
-  <!-- SCANNER ENGINE: UNCHANGED -->
   <script src="https://unpkg.com/html5-qrcode"></script>
   <script src="app.js"></script>
 </body>
