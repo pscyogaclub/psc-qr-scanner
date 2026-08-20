@@ -9,14 +9,15 @@
   --psc-cream:#F6F4ED;
   --psc-success:#4CAF72;
   --psc-line:rgba(198,169,107,.16);
-  --psc-shadow:0 18px 50px rgba(0,0,0,.20);
+  --psc-shadow:0 22px 60px rgba(0,0,0,.34);
 }
 
 html,body{width:100%;min-height:100%;}
 
 body{
   font-family:"Montserrat","Segoe UI",Arial,sans-serif;
-  background:var(--psc-forest);
+  background:
+    radial-gradient(circle at 50% 32%, rgba(26,77,52,.34) 0%, rgba(13,43,30,.82) 46%, #071C14 100%);
   min-height:100vh;
   min-height:100dvh;
   display:flex;
@@ -37,8 +38,9 @@ body{
   position:relative;
   width:100%;
   max-height:calc(100dvh - 16px);
-  background:var(--psc-card);
-  border:1px solid rgba(198,169,107,.34);
+  background:
+    linear-gradient(145deg, rgba(26,77,52,.22) 0%, rgba(8,45,32,.96) 42%, rgba(6,34,25,.98) 100%);
+  border:1px solid rgba(198,169,107,.28);
   border-radius:20px;
   overflow:auto;
   box-shadow:var(--psc-shadow);
@@ -94,9 +96,9 @@ body{
   gap:5px;
   min-height:30px;
   padding:0 10px;
-  border:1px solid rgba(198,169,107,.30);
+  border:1px solid rgba(198,169,107,.24);
   border-radius:999px;
-  background:rgba(8,45,32,.42);
+  background:rgba(8,45,32,.48);
   color:var(--psc-soft-gold);
   font-family:"Montserrat","Segoe UI",Arial,sans-serif;
   font-size:8px;
@@ -114,7 +116,7 @@ body{
   margin:0 14px;
   border-radius:15px;
   overflow:hidden;
-  border:1px solid rgba(198,169,107,.52);
+  border:1px solid rgba(198,169,107,.42);
   background:#000;
 }
 
@@ -136,15 +138,15 @@ body{
 
 #statusBar{
   margin:8px 14px 0;
-  background:rgba(246,244,237,.025);
-  border:1px solid rgba(198,169,107,.10);
+  background:rgba(26,77,52,.18);
+  border:1px solid rgba(198,169,107,.08);
   border-radius:10px;
   padding:8px 10px;
   display:flex;
   align-items:center;
   justify-content:center;
   gap:7px;
-  color:rgba(246,244,237,.70);
+  color:rgba(246,244,237,.68);
   font-size:10px;
 }
 
