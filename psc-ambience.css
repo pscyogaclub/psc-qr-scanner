@@ -1,0 +1,137 @@
+/* PSC APPROVED AMBIENCE — visual layer only. Scanner engine untouched. */
+:root{
+  --psc-deep:#061B13;
+  --psc-emerald:#0D2E22;
+  --psc-warm:#C6A96B;
+  --psc-warm-soft:#D7BE86;
+  --psc-cream:#F3EBDD;
+}
+
+html,body{background:#061B13!important;}
+
+body{
+  position:relative;
+  isolation:isolate;
+  background:
+    radial-gradient(ellipse 42% 70% at 16% 48%,rgba(143,107,52,.18) 0%,rgba(143,107,52,.09) 24%,transparent 58%),
+    radial-gradient(ellipse 34% 62% at 84% 50%,rgba(111,82,38,.10) 0%,transparent 62%),
+    radial-gradient(ellipse 55% 50% at 50% 43%,rgba(194,151,76,.10) 0%,rgba(194,151,76,.045) 25%,transparent 65%),
+    linear-gradient(115deg,#071D15 0%,#0A241A 38%,#061A12 100%)!important;
+}
+
+/* Very soft architectural shadow / foliage impression. No bright white halo. */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-8%;
+  z-index:-2;
+  pointer-events:none;
+  opacity:.34;
+  filter:blur(16px);
+  background:
+    radial-gradient(ellipse 13% 42% at 8% 20%,rgba(0,0,0,.70) 0%,transparent 72%),
+    radial-gradient(ellipse 18% 10% at 18% 29%,rgba(0,0,0,.62) 0%,transparent 72%),
+    radial-gradient(ellipse 19% 9% at 22% 39%,rgba(0,0,0,.54) 0%,transparent 72%),
+    radial-gradient(ellipse 15% 8% at 17% 50%,rgba(0,0,0,.48) 0%,transparent 72%);
+  transform:rotate(-12deg) scale(1.1);
+}
+
+/* Warm pool behind the card: broad, low contrast, like a lamp illuminating a wall. */
+.app::before{
+  content:""!important;
+  position:absolute;
+  z-index:-1;
+  inset:-18% -28%;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 42% 52% at 50% 50%,rgba(202,157,78,.13) 0%,rgba(202,157,78,.075) 28%,rgba(202,157,78,.032) 48%,transparent 72%);
+  filter:blur(34px);
+}
+
+.app::after{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  left:10%;right:10%;bottom:-3%;height:18%;
+  background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.48),transparent 72%);
+  filter:blur(20px);
+  pointer-events:none;
+}
+
+.scanner-card{
+  max-height:calc(100dvh - 24px)!important;
+  overflow:hidden!important;
+  border-color:rgba(198,169,107,.34)!important;
+  background:
+    radial-gradient(ellipse 82% 48% at 18% 4%,rgba(198,169,107,.075) 0%,rgba(198,169,107,.026) 38%,transparent 72%),
+    radial-gradient(ellipse 72% 55% at 92% 58%,rgba(47,82,61,.20) 0%,transparent 70%),
+    linear-gradient(145deg,#17382B 0%,#0F3023 43%,#09241A 100%)!important;
+  box-shadow:0 34px 90px rgba(0,0,0,.48),0 12px 40px rgba(198,169,107,.075)!important;
+}
+
+.scanner-card::before{
+  content:"";
+  position:absolute;
+  inset:1px;
+  border-radius:19px;
+  pointer-events:none;
+  background:radial-gradient(ellipse 52% 42% at 22% 5%,rgba(229,194,121,.055),transparent 72%);
+  z-index:0;
+}
+
+.scanner-card::after{
+  background:linear-gradient(110deg,rgba(255,255,255,.018),transparent 28%,transparent 72%,rgba(198,169,107,.018))!important;
+  z-index:0;
+}
+
+.header,.scanner-wrapper,#statusBar,#result{position:relative;z-index:1}
+
+.psc-logo{filter:drop-shadow(0 5px 10px rgba(198,169,107,.10));}
+
+.psc-tagline{
+  color:rgba(215,190,134,.88)!important;
+}
+
+.header h1{
+  color:#C9AC70!important;
+  text-shadow:0 2px 14px rgba(198,169,107,.07);
+}
+
+.psc-home{
+  border-color:rgba(198,169,107,.30)!important;
+  background:rgba(6,27,19,.24)!important;
+  color:rgba(215,190,134,.92)!important;
+}
+
+.scanner-wrapper{
+  border-color:rgba(198,169,107,.44)!important;
+  box-shadow:0 12px 30px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.025);
+}
+
+#statusBar{
+  background:rgba(12,48,35,.42)!important;
+  border-color:rgba(198,169,107,.14)!important;
+  color:rgba(243,235,221,.68)!important;
+}
+
+#result{color:var(--psc-cream)!important;}
+
+/* Keep the approved compact composition on short screens. */
+@media(max-width:560px){
+  body{padding:5px!important;}
+  .app,.scanner-card{max-height:calc(100dvh - 10px)!important;}
+  .header{padding-top:18px!important;padding-bottom:9px!important;}
+  .psc-logo{width:92px!important;height:92px!important;}
+  .psc-tagline{font-size:8px!important;letter-spacing:.20em!important;margin-bottom:9px!important;}
+  .header h1{font-size:clamp(21px,6.1vw,29px)!important;letter-spacing:.105em!important;}
+  .scanner-wrapper{height:min(46dvh,390px)!important;margin:0 12px!important;}
+  #statusBar{margin-top:7px!important;}
+}
+
+@media(max-height:700px){
+  .header{padding-top:13px!important;padding-bottom:7px!important;}
+  .psc-logo{width:78px!important;height:78px!important;}
+  .psc-tagline{font-size:7px!important;margin-bottom:7px!important;}
+  .header h1{font-size:21px!important;}
+  .scanner-wrapper{height:min(40dvh,285px)!important;}
+}
