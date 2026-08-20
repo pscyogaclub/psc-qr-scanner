@@ -1,97 +1,70 @@
-/* PSC APPROVED UI COLOR SOURCE OF TRUTH — ATMOSPHERE ONLY.
+/* PSC APPROVED VISUAL AMBIENCE v2 — ATMOSPHERE ONLY.
    LOCKED: layout, proportions, typography, scanner size, responsive sizing and navigation.
-   Palette source: PSC Yoga Club Color Palette.
-   Forest #0D2B1E | Emerald #1A4D34 | Moss #5A6F3A
-   Gold #C6A96B | Soft Gold #E0C78A
-   Neutral: Deep Charcoal #111111 | Warm Dark Grey #2B2B2B | Cream #F6F4ED
-   IMPORTANT: this file must never alter geometry. */
+   Purpose: make the approved warm-room feeling visibly render on the real UI. */
 
 html,body{
   background:
-    radial-gradient(ellipse 46% 72% at 50% 48%,rgba(90,111,58,.22) 0%,rgba(90,111,58,.10) 28%,transparent 66%),
-    radial-gradient(ellipse 34% 70% at 18% 52%,rgba(198,169,107,.15) 0%,rgba(198,169,107,.07) 28%,transparent 66%),
-    radial-gradient(ellipse 34% 70% at 82% 50%,rgba(26,77,52,.14) 0%,rgba(26,77,52,.05) 34%,transparent 70%),
-    linear-gradient(112deg,#0D2B1E 0%,#1A4D34 42%,#0D2B1E 68%,#061A12 100%) !important;
+    radial-gradient(ellipse 52% 72% at 50% 48%,rgba(194,154,82,.115) 0%,rgba(194,154,82,.070) 24%,rgba(194,154,82,.028) 44%,transparent 68%),
+    radial-gradient(ellipse 34% 78% at 18% 52%,rgba(167,123,58,.095) 0%,rgba(167,123,58,.050) 30%,transparent 68%),
+    radial-gradient(ellipse 30% 72% at 82% 52%,rgba(145,108,52,.050) 0%,transparent 68%),
+    linear-gradient(112deg,#061A12 0%,#092319 36%,#10291D 50%,#092319 64%,#061A12 100%) !important;
 }
 
-body{
-  position:relative;
-  isolation:isolate;
-}
+body{position:relative;isolation:isolate;}
 
-/* PSC ambience: green-to-gold warmth, never a white glow. */
+/* Keep atmosphere behind the interface instead of behind the document canvas. */
 body::before{
   content:"";
   position:fixed;
   z-index:0;
   inset:0;
   pointer-events:none;
-  opacity:.92;
+  opacity:.22;
   background:
-    radial-gradient(ellipse 26% 72% at 18% 50%,rgba(198,169,107,.18),transparent 72%),
-    radial-gradient(ellipse 42% 48% at 50% 48%,rgba(90,111,58,.10),transparent 72%),
-    linear-gradient(90deg,rgba(0,0,0,.12),transparent 24%,transparent 78%,rgba(0,0,0,.18));
-  filter:blur(30px);
+    radial-gradient(ellipse 46% 58% at 50% 48%,rgba(204,157,78,.10),transparent 72%),
+    radial-gradient(ellipse 20% 55% at 10% 35%,rgba(0,0,0,.24),transparent 72%);
+  filter:blur(28px);
 }
 
-/* Organic visual grain remains extremely subtle; it does not define the UI. */
-body::after{
-  content:"";
-  position:fixed;
-  z-index:0;
-  inset:-20px;
-  pointer-events:none;
-  opacity:.035;
-  background-image:
-    radial-gradient(circle at 20% 30%,rgba(224,199,138,.42) 0 1px,transparent 1.5px),
-    radial-gradient(circle at 70% 65%,rgba(224,199,138,.24) 0 1px,transparent 1.5px);
-  background-size:17px 19px,23px 27px;
-  mix-blend-mode:soft-light;
-}
+body::after{display:none!important;}
 
-.app{
-  position:relative;
-  z-index:1;
-}
+.app{position:relative;z-index:1;}
 
-/* Warm pool behind the existing approved card — color only. */
+/* Warm light behind the existing card — deliberately felt, never bright. */
 .app::before{
   content:"";
   position:absolute;
   z-index:0;
-  width:180%;
-  height:150%;
-  left:-40%;
-  top:-25%;
+  width:155%;
+  height:135%;
+  left:-27.5%;
+  top:-17.5%;
   pointer-events:none;
   background:
-    radial-gradient(ellipse 46% 56% at 43% 50%,rgba(198,169,107,.16) 0%,rgba(198,169,107,.075) 25%,rgba(90,111,58,.04) 48%,transparent 73%);
-  filter:blur(48px);
+    radial-gradient(ellipse 48% 58% at 50% 48%,rgba(204,157,78,.14) 0%,rgba(204,157,78,.075) 26%,rgba(160,124,65,.025) 48%,transparent 72%);
+  filter:blur(44px);
 }
 
+.scanner-card{position:relative;z-index:1;}
+
+/* Only tonal treatment — no size, spacing, position or geometry changes. */
 .scanner-card{
-  position:relative;
-  z-index:1;
   background:
-    radial-gradient(ellipse 72% 40% at 50% 4%,rgba(224,199,138,.10) 0%,rgba(224,199,138,.035) 38%,transparent 72%),
-    linear-gradient(145deg,#1A4D34 0%,#123B2A 48%,#0D2B1E 100%) !important;
-  border-color:rgba(198,169,107,.34) !important;
-  box-shadow:
-    0 28px 80px rgba(0,0,0,.38),
-    0 10px 34px rgba(198,169,107,.075) !important;
+    radial-gradient(ellipse 72% 38% at 50% 4%,rgba(224,191,119,.075) 0%,rgba(224,191,119,.026) 38%,transparent 72%),
+    linear-gradient(145deg,rgba(25,61,45,.985) 0%,rgba(15,46,34,.992) 52%,rgba(8,31,23,.997) 100%) !important;
+  border-color:rgba(198,169,107,.30) !important;
+  box-shadow:0 28px 80px rgba(0,0,0,.34),0 10px 34px rgba(198,169,107,.065) !important;
 }
 
 .scanner-card::after{
   background:
-    radial-gradient(ellipse 54% 40% at 20% 3%,rgba(224,199,138,.06),transparent 72%),
-    linear-gradient(110deg,rgba(255,255,255,.008),transparent 28%,transparent 72%,rgba(198,169,107,.02)) !important;
+    radial-gradient(ellipse 52% 38% at 22% 4%,rgba(232,198,128,.045),transparent 72%),
+    linear-gradient(110deg,rgba(255,255,255,.010),transparent 28%,transparent 72%,rgba(198,169,107,.018)) !important;
 }
 
-.psc-tagline,.header h1,.psc-home{
-  text-shadow:0 1px 10px rgba(224,199,138,.10);
-}
+.psc-tagline,.header h1,.psc-home{text-shadow:0 1px 10px rgba(198,169,107,.06);}
 
 @media(max-width:560px){
-  body::before{opacity:.88;}
-  .app::before{width:195%;left:-47.5%;}
+  body::before{opacity:.18;}
+  .app::before{width:175%;left:-37.5%;}
 }
