@@ -8,41 +8,28 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css?v=20260820-10">
-  <link rel="stylesheet" href="psc-ambience-v2.css?v=20260820-07">
+  <link rel="stylesheet" href="psc-ambience-v2.css?v=20260820-08">
 </head>
 <body>
   <main class="app">
     <section class="scanner-card">
       <header class="header">
-        <!-- PSC Admin HOME: cache-busted navigation prevents the intermittent first-load Page Not Found glitch. -->
-        <a
-          class="psc-home"
-          href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
-          aria-label="Buka PSC Admin"
-          onclick="event.preventDefault(); window.location.assign('https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin&_psc_nav=' + Date.now());">
+        <a class="psc-home" href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin" aria-label="Buka PSC Admin" onclick="event.preventDefault(); window.location.assign('https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin&_psc_nav=' + Date.now());">
           <span class="home-icon">⌂</span> HOME
         </a>
-
         <img class="psc-logo" src="psc-logo-gold.png" alt="PSC Yoga Club">
         <div class="psc-tagline">PRESENT • STRETCH • CONNECT</div>
         <h1>QR ATTENDANCE</h1>
       </header>
-
       <section id="scannerSection">
         <div class="scanner-wrapper">
           <div id="reader"></div>
         </div>
       </section>
-
-      <div id="statusBar">
-        <span class="status-dot"></span>
-        <span id="statusText">Initializing Camera...</span>
-      </div>
-
+      <div id="statusBar"><span class="status-dot"></span><span id="statusText">Initializing Camera...</span></div>
       <div id="result"></div>
     </section>
   </main>
-
   <script src="https://unpkg.com/html5-qrcode"></script>
   <script src="app.js"></script>
 </body>
