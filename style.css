@@ -8,8 +8,8 @@
   --psc-soft-gold:#E0C78A;
   --psc-cream:#F6F4ED;
   --psc-success:#4CAF72;
-  --psc-line:rgba(198,169,107,.22);
-  --psc-shadow:0 18px 50px rgba(0,0,0,.22);
+  --psc-line:rgba(198,169,107,.16);
+  --psc-shadow:0 18px 50px rgba(0,0,0,.20);
 }
 
 html,body{width:100%;min-height:100%;}
@@ -22,122 +22,130 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:12px;
+  padding:8px;
   color:var(--psc-cream);
+  overflow:hidden;
 }
 
-.app{width:100%;max-width:480px;}
+.app{
+  width:100%;
+  max-width:480px;
+  max-height:calc(100dvh - 16px);
+}
 
 .scanner-card{
   position:relative;
   width:100%;
+  max-height:calc(100dvh - 16px);
   background:var(--psc-card);
-  border:1px solid rgba(198,169,107,.42);
-  border-radius:22px;
-  overflow:hidden;
+  border:1px solid rgba(198,169,107,.34);
+  border-radius:20px;
+  overflow:auto;
   box-shadow:var(--psc-shadow);
+  scrollbar-width:none;
 }
+
+.scanner-card::-webkit-scrollbar{display:none}
 
 .header{
   position:relative;
   text-align:center;
-  padding:30px 22px 16px;
+  padding:24px 20px 12px;
 }
 
 .psc-logo{
   display:block;
-  width:132px;
-  height:132px;
+  width:104px;
+  height:104px;
   object-fit:contain;
-  margin:0 auto 4px;
+  margin:0 auto 3px;
 }
 
 .psc-tagline{
   color:var(--psc-soft-gold);
   font-family:"Montserrat","Segoe UI",Arial,sans-serif;
-  font-size:10px;
+  font-size:9px;
   font-weight:400;
-  letter-spacing:.25em;
-  line-height:1.35;
+  letter-spacing:.24em;
+  line-height:1.3;
   margin:0 auto 12px;
   white-space:nowrap;
 }
 
-.header-rule,
-.title-rule{
-  width:68px;
-  height:1px;
-  margin:0 auto;
-  background:var(--psc-gold);
-  opacity:.35;
-}
-
-.header-rule{display:none}
-.title-rule{margin-bottom:13px}
-
 .header h1{
   width:100%;
   color:var(--psc-gold);
-  font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
-  font-size:clamp(32px,8vw,46px);
-  line-height:.95;
-  font-weight:500;
-  letter-spacing:.025em;
+  font-family:"Montserrat","Segoe UI",Arial,sans-serif;
+  font-size:clamp(24px,6.2vw,32px);
+  line-height:1.05;
+  font-weight:400;
+  letter-spacing:.13em;
   text-transform:uppercase;
   white-space:nowrap;
 }
 
-.title-rule-bottom{margin-top:13px;margin-bottom:0}
-
 .psc-home{
   position:absolute;
-  top:16px;
-  right:16px;
+  top:12px;
+  right:12px;
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:6px;
-  min-height:32px;
-  padding:0 11px;
-  border:1px solid rgba(198,169,107,.38);
+  gap:5px;
+  min-height:30px;
+  padding:0 10px;
+  border:1px solid rgba(198,169,107,.30);
   border-radius:999px;
-  background:rgba(8,45,32,.45);
+  background:rgba(8,45,32,.42);
   color:var(--psc-soft-gold);
   font-family:"Montserrat","Segoe UI",Arial,sans-serif;
-  font-size:9px;
+  font-size:8px;
   font-weight:500;
   letter-spacing:.10em;
   text-decoration:none;
   -webkit-tap-highlight-color:transparent;
 }
 
-.home-icon{font-size:13px;line-height:1}
-.psc-home:active{background:rgba(198,169,107,.10)}
+.home-icon{font-size:12px;line-height:1}
+.psc-home:active{background:rgba(198,169,107,.08)}
 
 .scanner-wrapper{
-  margin:0 22px;
-  border-radius:16px;
+  height:clamp(250px,45dvh,350px);
+  margin:0 14px;
+  border-radius:15px;
   overflow:hidden;
-  border:1px solid rgba(198,169,107,.65);
+  border:1px solid rgba(198,169,107,.52);
   background:#000;
 }
 
-#reader{width:100%;background:#000}
-#reader video{display:block;width:100%;border-radius:15px}
+#reader{
+  width:100%;
+  height:100%;
+  background:#000;
+}
+
+#reader video{
+  display:block;
+  width:100% !important;
+  height:100% !important;
+  object-fit:cover;
+  border-radius:14px;
+}
+
 #reader button{font-family:inherit}
 
 #statusBar{
-  margin:12px 22px 0;
-  background:rgba(246,244,237,.035);
-  border:1px solid rgba(198,169,107,.14);
+  margin:8px 14px 0;
+  background:rgba(246,244,237,.025);
+  border:1px solid rgba(198,169,107,.10);
   border-radius:10px;
-  padding:9px 12px;
+  padding:8px 10px;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:8px;
-  color:rgba(246,244,237,.78);
-  font-size:11px;
+  gap:7px;
+  color:rgba(246,244,237,.70);
+  font-size:10px;
 }
 
 .status-dot{
@@ -147,7 +155,7 @@ body{
   flex:0 0 7px;
 }
 
-#result{padding:14px 22px 18px;color:var(--psc-cream);text-align:center}
+#result{padding:12px 14px 14px;color:var(--psc-cream);text-align:center}
 #result:empty{display:none}
 
 .psc-result-card{text-align:center}
@@ -157,45 +165,41 @@ body{
 .psc-success-icon{background:rgba(76,175,114,.14);color:#78D49A;border:1px solid rgba(120,212,154,.22)}
 .psc-error-icon{background:rgba(217,92,92,.14);color:#F18A8A;border:1px solid rgba(241,138,138,.22)}
 .psc-info{margin-top:10px;border-top:1px solid var(--psc-line);border-bottom:1px solid var(--psc-line)}
-.psc-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid rgba(198,169,107,.10);text-align:left}
+.psc-row{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:11px 0;border-bottom:1px solid rgba(198,169,107,.08);text-align:left}
 .psc-row:last-child{border-bottom:none}
 .psc-row span{color:rgba(246,244,237,.66)}
 .psc-row strong{color:var(--psc-cream);text-align:right}
-.psc-practice-ready{margin-top:16px;padding:12px;border:1px solid rgba(198,169,107,.15);border-radius:12px;background:rgba(246,244,237,.035);display:flex;gap:10px;align-items:flex-start;text-align:left}
+.psc-practice-ready{margin-top:16px;padding:12px;border:1px solid rgba(198,169,107,.12);border-radius:12px;background:rgba(246,244,237,.025);display:flex;gap:10px;align-items:flex-start;text-align:left}
 .psc-practice-icon{width:26px;height:26px;flex:0 0 26px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(76,175,114,.14);color:#78D49A;font-weight:700}
 .psc-practice-title{color:var(--psc-soft-gold);font-weight:700;margin-bottom:3px}
 .psc-practice-text{color:rgba(246,244,237,.68);font-size:11px;line-height:1.45}
 
-button{width:100%;margin-top:18px;padding:12px 14px;border:1px solid rgba(198,169,107,.26);border-radius:10px;background:var(--psc-gold);color:var(--psc-forest);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:.2s ease}
+button{width:100%;margin-top:18px;padding:12px 14px;border:1px solid rgba(198,169,107,.22);border-radius:10px;background:var(--psc-gold);color:var(--psc-forest);font-family:inherit;font-size:14px;font-weight:700;cursor:pointer;transition:.2s ease}
 button:hover{background:var(--psc-soft-gold)}
 button:active{transform:scale(.98)}
 
 @keyframes pulse{0%{transform:scale(1);opacity:.65}50%{transform:scale(1.25);opacity:1}100%{transform:scale(1);opacity:.65}}
 
 @media(max-width:560px){
-  body{padding:8px}
-  .scanner-card{border-radius:20px}
-  .header{padding:27px 16px 14px}
-  .psc-logo{width:118px;height:118px;margin-bottom:3px}
-  .psc-tagline{font-size:9px;letter-spacing:.19em;margin-bottom:10px}
-  .title-rule{width:58px;margin-bottom:11px}
-  .header h1{font-size:34px;letter-spacing:.018em}
-  .title-rule-bottom{margin-top:11px}
-  .psc-home{top:12px;right:12px;min-height:30px;padding:0 10px;font-size:8px}
-  .scanner-wrapper{margin:0 14px;border-radius:15px}
-  #reader video{border-radius:14px}
-  #statusBar{margin:10px 14px 0;padding:8px 10px;font-size:10px}
-  #result{padding:12px 14px 14px}
+  body{padding:6px}
+  .app,.scanner-card{max-height:calc(100dvh - 12px)}
+  .scanner-card{border-radius:18px}
+  .header{padding:20px 14px 10px}
+  .psc-logo{width:94px;height:94px}
+  .psc-tagline{font-size:8px;letter-spacing:.20em;margin-bottom:10px}
+  .header h1{font-size:clamp(22px,6.2vw,30px);letter-spacing:.11em}
+  .psc-home{top:10px;right:10px;min-height:29px;padding:0 9px;font-size:8px}
+  .scanner-wrapper{height:clamp(240px,43dvh,330px);margin:0 12px;border-radius:14px}
+  #reader video{border-radius:13px}
+  #statusBar{margin:8px 12px 0;padding:7px 9px;font-size:10px}
+  #result{padding:10px 12px 12px}
 }
 
 @media(max-height:700px){
-  body{padding:6px}
-  .header{padding-top:22px;padding-bottom:10px}
-  .psc-logo{width:96px;height:96px}
-  .psc-tagline{font-size:8px;margin-bottom:8px}
-  .title-rule{margin-bottom:9px}
-  .header h1{font-size:30px}
-  .title-rule-bottom{margin-top:9px}
-  .scanner-wrapper{margin-left:14px;margin-right:14px}
-  #statusBar{margin-top:8px}
+  .header{padding-top:16px;padding-bottom:8px}
+  .psc-logo{width:82px;height:82px}
+  .psc-tagline{font-size:7px;margin-bottom:8px}
+  .header h1{font-size:22px;letter-spacing:.10em}
+  .scanner-wrapper{height:clamp(220px,42dvh,300px)}
+  #statusBar{margin-top:7px}
 }
