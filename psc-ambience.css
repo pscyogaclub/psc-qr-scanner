@@ -3,38 +3,57 @@
 
 :root{
   --psc-ambient-green:#071E15;
-  --psc-ambient-warm:#B88A4A;
+  --psc-ambient-deep:#04150F;
+  --psc-ambient-warm:#A8793F;
+  --psc-ambient-olive:#5C593A;
   --psc-ambient-gold:#C6A96B;
 }
 
-/* PSC spatial mood: deep architectural green + restrained warm pool of light. */
+/*
+   PSC spatial mood:
+   deep architectural green + warm olive/amber reflected light.
+   The light is deliberately broad and low-contrast — it should be FELT,
+   not read as a bright effect.
+*/
 html,body{background:#071E15!important;}
 
 body{
   position:relative;
   isolation:isolate;
   background:
-    radial-gradient(ellipse 38% 72% at 50% 48%,rgba(184,138,74,.115) 0%,rgba(184,138,74,.070) 25%,rgba(184,138,74,.030) 45%,transparent 70%),
-    radial-gradient(ellipse 30% 70% at 24% 50%,rgba(154,113,55,.075) 0%,rgba(154,113,55,.035) 38%,transparent 70%),
-    radial-gradient(ellipse 28% 68% at 76% 50%,rgba(130,96,45,.045) 0%,transparent 68%),
-    linear-gradient(112deg,#061A12 0%,#0A241A 38%,#10291D 52%,#061A12 100%)!important;
+    /* warm wall light directly behind the card */
+    radial-gradient(ellipse 42% 66% at 50% 50%,
+      rgba(157,119,59,.20) 0%,
+      rgba(128,101,57,.125) 23%,
+      rgba(82,76,49,.065) 43%,
+      transparent 69%),
+    /* soft olive reflection around the card */
+    radial-gradient(ellipse 72% 82% at 50% 50%,
+      rgba(50,70,52,.32) 0%,
+      rgba(24,48,35,.18) 46%,
+      transparent 74%),
+    /* subtle warmth toward the lower room */
+    radial-gradient(ellipse 48% 42% at 50% 82%,
+      rgba(126,91,42,.075) 0%,
+      transparent 70%),
+    linear-gradient(112deg,#04150F 0%,#092219 30%,#14291F 50%,#092219 70%,#04150F 100%)!important;
 }
 
-/* Very soft architectural wall texture — intentionally almost imperceptible. */
+/* Very restrained architectural wall texture. */
 body::after{
   content:"";
   position:fixed;
   inset:0;
   z-index:-3;
   pointer-events:none;
-  opacity:.16;
+  opacity:.20;
   background:
-    repeating-radial-gradient(ellipse at 20% 30%,rgba(225,193,131,.045) 0 1px,transparent 1px 8px),
-    repeating-linear-gradient(102deg,rgba(255,255,255,.012) 0 1px,transparent 1px 6px);
+    repeating-radial-gradient(ellipse at 18% 32%,rgba(225,193,131,.040) 0 1px,transparent 1px 9px),
+    repeating-linear-gradient(102deg,rgba(255,255,255,.010) 0 1px,transparent 1px 7px);
   mix-blend-mode:soft-light;
 }
 
-/* Soft foliage shadow: depth cue only, never a literal illustration. */
+/* Soft foliage shadow — a depth cue, never a literal illustration. */
 body::before{
   content:"";
   position:fixed;
@@ -44,44 +63,72 @@ body::before{
   width:34vw;
   height:116vh;
   pointer-events:none;
-  opacity:.42;
+  opacity:.38;
   filter:blur(5px);
   transform:rotate(-9deg);
   background:
-    radial-gradient(ellipse 10% 35% at 25% 12%,rgba(0,0,0,.52) 0 55%,transparent 57%),
-    radial-gradient(ellipse 12% 30% at 45% 22%,rgba(0,0,0,.48) 0 55%,transparent 57%),
-    radial-gradient(ellipse 11% 30% at 62% 34%,rgba(0,0,0,.44) 0 55%,transparent 57%),
-    radial-gradient(ellipse 10% 29% at 45% 47%,rgba(0,0,0,.40) 0 55%,transparent 57%),
-    radial-gradient(ellipse 9% 27% at 28% 61%,rgba(0,0,0,.36) 0 55%,transparent 57%),
-    linear-gradient(73deg,transparent 0 46%,rgba(0,0,0,.40) 47% 51%,transparent 52%);
+    radial-gradient(ellipse 10% 35% at 25% 12%,rgba(0,0,0,.46) 0 55%,transparent 57%),
+    radial-gradient(ellipse 12% 30% at 45% 22%,rgba(0,0,0,.42) 0 55%,transparent 57%),
+    radial-gradient(ellipse 11% 30% at 62% 34%,rgba(0,0,0,.38) 0 55%,transparent 57%),
+    radial-gradient(ellipse 10% 29% at 45% 47%,rgba(0,0,0,.34) 0 55%,transparent 57%),
+    radial-gradient(ellipse 9% 27% at 28% 61%,rgba(0,0,0,.30) 0 55%,transparent 57%),
+    linear-gradient(73deg,transparent 0 46%,rgba(0,0,0,.34) 47% 51%,transparent 52%);
 }
 
-/* Warm light remains BEHIND the existing card; card geometry is untouched. */
+/*
+   The approved card stays exactly where it is.
+   Only its tonal response to the warm room light changes.
+*/
 .app::before{
-  background:radial-gradient(ellipse 48% 54% at 50% 48%,rgba(204,157,78,.145) 0%,rgba(204,157,78,.082) 25%,rgba(204,157,78,.032) 46%,transparent 72%)!important;
-  filter:blur(38px)!important;
+  background:
+    radial-gradient(ellipse 62% 66% at 50% 50%,
+      rgba(199,151,72,.17) 0%,
+      rgba(174,132,65,.085) 25%,
+      rgba(142,112,64,.035) 46%,
+      transparent 72%)!important;
+  filter:blur(42px)!important;
 }
 
-/* Existing card: preserve every dimension, only enrich tonal atmosphere. */
 .scanner-card{
   background:
-    radial-gradient(ellipse 72% 38% at 50% 4%,rgba(198,169,107,.072) 0%,rgba(198,169,107,.026) 38%,transparent 72%),
-    linear-gradient(145deg,rgba(24,58,43,.985) 0%,rgba(15,46,34,.992) 52%,rgba(8,31,23,.997) 100%)!important;
+    /* warm ceiling/architectural reflection */
+    radial-gradient(ellipse 74% 42% at 50% 2%,
+      rgba(207,172,101,.085) 0%,
+      rgba(177,140,76,.030) 36%,
+      transparent 72%),
+    /* subtle warm side falloff */
+    radial-gradient(ellipse 80% 80% at 18% 50%,
+      rgba(111,94,54,.045) 0%,
+      transparent 62%),
+    linear-gradient(145deg,
+      rgba(25,57,43,.985) 0%,
+      rgba(15,45,33,.992) 52%,
+      rgba(7,29,22,.997) 100%)!important;
   border-color:rgba(198,169,107,.30)!important;
-  box-shadow:0 28px 80px rgba(0,0,0,.34),0 10px 34px rgba(198,169,107,.055)!important;
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.34),
+    0 10px 34px rgba(198,169,107,.055)!important;
 }
 
 .scanner-card::after{
   background:
-    radial-gradient(ellipse 52% 38% at 22% 4%,rgba(232,198,128,.045),transparent 72%),
-    linear-gradient(110deg,rgba(255,255,255,.010),transparent 28%,transparent 72%,rgba(198,169,107,.018))!important;
+    radial-gradient(ellipse 58% 46% at 26% 5%,
+      rgba(232,198,128,.050),transparent 72%),
+    radial-gradient(ellipse 54% 50% at 78% 92%,
+      rgba(151,110,52,.025),transparent 72%),
+    linear-gradient(110deg,
+      rgba(255,255,255,.010),transparent 28%,transparent 72%,rgba(198,169,107,.018))!important;
 }
 
-/* Gold remains champagne — never bright yellow. */
+/* Champagne gold remains restrained — never bright yellow. */
 .psc-tagline,.header h1,.psc-home{
   text-shadow:0 1px 10px rgba(198,169,107,.06);
 }
 
 @media(max-width:560px){
-  body::before{left:-18vw;width:55vw;opacity:.34;}
+  body::before{left:-18vw;width:55vw;opacity:.31;}
+  body{background:
+    radial-gradient(ellipse 62% 54% at 50% 50%,rgba(157,119,59,.16) 0%,rgba(128,101,57,.09) 25%,rgba(82,76,49,.045) 45%,transparent 70%),
+    radial-gradient(ellipse 92% 78% at 50% 50%,rgba(42,64,49,.28) 0%,rgba(16,39,29,.16) 48%,transparent 74%),
+    linear-gradient(112deg,#04150F 0%,#0A241A 50%,#04150F 100%)!important;}
 }
