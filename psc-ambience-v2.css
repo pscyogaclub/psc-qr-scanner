@@ -3,13 +3,10 @@
    Palette: #0E2B22 #153D31 #C6A96B #274C3B #121A16
    Light: #DDBA77 warm gold, #E6C98A soft gold, #0B1F18 shadow green.
    Direction: warm light comes from BEHIND the card, center-ish and slightly upper.
-   Foliage: one large, soft, recognizable Monstera shadow; no decorative leaf objects.
 */
 :root{--psc-deep-emerald:#0E2B22;--psc-emerald-green:#153D31;--psc-champagne:#C6A96B;--psc-moss:#274C3B;--psc-charcoal:#121A16;--psc-warm-glow:#DDBA77;--psc-soft-gold:#E6C98A;--psc-shadow-green:#0B1F18;--psc-cream:#F6F4ED}
 html,body{background:radial-gradient(ellipse 58% 62% at 50% 45%,rgba(221,186,119,.84) 0%,rgba(221,186,119,.64) 14%,rgba(221,186,119,.43) 28%,rgba(198,169,107,.23) 44%,rgba(198,169,107,.09) 59%,transparent 77%),radial-gradient(ellipse 120% 120% at 50% 52%,rgba(21,61,49,.42) 0%,rgba(14,43,34,.80) 54%,rgba(11,31,24,.98) 100%),var(--psc-deep-emerald)!important}
 body{position:relative;isolation:isolate;overflow-x:hidden}
-/* One soft Monstera shadow only. If it does not read as Monstera, it must not become decoration. */
-body::before{content:"";position:fixed;z-index:0;left:-10vw;top:-4vh;width:55vw;height:112vh;pointer-events:none;opacity:.23;background:url("psc-foliage-shadow.svg?v=20260820-06") left center/100% 100% no-repeat;filter:blur(2.5px);mix-blend-mode:multiply}
 body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.03;background:repeating-linear-gradient(102deg,rgba(246,244,237,.018) 0 1px,transparent 1px 11px);mix-blend-mode:soft-light}
 /* Warm source is behind the card, centered and slightly upper. No left/right spotlight. */
 .app::before{content:"";position:absolute;z-index:0;pointer-events:none;width:275%;height:205%;left:-87.5%;top:-48%;background:radial-gradient(ellipse 47% 41% at 50% 47%,rgba(221,186,119,.78) 0%,rgba(221,186,119,.58) 16%,rgba(221,186,119,.38) 32%,rgba(198,169,107,.20) 49%,rgba(198,169,107,.07) 64%,transparent 80%);filter:blur(32px)}
@@ -17,4 +14,4 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opac
 .scanner-card{position:relative;z-index:1;background:radial-gradient(ellipse 72% 30% at 50% 0%,rgba(230,201,138,.04) 0%,transparent 70%),linear-gradient(145deg,rgba(14,43,34,.99) 0%,rgba(11,31,24,.995) 58%,rgba(7,25,19,1) 100%)!important;border-color:rgba(198,169,107,.44)!important;box-shadow:0 28px 80px rgba(0,0,0,.48),0 0 102px 25px rgba(221,186,119,.34),0 0 44px 9px rgba(198,169,107,.18)!important}
 .scanner-card::after{background:linear-gradient(180deg,rgba(230,201,138,.035),transparent 24%,transparent 76%,rgba(198,169,107,.02))!important}
 .psc-tagline,.header h1,.psc-home{text-shadow:0 1px 10px rgba(230,201,138,.13)}
-@media(max-width:560px){body::before{left:-20vw;top:-5vh;width:78vw;height:112vh;opacity:.20}.app::before{width:310%;left:-105%;height:185%;top:-39%;background:radial-gradient(ellipse 49% 43% at 50% 47%,rgba(221,186,119,.70) 0%,rgba(221,186,119,.51) 18%,rgba(221,186,119,.32) 35%,rgba(198,169,107,.15) 52%,rgba(198,169,107,.05) 67%,transparent 81%);filter:blur(29px)}.scanner-card{box-shadow:0 24px 65px rgba(0,0,0,.50),0 0 94px 23px rgba(221,186,119,.32),0 0 38px 8px rgba(198,169,107,.16)!important}}
+@media(max-width:560px){.app::before{width:310%;left:-105%;height:185%;top:-39%;background:radial-gradient(ellipse 49% 43% at 50% 47%,rgba(221,186,119,.70) 0%,rgba(221,186,119,.51) 18%,rgba(221,186,119,.32) 35%,rgba(198,169,107,.15) 52%,rgba(198,169,107,.05) 67%,transparent 81%);filter:blur(29px)}.scanner-card{box-shadow:0 24px 65px rgba(0,0,0,.50),0 0 94px 23px rgba(221,186,119,.32),0 0 38px 8px rgba(198,169,107,.16)!important}}
