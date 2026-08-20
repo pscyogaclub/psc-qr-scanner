@@ -1,156 +1,22 @@
-/* PSC APPROVED MOCK-UP AMBIENCE — IMPLEMENTATION ONLY.
-   SOURCE OF TRUTH: approved PSC scanner mock-up + PSC Color Palette.
-   LOCKED: layout, proportions, typography, scanner size, responsive sizing and navigation.
-   THIS FILE CHANGES ATMOSPHERE ONLY. */
-
-:root{
-  --psc-deep-emerald:#0E2B22;
-  --psc-emerald-green:#153D31;
-  --psc-champagne:#C6A96B;
-  --psc-moss:#274C3B;
-  --psc-charcoal:#121A16;
-  --psc-warm-glow:#DDBA77;
-  --psc-soft-gold:#E6C98A;
-  --psc-shadow-green:#0B1F18;
-  --psc-cream:#F6F4ED;
-}
-
-/* ONE wall only. The approved mock-up has a deep emerald wall with a
-   clearly visible warm-gold pool of light BEHIND the card. */
-html,body{
-  background:
-    radial-gradient(ellipse 62% 58% at 50% 47%,
-      rgba(221,186,119,.42) 0%,
-      rgba(221,186,119,.31) 12%,
-      rgba(198,169,107,.21) 27%,
-      rgba(198,169,107,.105) 43%,
-      rgba(39,76,59,.12) 60%,
-      transparent 78%),
-    radial-gradient(ellipse 125% 115% at 50% 50%,
-      rgba(21,61,49,.72) 0%,
-      rgba(14,43,34,.82) 50%,
-      rgba(11,31,24,.98) 100%),
-    var(--psc-deep-emerald) !important;
-}
-
-body{
-  position:relative;
-  isolation:isolate;
-}
-
-/* Soft, recognizable foliage shadow. This is a real leaf silhouette,
-   intentionally restrained so it reads as a shadow rather than decoration. */
-body::before{
-  content:"";
-  position:fixed;
-  z-index:0;
-  left:-7vw;
-  top:-6vh;
-  width:49vw;
-  height:112vh;
-  pointer-events:none;
-  opacity:.34;
-  background:url("psc-foliage-shadow.svg?v=20260820-03") left center / 100% 100% no-repeat;
-  filter:blur(1.8px);
-  mix-blend-mode:multiply;
-}
-
-/* Very restrained architectural texture — never another background panel. */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:0;
-  pointer-events:none;
-  opacity:.055;
-  background:repeating-linear-gradient(102deg,rgba(246,244,237,.018) 0 1px,transparent 1px 11px);
-  mix-blend-mode:soft-light;
-}
-
-/* Warm Gold Glow #DDBA77 — deliberately stronger than the previous pass.
-   Its center is behind the card, slightly above center, and it falls away
-   naturally toward the dark emerald wall. */
-.app::before{
-  content:"";
-  position:absolute;
-  z-index:0;
-  pointer-events:none;
-  width:190%;
-  height:155%;
-  left:-45%;
-  top:-27%;
-  background:
-    radial-gradient(ellipse 47% 39% at 50% 48%,
-      rgba(221,186,119,.34) 0%,
-      rgba(221,186,119,.24) 18%,
-      rgba(198,169,107,.14) 38%,
-      rgba(198,169,107,.055) 58%,
-      transparent 78%);
-  filter:blur(34px);
-}
-
-/* Keep the card itself dark and calm; the wall provides the warmth. */
-.app{
-  position:relative;
-  z-index:1;
-}
-
-.scanner-card{
-  position:relative;
-  z-index:1;
-  background:
-    radial-gradient(ellipse 70% 30% at 50% 0%, rgba(230,201,138,.055) 0%, transparent 70%),
-    linear-gradient(145deg,
-      rgba(21,61,49,.985) 0%,
-      rgba(14,43,34,.992) 58%,
-      rgba(11,31,24,.998) 100%) !important;
-  border-color:rgba(198,169,107,.40) !important;
-  box-shadow:
-    0 28px 80px rgba(0,0,0,.38),
-    0 0 120px 30px rgba(221,186,119,.22),
-    0 0 42px 8px rgba(198,169,107,.12) !important;
-}
-
-.scanner-card::after{
-  background:linear-gradient(180deg,
-    rgba(230,201,138,.035),
-    transparent 24%,
-    transparent 76%,
-    rgba(198,169,107,.020)) !important;
-}
-
-.psc-tagline,.header h1,.psc-home{
-  text-shadow:0 1px 10px rgba(230,201,138,.10);
-}
-
-@media(max-width:560px){
-  body::before{
-    left:-19vw;
-    top:-5vh;
-    width:76vw;
-    height:108vh;
-    opacity:.30;
-  }
-
-  .app::before{
-    width:205%;
-    left:-52.5%;
-    height:145%;
-    top:-23%;
-    background:
-      radial-gradient(ellipse 52% 40% at 50% 47%,
-        rgba(221,186,119,.31) 0%,
-        rgba(221,186,119,.21) 20%,
-        rgba(198,169,107,.11) 40%,
-        rgba(198,169,107,.04) 60%,
-        transparent 79%);
-    filter:blur(30px);
-  }
-
-  .scanner-card{
-    box-shadow:
-      0 24px 65px rgba(0,0,0,.40),
-      0 0 92px 24px rgba(221,186,119,.20),
-      0 0 34px 7px rgba(198,169,107,.11) !important;
-  }
-}
+/* PSC OS — APPROVED VISUAL SOURCE OF TRUTH
+   Implementation only. No layout redesign.
+   Palette: #0E2B22 #153D31 #C6A96B #274C3B #121A16
+   Light: #DDBA77 warm gold, #E6C98A soft gold, #0B1F18 shadow green.
+   Direction: warm light comes from BEHIND the card, center-ish and slightly upper.
+   Foliage: recognizable Monstera shadow, soft and natural.
+*/
+:root{--psc-deep-emerald:#0E2B22;--psc-emerald-green:#153D31;--psc-champagne:#C6A96B;--psc-moss:#274C3B;--psc-charcoal:#121A16;--psc-warm-glow:#DDBA77;--psc-soft-gold:#E6C98A;--psc-shadow-green:#0B1F18;--psc-cream:#F6F4ED}
+html,body{background:radial-gradient(ellipse 48% 58% at 50% 48%,rgba(221,186,119,.78) 0%,rgba(221,186,119,.58) 9%,rgba(221,186,119,.38) 21%,rgba(198,169,107,.22) 37%,rgba(198,169,107,.09) 53%,transparent 72%),radial-gradient(ellipse 105% 115% at 50% 50%,rgba(21,61,49,.72) 0%,rgba(14,43,34,.84) 50%,rgba(7,30,21,.98) 100%),var(--psc-deep-emerald)!important}
+body{position:relative;isolation:isolate}
+/* Recognizable Monstera shadow — not a palm and not decorative foliage. */
+body::before{content:"";position:fixed;z-index:0;left:-10vw;top:-8vh;width:58vw;height:116vh;pointer-events:none;opacity:.48;background:url("psc-foliage-shadow.svg?v=20260820-04") left center/100% 100% no-repeat;filter:blur(2px);mix-blend-mode:multiply}
+/* Very subtle wall texture; never another background panel. */
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;background:repeating-linear-gradient(102deg,rgba(246,244,237,.018) 0 1px,transparent 1px 11px);mix-blend-mode:soft-light}
+/* The warm source sits BEHIND the card, not on the left or right. */
+.app::before{content:"";position:absolute;z-index:0;pointer-events:none;width:260%;height:190%;left:-80%;top:-44%;background:radial-gradient(ellipse 44% 36% at 50% 50%,rgba(221,186,119,.62) 0%,rgba(221,186,119,.44) 18%,rgba(198,169,107,.24) 37%,rgba(198,169,107,.10) 55%,transparent 76%);filter:blur(32px)}
+.app{position:relative;z-index:1}
+/* Card stays dark, premium and grounded; the wall carries the warmth. */
+.scanner-card{position:relative;z-index:1;background:radial-gradient(ellipse 72% 30% at 50% 0%,rgba(230,201,138,.055) 0%,transparent 70%),linear-gradient(145deg,rgba(14,43,34,.985) 0%,rgba(11,31,24,.992) 58%,rgba(7,25,19,.998) 100%)!important;border-color:rgba(198,169,107,.42)!important;box-shadow:0 28px 80px rgba(0,0,0,.46),0 0 110px 28px rgba(221,186,119,.30),0 0 44px 8px rgba(198,169,107,.16)!important}
+.scanner-card::after{background:linear-gradient(180deg,rgba(230,201,138,.035),transparent 24%,transparent 76%,rgba(198,169,107,.020))!important}
+.psc-tagline,.header h1,.psc-home{text-shadow:0 1px 10px rgba(230,201,138,.12)}
+@media(max-width:560px){body::before{left:-24vw;top:-5vh;width:88vw;height:112vh;opacity:.44}.app::before{width:300%;left:-100%;height:175%;top:-35%;background:radial-gradient(ellipse 46% 38% at 50% 50%,rgba(221,186,119,.56) 0%,rgba(221,186,119,.39) 20%,rgba(198,169,107,.20) 40%,rgba(198,169,107,.08) 59%,transparent 78%);filter:blur(28px)}.scanner-card{box-shadow:0 24px 65px rgba(0,0,0,.48),0 0 92px 24px rgba(221,186,119,.28),0 0 36px 7px rgba(198,169,107,.14)!important}}
