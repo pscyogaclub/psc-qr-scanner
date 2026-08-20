@@ -1,9 +1,10 @@
-/* PSC APPROVED AMBIENCE — visual layer only. Scanner engine untouched. */
+/* PSC APPROVED MOCK-UP REALIZATION — VISUAL LAYER ONLY.
+   Scanner engine / #reader / app.js remain untouched. */
 :root{
   --psc-deep:#061B13;
-  --psc-emerald:#0D2E22;
-  --psc-warm:#C6A96B;
-  --psc-warm-soft:#D7BE86;
+  --psc-emerald:#102F22;
+  --psc-gold:#C6A96B;
+  --psc-soft-gold:#D7BE86;
   --psc-cream:#F3EBDD;
 }
 
@@ -12,126 +13,202 @@ html,body{background:#061B13!important;}
 body{
   position:relative;
   isolation:isolate;
+  overflow:hidden;
   background:
-    radial-gradient(ellipse 42% 70% at 16% 48%,rgba(143,107,52,.18) 0%,rgba(143,107,52,.09) 24%,transparent 58%),
-    radial-gradient(ellipse 34% 62% at 84% 50%,rgba(111,82,38,.10) 0%,transparent 62%),
-    radial-gradient(ellipse 55% 50% at 50% 43%,rgba(194,151,76,.10) 0%,rgba(194,151,76,.045) 25%,transparent 65%),
-    linear-gradient(115deg,#071D15 0%,#0A241A 38%,#061A12 100%)!important;
+    /* warm wall illumination — intentionally obvious like the approved mock-up */
+    radial-gradient(ellipse 34% 78% at 50% 47%,rgba(185,137,61,.24) 0%,rgba(185,137,61,.14) 28%,rgba(185,137,61,.055) 50%,transparent 72%),
+    radial-gradient(ellipse 24% 70% at 21% 50%,rgba(161,117,51,.16) 0%,rgba(161,117,51,.08) 34%,transparent 70%),
+    radial-gradient(ellipse 22% 64% at 79% 48%,rgba(139,101,43,.11) 0%,transparent 68%),
+    linear-gradient(112deg,#061A12 0%,#0A241A 35%,#10291D 52%,#061A12 100%)!important;
 }
 
-/* Very soft architectural shadow / foliage impression. No bright white halo. */
+/* Subtle architectural / wall texture. */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-3;
+  pointer-events:none;
+  opacity:.34;
+  background:
+    repeating-radial-gradient(ellipse at 20% 30%,rgba(225,193,131,.08) 0 1px,transparent 1px 7px),
+    repeating-linear-gradient(102deg,rgba(255,255,255,.018) 0 1px,transparent 1px 5px);
+  mix-blend-mode:soft-light;
+}
+
+/* Large soft foliage silhouette on the left, matching the approved visual language. */
 body::before{
   content:"";
   position:fixed;
-  inset:-8%;
   z-index:-2;
+  left:-5vw;
+  top:-8vh;
+  width:36vw;
+  height:116vh;
   pointer-events:none;
-  opacity:.34;
-  filter:blur(16px);
+  opacity:.72;
+  filter:blur(4px);
+  transform:rotate(-9deg);
   background:
-    radial-gradient(ellipse 13% 42% at 8% 20%,rgba(0,0,0,.70) 0%,transparent 72%),
-    radial-gradient(ellipse 18% 10% at 18% 29%,rgba(0,0,0,.62) 0%,transparent 72%),
-    radial-gradient(ellipse 19% 9% at 22% 39%,rgba(0,0,0,.54) 0%,transparent 72%),
-    radial-gradient(ellipse 15% 8% at 17% 50%,rgba(0,0,0,.48) 0%,transparent 72%);
-  transform:rotate(-12deg) scale(1.1);
+    radial-gradient(ellipse 10% 35% at 25% 12%,rgba(0,0,0,.78) 0 55%,transparent 57%),
+    radial-gradient(ellipse 12% 30% at 45% 22%,rgba(0,0,0,.74) 0 55%,transparent 57%),
+    radial-gradient(ellipse 11% 30% at 62% 34%,rgba(0,0,0,.70) 0 55%,transparent 57%),
+    radial-gradient(ellipse 10% 29% at 45% 47%,rgba(0,0,0,.66) 0 55%,transparent 57%),
+    radial-gradient(ellipse 9% 27% at 28% 61%,rgba(0,0,0,.62) 0 55%,transparent 57%),
+    linear-gradient(73deg,transparent 0 46%,rgba(0,0,0,.72) 47% 51%,transparent 52%);
 }
 
-/* Warm pool behind the card: broad, low contrast, like a lamp illuminating a wall. */
+.app{
+  width:min(650px,calc(100vw - 28px),calc((100dvh - 20px)/1.26))!important;
+  max-width:none!important;
+  height:min(820px,calc(100dvh - 20px))!important;
+  max-height:none!important;
+  aspect-ratio:0.795!important;
+}
+
+/* Warm pool + deep shadow around the card. */
 .app::before{
   content:""!important;
   position:absolute;
   z-index:-1;
-  inset:-18% -28%;
+  inset:-20% -28%;
   pointer-events:none;
   background:
-    radial-gradient(ellipse 42% 52% at 50% 50%,rgba(202,157,78,.13) 0%,rgba(202,157,78,.075) 28%,rgba(202,157,78,.032) 48%,transparent 72%);
-  filter:blur(34px);
+    radial-gradient(ellipse 46% 54% at 50% 48%,rgba(212,164,78,.20) 0%,rgba(212,164,78,.12) 26%,rgba(212,164,78,.055) 46%,transparent 72%);
+  filter:blur(38px);
 }
-
 .app::after{
   content:"";
   position:absolute;
   z-index:-1;
-  left:10%;right:10%;bottom:-3%;height:18%;
-  background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.48),transparent 72%);
-  filter:blur(20px);
+  left:6%;right:6%;bottom:-4%;height:18%;
+  background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,.58),transparent 72%);
+  filter:blur(22px);
   pointer-events:none;
 }
 
 .scanner-card{
-  max-height:calc(100dvh - 24px)!important;
+  width:100%!important;
+  height:100%!important;
+  max-height:none!important;
   overflow:hidden!important;
-  border-color:rgba(198,169,107,.34)!important;
+  border-color:rgba(198,169,107,.48)!important;
+  border-radius:22px!important;
   background:
-    radial-gradient(ellipse 82% 48% at 18% 4%,rgba(198,169,107,.075) 0%,rgba(198,169,107,.026) 38%,transparent 72%),
-    radial-gradient(ellipse 72% 55% at 92% 58%,rgba(47,82,61,.20) 0%,transparent 70%),
-    linear-gradient(145deg,#17382B 0%,#0F3023 43%,#09241A 100%)!important;
-  box-shadow:0 34px 90px rgba(0,0,0,.48),0 12px 40px rgba(198,169,107,.075)!important;
+    radial-gradient(ellipse 76% 38% at 22% 3%,rgba(224,186,104,.10) 0%,rgba(224,186,104,.038) 36%,transparent 72%),
+    radial-gradient(ellipse 68% 52% at 90% 55%,rgba(41,77,56,.22) 0%,transparent 72%),
+    linear-gradient(145deg,#173A2B 0%,#123425 43%,#09241A 100%)!important;
+  box-shadow:0 34px 95px rgba(0,0,0,.56),0 12px 42px rgba(198,169,107,.10)!important;
 }
 
 .scanner-card::before{
   content:"";
   position:absolute;
   inset:1px;
-  border-radius:19px;
+  z-index:0;
   pointer-events:none;
-  background:radial-gradient(ellipse 52% 42% at 22% 5%,rgba(229,194,121,.055),transparent 72%);
-  z-index:0;
+  border-radius:21px;
+  background:radial-gradient(ellipse 55% 42% at 20% 4%,rgba(235,202,135,.065),transparent 72%);
 }
-
 .scanner-card::after{
-  background:linear-gradient(110deg,rgba(255,255,255,.018),transparent 28%,transparent 72%,rgba(198,169,107,.018))!important;
   z-index:0;
+  background:linear-gradient(110deg,rgba(255,255,255,.018),transparent 26%,transparent 72%,rgba(198,169,107,.022))!important;
 }
 
 .header,.scanner-wrapper,#statusBar,#result{position:relative;z-index:1}
 
-.psc-logo{filter:drop-shadow(0 5px 10px rgba(198,169,107,.10));}
-
-.psc-tagline{
-  color:rgba(215,190,134,.88)!important;
+.header{
+  padding:25px 22px 12px!important;
 }
-
+.psc-logo{
+  width:122px!important;
+  height:122px!important;
+  margin-bottom:2px!important;
+  filter:drop-shadow(0 6px 12px rgba(198,169,107,.13));
+}
+.psc-tagline{
+  color:rgba(215,190,134,.96)!important;
+  font-size:10px!important;
+  letter-spacing:.25em!important;
+  margin-bottom:14px!important;
+}
 .header h1{
   color:#C9AC70!important;
-  text-shadow:0 2px 14px rgba(198,169,107,.07);
+  font-size:clamp(28px,4.1vw,39px)!important;
+  letter-spacing:.13em!important;
+  text-shadow:0 2px 16px rgba(198,169,107,.10);
 }
-
 .psc-home{
-  border-color:rgba(198,169,107,.30)!important;
-  background:rgba(6,27,19,.24)!important;
-  color:rgba(215,190,134,.92)!important;
+  top:13px!important;
+  right:13px!important;
+  min-height:34px!important;
+  padding:0 12px!important;
+  border-color:rgba(198,169,107,.38)!important;
+  background:rgba(6,27,19,.28)!important;
+  color:rgba(215,190,134,.96)!important;
+  font-size:9px!important;
 }
 
 .scanner-wrapper{
-  border-color:rgba(198,169,107,.44)!important;
-  box-shadow:0 12px 30px rgba(0,0,0,.20),inset 0 1px 0 rgba(255,255,255,.025);
+  height:47%!important;
+  margin:0 18px!important;
+  border-color:rgba(198,169,107,.48)!important;
+  border-radius:16px!important;
+  box-shadow:0 14px 32px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.025);
 }
+#reader video{border-radius:15px!important;}
 
 #statusBar{
-  background:rgba(12,48,35,.42)!important;
-  border-color:rgba(198,169,107,.14)!important;
-  color:rgba(243,235,221,.68)!important;
+  margin:10px 18px 0!important;
+  padding:10px 12px!important;
+  background:rgba(12,48,35,.48)!important;
+  border-color:rgba(198,169,107,.17)!important;
+  color:rgba(243,235,221,.76)!important;
+  font-size:11px!important;
+}
+#result{
+  padding:13px 18px 16px!important;
+  font-size:16px;
 }
 
-#result{color:var(--psc-cream)!important;}
+@media(max-width:700px){
+  .app{
+    width:min(620px,calc(100vw - 20px),calc((100dvh - 14px)/1.26))!important;
+    height:min(800px,calc(100dvh - 14px))!important;
+  }
+  .header{padding:18px 16px 9px!important;}
+  .psc-logo{width:102px!important;height:102px!important;}
+  .psc-tagline{font-size:8px!important;letter-spacing:.21em!important;margin-bottom:10px!important;}
+  .header h1{font-size:clamp(24px,5.4vw,34px)!important;}
+  .scanner-wrapper{height:47%!important;margin:0 14px!important;}
+  #statusBar{margin:8px 14px 0!important;}
+  #result{padding:10px 14px 12px!important;}
+}
 
-/* Keep the approved compact composition on short screens. */
 @media(max-width:560px){
   body{padding:5px!important;}
-  .app,.scanner-card{max-height:calc(100dvh - 10px)!important;}
-  .header{padding-top:18px!important;padding-bottom:9px!important;}
-  .psc-logo{width:92px!important;height:92px!important;}
-  .psc-tagline{font-size:8px!important;letter-spacing:.20em!important;margin-bottom:9px!important;}
-  .header h1{font-size:clamp(21px,6.1vw,29px)!important;letter-spacing:.105em!important;}
-  .scanner-wrapper{height:min(46dvh,390px)!important;margin:0 12px!important;}
-  #statusBar{margin-top:7px!important;}
+  body::before{left:-18vw;width:55vw;opacity:.58;}
+  .app{
+    width:calc(100vw - 10px)!important;
+    height:calc(100dvh - 10px)!important;
+    aspect-ratio:auto!important;
+  }
+  .scanner-card{border-radius:18px!important;}
+  .header{padding:17px 13px 8px!important;}
+  .psc-logo{width:88px!important;height:88px!important;}
+  .psc-tagline{font-size:7px!important;letter-spacing:.18em!important;margin-bottom:8px!important;}
+  .header h1{font-size:clamp(22px,6.1vw,30px)!important;letter-spacing:.10em!important;}
+  .psc-home{top:9px!important;right:9px!important;min-height:29px!important;padding:0 9px!important;font-size:8px!important;}
+  .scanner-wrapper{height:50%!important;margin:0 11px!important;border-radius:14px!important;}
+  #statusBar{margin:7px 11px 0!important;padding:7px 9px!important;font-size:10px!important;}
+  #result{padding:8px 11px 10px!important;font-size:14px;}
 }
 
-@media(max-height:700px){
-  .header{padding-top:13px!important;padding-bottom:7px!important;}
-  .psc-logo{width:78px!important;height:78px!important;}
-  .psc-tagline{font-size:7px!important;margin-bottom:7px!important;}
-  .header h1{font-size:21px!important;}
-  .scanner-wrapper{height:min(40dvh,285px)!important;}
+@media(max-height:700px) and (min-width:561px){
+  .app{width:min(610px,calc(100vw - 18px),calc((100dvh - 12px)/1.26))!important;height:calc(100dvh - 12px)!important;}
+  .header{padding-top:16px!important;padding-bottom:8px!important;}
+  .psc-logo{width:94px!important;height:94px!important;}
+  .psc-tagline{font-size:8px!important;margin-bottom:8px!important;}
+  .header h1{font-size:25px!important;}
+  .scanner-wrapper{height:49%!important;}
 }
