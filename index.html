@@ -14,11 +14,12 @@
   <main class="app">
     <section class="scanner-card">
       <header class="header">
-        <!-- RESTORED: approved PSC Admin destination. -->
+        <!-- PSC Admin HOME: cache-busted navigation prevents the intermittent first-load Page Not Found glitch. -->
         <a
           class="psc-home"
-          href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTFDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
-          aria-label="Buka PSC Admin">
+          href="https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin"
+          aria-label="Buka PSC Admin"
+          onclick="event.preventDefault(); window.location.assign('https://script.google.com/macros/s/AKfycbxQNDwNvycomkkkgQ588fz2bOJip5Wso6dXuuTfDqmtwXH8UYOUKPG1Umvm-SGORrtp/exec?page=admin&_psc_nav=' + Date.now());">
           <span class="home-icon">⌂</span> HOME
         </a>
 
